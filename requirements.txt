@@ -1,0 +1,10 @@
+fastapi
+uvicorn[standard]
+opentelemetry-sdk
+opentelemetry-api
+openai
+streamlit
+numpy
+python-dotenv
+httpx
+pytest

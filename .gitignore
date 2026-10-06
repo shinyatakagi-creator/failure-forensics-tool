@@ -1,0 +1,7 @@
+.venv/
+__pycache__/
+*.pyc
+data/forensics.db
+data/traces/
+.env
+.DS_Store
