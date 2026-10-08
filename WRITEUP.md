@@ -47,8 +47,22 @@ So the question I set out to answer was not "is the agent accurate" but "which f
 
 The useful finding is the wrong-doc row. When the agent is handed an irrelevant doc, the diagnosis is wrong in 9 of 20 runs and the detector flags 4 of them, missing 6. Nothing in the detector compares the diagnosis to the retrieved document, and the judge only sees fluent text. The next thing I would build is a check that the diagnosis is supported by the retrieved doc or logs.
 
+## Regression gate
+
+To keep the detector useful as the agent changes, `eval_triage.py gate <variant>` reruns all 20 tickets three times with a changed diagnosis prompt and compares against a recorded baseline. It fails when mean correct drops, or mean flagged rises, by more than the baseline's own run-to-run spread.
+
+| Prompt change | Mean correct | Mean flagged | Verdict |
+|---|---|---|---|
+| baseline (reference) | 0.75 | 0.15 | n/a |
+| original prompt, before the fabrication fix | 0.77 | 0.08 | pass |
+| "keep each cause under 15 words" | 0.60 | 0.15 | pass, borderline |
+| "paraphrase the evidence" | 0.00 | 1.00 | **fail** |
+
+A one-run gate was my first version, and it failed an unchanged prompt: single passes of the same prompt scored between 13 and 18 of 20. That is why the gate uses repeats and a measured tolerance (0.20 here). The cost is sensitivity: only large drops fail. The "under 15 words" change scored 12 of 20 on all three repeats, regressing the same three tickets each time, which looks like a real effect (or the keyword scorer penalising short text), and it still passed. The paraphrase change fails because every run trips the evidence-in-logs check.
+
 ## What it does not do
 
+- The regression gate catches only large regressions (roughly 4 or more tickets of 20 on average) and uses 3 repeats of one model.
 - It does not prove accuracy at scale. 20 tickets, one run per cell, no repeats and no confidence intervals. Treat the rates as a smoke test.
 - The judge is noisy. On the same stored runs, truncated replies were flagged 4 of 4, then 2 of 4, then 3 of 4 across three judge calls. Judge-only catches should not be trusted individually.
 - The evidence check, the keyword lists and the fault definitions were written by me after seeing similar failures. The 20 of 20 on fabricated evidence only means that check handles the fault I injected, not other forms of fabrication.
