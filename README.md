@@ -2,6 +2,19 @@
 
 Traces a small RAG + calculator pipeline with OpenTelemetry spans (SQLite), flags failed runs, and exports flagged runs as an eval dataset. Personal project; all data is synthetic.
 
+## Setup
+
+Needs Python 3 and an OpenAI API key. The detector and the triage agent call the OpenAI API (`gpt-4o-mini` to generate, `gpt-4o` to judge), so running them costs a small amount of money.
+
+```
+python -m venv .venv
+source .venv/bin/activate        # Windows: .venv\Scripts\activate
+pip install -r requirements.txt
+cp .env.example .env             # then put your key in OPENAI_API_KEY
+```
+
+Start the API with `uvicorn app.api.main:app --port 8000` and the dashboard with `streamlit run app/dashboard/app.py`. `DEMO.md` has a walkthrough. The commands in the Run section use `.venv/bin/python`, the Mac/Linux path; on Windows use `.venv\Scripts\python`.
+
 ## Detector
 
 Checks, in order: tool error/empty (`tool.status` span attribute), exception, empty/short answer, step latency, groundedness judge.

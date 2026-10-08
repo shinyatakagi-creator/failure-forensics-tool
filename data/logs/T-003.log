@@ -11,7 +11,7 @@
 2026-10-01T10:10:00Z DEBUG cache hit key=session:221 ttl=24s
 2026-10-02T10:11:00Z INFO health check ok node=9 latency=216ms
 2026-10-03T10:12:00Z INFO request id=22 completed in 223ms status=200 from 10.0.5.116
-2026-10-04T10:13:00Z WARN sso login failed idp=okta-corp reason=invalid_signature user=j.kim@corp-example.com
+2026-10-04T10:13:00Z WARN sso login failed idp=okta-corp reason=invalid_signature user=j.kim@corp-example.test
 2026-10-05T10:14:00Z INFO request id=194 completed in 194ms status=200 from 10.0.72.64
 2026-10-01T10:15:00Z INFO health check ok node=29 latency=205ms
 2026-10-02T10:16:00Z INFO health check ok node=75 latency=18ms
