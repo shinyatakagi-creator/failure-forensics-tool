@@ -1,0 +1,5 @@
+{
+  "id": "T-020",
+  "area": "storage",
+  "symptom": "The account says storage is full but we only have about 2GB of files."
+}

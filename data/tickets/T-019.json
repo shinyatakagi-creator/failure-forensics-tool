@@ -1,0 +1,5 @@
+{
+  "id": "T-019",
+  "area": "auth",
+  "symptom": "MFA codes are rejected for some of our users, although they enter them correctly."
+}

@@ -1,14 +1,258 @@
 {
   "T-001": {
-    "root_cause": "Webhook retry after a delivery timeout re-processed payment.succeeded without an idempotency key, charging the invoice twice."
+    "root_cause": "Webhook retry after a delivery timeout re-processed payment.succeeded without an idempotency key, charging the invoice twice.",
+    "keywords": [
+      [
+        "idempotency"
+      ],
+      [
+        "webhook",
+        "retry",
+        "retries"
+      ]
+    ]
   },
   "T-002": {
-    "root_cause": "The API key is shared with a nightly batch sync job, which uses up the per-minute rate limit."
+    "root_cause": "The API key is shared with a nightly batch sync job, which uses up the per-minute rate limit.",
+    "keywords": [
+      [
+        "shared",
+        "batch",
+        "nightly",
+        "another job",
+        "multiple"
+      ],
+      [
+        "rate limit",
+        "429",
+        "limit"
+      ]
+    ]
   },
   "T-003": {
-    "root_cause": "The identity provider's SAML signing certificate expired on 2026-09-28 and metadata was never refreshed."
+    "root_cause": "The identity provider's SAML signing certificate expired on 2026-09-28 and metadata was never refreshed.",
+    "keywords": [
+      [
+        "certificate",
+        "cert"
+      ],
+      [
+        "expire"
+      ]
+    ]
   },
   "T-004": {
-    "root_cause": "The export query does a full table scan on orders for large accounts and exceeds the 30s gateway timeout."
+    "root_cause": "The export query does a full table scan on orders for large accounts and exceeds the 30s gateway timeout.",
+    "keywords": [
+      [
+        "table scan",
+        "index"
+      ],
+      [
+        "timeout",
+        "30"
+      ]
+    ]
+  },
+  "T-005": {
+    "root_cause": "VAT ID validation timed out, so billing treated the ID as unverified and fell back to a 0% rate.",
+    "keywords": [
+      [
+        "vat",
+        "vies"
+      ],
+      [
+        "timeout",
+        "timed out",
+        "unverified",
+        "validation"
+      ]
+    ]
+  },
+  "T-006": {
+    "root_cause": "The customer's endpoint returned HTTP 410 repeatedly, so the subscription was auto-disabled after 50 failures.",
+    "keywords": [
+      [
+        "410"
+      ],
+      [
+        "disabled",
+        "failure",
+        "failed"
+      ]
+    ]
+  },
+  "T-007": {
+    "root_cause": "The users' addresses are on the email suppression list after an earlier hard bounce, so reset emails are never sent.",
+    "keywords": [
+      [
+        "suppress"
+      ]
+    ]
+  },
+  "T-008": {
+    "root_cause": "The upload exceeds the 250MB request limit at the proxy, so finalizing the upload returns 413.",
+    "keywords": [
+      [
+        "413",
+        "too large",
+        "size limit",
+        "250"
+      ]
+    ]
+  },
+  "T-009": {
+    "root_cause": "The admin invite had expired, so the user was given the default member role, which lacks billing access.",
+    "keywords": [
+      [
+        "invite",
+        "expired"
+      ],
+      [
+        "member",
+        "role"
+      ]
+    ]
+  },
+  "T-010": {
+    "root_cause": "Indexer workers were paused by a deploy and resumed at concurrency 1 instead of 8, leaving a 4 hour indexing backlog.",
+    "keywords": [
+      [
+        "lag",
+        "backlog",
+        "paused",
+        "concurrency"
+      ]
+    ]
+  },
+  "T-011": {
+    "root_cause": "The Slack OAuth token was revoked, so posts fail with token_revoked and the integration is unhealthy.",
+    "keywords": [
+      [
+        "revoked"
+      ],
+      [
+        "slack",
+        "token"
+      ]
+    ]
+  },
+  "T-012": {
+    "root_cause": "The nightly sync outran its 900s lock lease, so a second run started in parallel and inserted the same contacts again.",
+    "keywords": [
+      [
+        "lease",
+        "overlap",
+        "parallel",
+        "concurrent",
+        "twice",
+        "second run"
+      ]
+    ]
+  },
+  "T-013": {
+    "root_cause": "A config change raised the aggregate cache TTL to 24 hours, so dashboards serve stale cached aggregates.",
+    "keywords": [
+      [
+        "ttl",
+        "cache"
+      ],
+      [
+        "86400",
+        "24",
+        "config",
+        "stale",
+        "long"
+      ]
+    ]
+  },
+  "T-014": {
+    "root_cause": "Version 5.2.0 calls an API that older Android versions do not have, which crashes the app on launch there.",
+    "keywords": [
+      [
+        "5.2.0",
+        "nosuchmethod",
+        "method",
+        "api level",
+        "older"
+      ],
+      [
+        "android",
+        "older",
+        "api"
+      ]
+    ]
+  },
+  "T-015": {
+    "root_cause": "The report filters on segment seg_88, which was deleted, so the report returns zero rows.",
+    "keywords": [
+      [
+        "seg_88",
+        "segment"
+      ],
+      [
+        "deleted",
+        "not found",
+        "missing"
+      ]
+    ]
+  },
+  "T-016": {
+    "root_cause": "An admin rotated the API key and the old secret was revoked, so requests with the old secret return 401.",
+    "keywords": [
+      [
+        "rotat",
+        "revok"
+      ]
+    ]
+  },
+  "T-017": {
+    "root_cause": "Two alert rules (rule_12 and rule_31) have the same condition and recipient, and deduplication is per rule, so each alert is sent twice.",
+    "keywords": [
+      [
+        "rule_12",
+        "two rules",
+        "duplicate",
+        "overlap",
+        "same condition",
+        "both"
+      ]
+    ]
+  },
+  "T-018": {
+    "root_cause": "The CSV is UTF-8 without a byte order mark, so Excel assumes a legacy encoding and garbles accented characters.",
+    "keywords": [
+      [
+        "bom",
+        "byte order"
+      ]
+    ]
+  },
+  "T-019": {
+    "root_cause": "The users' devices have clocks that are more than a minute off, outside the 30 second TOTP window, so valid codes are rejected.",
+    "keywords": [
+      [
+        "clock",
+        "skew",
+        "drift",
+        "time"
+      ]
+    ]
+  },
+  "T-020": {
+    "root_cause": "Soft-deleted files in the trash still count toward quota for 30 days, which accounts for almost all of the used storage.",
+    "keywords": [
+      [
+        "trash",
+        "soft-delete",
+        "soft delete",
+        "deleted"
+      ],
+      [
+        "quota",
+        "storage",
+        "count"
+      ]
+    ]
   }
 }

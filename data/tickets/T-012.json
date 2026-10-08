@@ -1,0 +1,5 @@
+{
+  "id": "T-012",
+  "area": "data-sync",
+  "symptom": "The nightly sync created about 2,000 duplicate contacts."
+}

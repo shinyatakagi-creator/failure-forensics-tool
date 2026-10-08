@@ -1,0 +1,20 @@
+2026-10-06T10:00:00Z INFO request id=163 completed in 23ms status=200 from 10.0.206.67
+2026-10-06T10:02:00Z INFO request id=156 completed in 220ms status=200 from 10.0.57.18
+2026-10-06T10:04:00Z INFO health check ok node=221 latency=32ms
+2026-10-06T10:06:00Z INFO sync job=contacts_nightly run=r_881 started lock=acquired lease=900s
+2026-10-06T10:08:00Z WARN sync job=contacts_nightly run=r_881 exceeded lease=900s, lock released
+2026-10-06T10:10:00Z INFO health check ok node=142 latency=107ms
+2026-10-06T10:12:00Z INFO health check ok node=160 latency=34ms
+2026-10-06T10:14:00Z INFO sync job=contacts_nightly run=r_882 started lock=acquired (overlap with r_881)
+2026-10-06T10:16:00Z DEBUG cache hit key=session:241 ttl=29s
+2026-10-06T10:18:00Z INFO health check ok node=13 latency=47ms
+2026-10-06T10:20:00Z INFO health check ok node=161 latency=79ms
+2026-10-06T10:22:00Z DEBUG cache hit key=session:75 ttl=115s
+2026-10-06T10:24:00Z DEBUG cache hit key=session:70 ttl=89s
+2026-10-06T10:26:00Z INFO health check ok node=10 latency=4ms
+2026-10-06T10:28:00Z ERROR crm client 502, retrying
+2026-10-06T10:30:00Z INFO job heartbeat worker=142 queue=49
+2026-10-06T10:32:00Z DEBUG cache hit key=session:240 ttl=115s
+2026-10-06T10:34:00Z DEBUG gc pause 169ms heap=127MB
+2026-10-06T10:36:00Z DEBUG gc pause 249ms heap=130MB
+2026-10-06T10:38:00Z DEBUG cache hit key=session:59 ttl=88s

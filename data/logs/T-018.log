@@ -1,0 +1,19 @@
+2026-10-06T10:00:00Z INFO request id=1 completed in 201ms status=200 from 10.0.33.60
+2026-10-06T10:02:00Z INFO job heartbeat worker=236 queue=10
+2026-10-06T10:04:00Z INFO health check ok node=247 latency=33ms
+2026-10-06T10:06:00Z INFO job heartbeat worker=163 queue=112
+2026-10-06T10:08:00Z INFO request id=26 completed in 19ms status=200 from 10.0.77.135
+2026-10-06T10:10:00Z INFO job heartbeat worker=50 queue=100
+2026-10-06T10:12:00Z INFO job heartbeat worker=1 queue=3
+2026-10-06T10:14:00Z ERROR audit log flush retried
+2026-10-06T10:16:00Z DEBUG gc pause 72ms heap=246MB
+2026-10-06T10:18:00Z DEBUG cache hit key=session:122 ttl=135s
+2026-10-06T10:20:00Z DEBUG cache hit key=session:8 ttl=246s
+2026-10-06T10:22:00Z INFO health check ok node=15 latency=6ms
+2026-10-06T10:24:00Z INFO export job=exp_6620 format=csv encoding=utf-8 bom=false
+2026-10-06T10:26:00Z DEBUG gc pause 21ms heap=66MB
+2026-10-06T10:28:00Z DEBUG gc pause 237ms heap=95MB
+2026-10-06T10:30:00Z INFO export job=exp_6620 rows=1840 completed
+2026-10-06T10:32:00Z INFO request id=179 completed in 87ms status=200 from 10.0.184.108
+2026-10-06T10:34:00Z INFO health check ok node=175 latency=102ms
+2026-10-06T10:36:00Z INFO health check ok node=190 latency=217ms

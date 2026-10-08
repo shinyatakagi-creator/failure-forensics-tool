@@ -1,0 +1,20 @@
+2026-10-06T10:00:00Z INFO request id=214 completed in 170ms status=200 from 10.0.31.233
+2026-10-06T10:02:00Z DEBUG gc pause 201ms heap=183MB
+2026-10-06T10:04:00Z DEBUG gc pause 228ms heap=46MB
+2026-10-06T10:06:00Z INFO health check ok node=23 latency=206ms
+2026-10-06T10:08:00Z DEBUG gc pause 119ms heap=103MB
+2026-10-06T10:10:00Z INFO invite inv_93 accepted user=p.ng@corp-example.test
+2026-10-06T10:12:00Z INFO request id=186 completed in 41ms status=200 from 10.0.44.33
+2026-10-06T10:14:00Z INFO role assigned user=p.ng@corp-example.test role=member reason=admin_invite_expired
+2026-10-06T10:16:00Z INFO request id=39 completed in 152ms status=200 from 10.0.232.120
+2026-10-06T10:18:00Z DEBUG cache hit key=session:157 ttl=212s
+2026-10-06T10:20:00Z INFO health check ok node=40 latency=141ms
+2026-10-06T10:22:00Z WARN access denied path=/billing user=p.ng@corp-example.test required=billing_admin
+2026-10-06T10:24:00Z ERROR audit exporter lag 30s
+2026-10-06T10:26:00Z INFO request id=4 completed in 205ms status=200 from 10.0.249.186
+2026-10-06T10:28:00Z INFO request id=135 completed in 192ms status=200 from 10.0.240.36
+2026-10-06T10:30:00Z DEBUG gc pause 224ms heap=50MB
+2026-10-06T10:32:00Z DEBUG cache hit key=session:8 ttl=65s
+2026-10-06T10:34:00Z INFO job heartbeat worker=62 queue=196
+2026-10-06T10:36:00Z INFO health check ok node=140 latency=108ms
+2026-10-06T10:38:00Z INFO request id=233 completed in 190ms status=200 from 10.0.91.230

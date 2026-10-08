@@ -1,0 +1,20 @@
+2026-10-06T10:00:00Z INFO job heartbeat worker=5 queue=224
+2026-10-06T10:02:00Z DEBUG cache hit key=session:156 ttl=2s
+2026-10-06T10:04:00Z DEBUG cache hit key=session:45 ttl=37s
+2026-10-06T10:06:00Z INFO request id=143 completed in 16ms status=200 from 10.0.84.175
+2026-10-06T10:08:00Z WARN indexer consumer lag=14400s partition=3
+2026-10-06T10:10:00Z INFO job heartbeat worker=136 queue=143
+2026-10-06T10:12:00Z INFO request id=227 completed in 144ms status=200 from 10.0.15.64
+2026-10-06T10:14:00Z DEBUG cache hit key=session:71 ttl=11s
+2026-10-06T10:16:00Z INFO job heartbeat worker=116 queue=144
+2026-10-06T10:18:00Z INFO request id=114 completed in 84ms status=200 from 10.0.157.250
+2026-10-06T10:20:00Z INFO job heartbeat worker=156 queue=132
+2026-10-06T10:22:00Z INFO health check ok node=116 latency=131ms
+2026-10-06T10:24:00Z INFO indexer workers paused by deploy rel-2291 at 2026-10-06T06:00:00Z
+2026-10-06T10:26:00Z DEBUG gc pause 130ms heap=242MB
+2026-10-06T10:28:00Z INFO job heartbeat worker=225 queue=225
+2026-10-06T10:30:00Z INFO indexer workers resumed with concurrency=1 (expected 8)
+2026-10-06T10:32:00Z INFO health check ok node=237 latency=144ms
+2026-10-06T10:34:00Z DEBUG cache hit key=session:216 ttl=115s
+2026-10-06T10:36:00Z ERROR autocomplete cache eviction storm
+2026-10-06T10:38:00Z INFO request id=101 completed in 114ms status=200 from 10.0.81.19

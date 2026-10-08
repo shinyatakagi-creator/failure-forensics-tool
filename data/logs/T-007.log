@@ -1,0 +1,20 @@
+2026-10-06T10:00:00Z DEBUG gc pause 246ms heap=60MB
+2026-10-06T10:02:00Z DEBUG cache hit key=session:39 ttl=60s
+2026-10-06T10:04:00Z INFO request id=125 completed in 213ms status=200 from 10.0.151.47
+2026-10-06T10:06:00Z INFO health check ok node=73 latency=2ms
+2026-10-06T10:08:00Z INFO job heartbeat worker=95 queue=157
+2026-10-06T10:10:00Z DEBUG cache hit key=session:177 ttl=220s
+2026-10-06T10:12:00Z INFO job heartbeat worker=168 queue=174
+2026-10-06T10:14:00Z DEBUG gc pause 231ms heap=223MB
+2026-10-06T10:16:00Z ERROR template cache stale, reloaded
+2026-10-06T10:18:00Z INFO job heartbeat worker=101 queue=102
+2026-10-06T10:20:00Z INFO password_reset requested user=m.ito@corp-example.test
+2026-10-06T10:22:00Z INFO request id=124 completed in 163ms status=200 from 10.0.103.16
+2026-10-06T10:24:00Z DEBUG cache hit key=session:18 ttl=54s
+2026-10-06T10:26:00Z INFO request id=88 completed in 154ms status=200 from 10.0.14.27
+2026-10-06T10:28:00Z INFO request id=146 completed in 39ms status=200 from 10.0.138.26
+2026-10-06T10:30:00Z INFO health check ok node=158 latency=7ms
+2026-10-06T10:32:00Z DEBUG cache hit key=session:158 ttl=97s
+2026-10-06T10:34:00Z WARN email send suppressed recipient=m.ito@corp-example.test reason=suppression_list
+2026-10-06T10:36:00Z INFO suppression entry created 2026-09-12 reason=hard_bounce
+2026-10-06T10:38:00Z INFO health check ok node=245 latency=89ms

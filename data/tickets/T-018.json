@@ -1,0 +1,5 @@
+{
+  "id": "T-018",
+  "area": "export",
+  "symptom": "The Excel export shows garbled characters for names with accents."
+}

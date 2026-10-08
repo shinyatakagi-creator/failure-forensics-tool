@@ -1,0 +1,20 @@
+2026-10-06T10:00:00Z DEBUG gc pause 110ms heap=36MB
+2026-10-06T10:02:00Z DEBUG cache hit key=session:24 ttl=45s
+2026-10-06T10:04:00Z INFO request id=82 completed in 62ms status=200 from 10.0.95.67
+2026-10-06T10:06:00Z INFO job heartbeat worker=52 queue=228
+2026-10-06T10:08:00Z INFO alert rule_12 condition=cpu>90 notify=ops@corp-example.test
+2026-10-06T10:10:00Z DEBUG gc pause 99ms heap=106MB
+2026-10-06T10:12:00Z DEBUG cache hit key=session:97 ttl=70s
+2026-10-06T10:14:00Z INFO request id=128 completed in 72ms status=200 from 10.0.148.248
+2026-10-06T10:16:00Z INFO health check ok node=33 latency=176ms
+2026-10-06T10:18:00Z DEBUG cache hit key=session:24 ttl=70s
+2026-10-06T10:20:00Z DEBUG gc pause 103ms heap=166MB
+2026-10-06T10:22:00Z INFO alert rule_31 condition=cpu>90 notify=ops@corp-example.test
+2026-10-06T10:24:00Z INFO health check ok node=218 latency=209ms
+2026-10-06T10:26:00Z INFO request id=33 completed in 9ms status=200 from 10.0.109.182
+2026-10-06T10:28:00Z DEBUG gc pause 248ms heap=151MB
+2026-10-06T10:30:00Z WARN smtp relay latency 900ms
+2026-10-06T10:32:00Z INFO request id=101 completed in 239ms status=200 from 10.0.238.238
+2026-10-06T10:34:00Z INFO alert dispatched rule=rule_12 rule=rule_31 duplicates=0 dedup_scope=per_rule
+2026-10-06T10:36:00Z INFO job heartbeat worker=219 queue=120
+2026-10-06T10:38:00Z DEBUG cache hit key=session:201 ttl=28s
