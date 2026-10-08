@@ -4,6 +4,7 @@
   eval_triage.py recheck re-run the current detector on stored traces (keeps scores)
   eval_triage.py autoscore  LLM-score every row with no auto_score (separate from hand scores)
   eval_triage.py agreement  auto vs hand scores on rows you scored yourself
+  eval_triage.py gate <variant> [N]  N repeats (default 3) of a prompt variant vs the recorded baseline; exit 1 on regression
   eval_triage.py keyscore   deterministic keyword score (key_score)
   eval_triage.py report     hand score if present, else key_score  table: did the detector catch each fault?
 """
@@ -106,29 +107,91 @@ def autoscore():
         put(k, auto_score=verdict)
 
 
-def keyscore():
+def key_verdict(v):
     """Deterministic score from golden keywords. correct: every keyword group hits the top candidate AND its
     evidence is verified in the real log lines. partial: some groups hit, or cause hits but evidence isn't
     verified. incorrect: no hit, no candidate, or any cited evidence line is not a real log line."""
     from app.storage.traces import read_trace_file
+    cands = (v["diagnosis"] or {}).get("candidates") or []
+    if not cands:
+        return "incorrect"
+    real = ((read_trace_file(v["trace_id"]) or {}).get("tool_result") or {}).get("lines", [])
+    cause = cands[0]["cause"].lower()
+    hits = [any(w in cause for w in group) for group in GOLDEN[v["ticket"]]["keywords"]]
+    evidence = [e.strip() for c in cands for e in c.get("evidence", [])]
+    if any(e not in real for e in evidence) or not any(hits):
+        return "incorrect"
+    return "correct" if all(hits) and evidence else "partial"
+
+
+def keyscore():
     for k, v in load().items():
-        cands = (v["diagnosis"] or {}).get("candidates") or []
-        if not cands:
-            put(k, key_score="incorrect")
-            continue
-        real = ((read_trace_file(v["trace_id"]) or {}).get("tool_result") or {}).get("lines", [])
-        cause = cands[0]["cause"].lower()
-        hits = [any(w in cause for w in group) for group in GOLDEN[v["ticket"]]["keywords"]]
-        evidence = [e.strip() for c in cands for e in c.get("evidence", [])]
-        if any(e not in real for e in evidence):
-            verdict = "incorrect"
-        elif not any(hits):
-            verdict = "incorrect"
-        elif all(hits) and evidence:
-            verdict = "correct"
-        else:
-            verdict = "partial"
-        put(k, key_score=verdict)
+        put(k, key_score=key_verdict(v))
+
+
+GATE_MIN_TOLERANCE = 0.10  # never tighter than 2 tickets of 20, even if baseline repeats happen to agree
+
+
+def _gate_runs(variant, repeats):
+    """Run all tickets `repeats` times (no fault) with a prompt variant. Returns per-repeat {ticket: row}."""
+    from app.pipeline.triage import run_triage
+    os.environ.pop("TRIAGE_FAULT", None)
+    os.environ["TRIAGE_PROMPT_VARIANT"] = variant
+    reps = []
+    for i in range(repeats):
+        rows = {}
+        for tid in GOLDEN:
+            r = run_triage(tid)
+            rows[tid] = {"ticket": tid, "trace_id": r["trace_id"], "failed": r["failed"], "reason": r["reason"],
+                         "diagnosis": r["diagnosis"]}
+            rows[tid]["key_score"] = key_verdict(rows[tid])
+        reps.append(rows)
+        print(f"  {variant} repeat {i + 1}/{repeats}: correct {sum(v['key_score'] == 'correct' for v in rows.values())}"
+              f"/{len(rows)} flagged {sum(v['failed'] for v in rows.values())}", flush=True)
+    return reps
+
+
+def _gate_summary(reps):
+    n = len(reps[0])
+    correct = [sum(v["key_score"] == "correct" for v in r.values()) / n for r in reps]
+    flagged = [sum(v["failed"] for v in r.values()) / n for r in reps]
+    frac = {t: sum(r[t]["key_score"] == "correct" for r in reps) / len(reps) for t in reps[0]}
+    return {"correct": correct, "flagged": flagged, "ticket_correct_frac": frac}
+
+
+def gate():
+    """Regression gate. `gate baseline [N]` records the reference (N repeats, default 3) and its run-to-run spread.
+    `gate <variant> [N]` reruns with that prompt variant and fails (exit 1) if mean correct drops, or mean
+    flagged rises, by more than max(0.10, the baseline's own spread)."""
+    from app.pipeline.triage import PROMPT_VARIANTS
+    variant = sys.argv[2] if len(sys.argv) > 2 else "baseline"
+    repeats = int(sys.argv[3]) if len(sys.argv) > 3 else 3
+    if variant not in PROMPT_VARIANTS:
+        sys.exit(f"unknown variant {variant!r}; choose from {list(PROMPT_VARIANTS)}")
+    ref_path = ROOT / "data" / "regression_baseline.json"
+    summ = _gate_summary(_gate_runs(variant, repeats))
+    summ.update(variant=variant, repeats=repeats)
+    if variant == "baseline":
+        ref_path.write_text(json.dumps(summ, indent=2))
+        spread = max(summ["correct"]) - min(summ["correct"])
+        print(f"recorded baseline: correct {summ['correct']} (spread {spread:.2f}), flagged {summ['flagged']}")
+        return
+    if not ref_path.exists():
+        sys.exit("no baseline recorded; run: eval_triage.py gate baseline")
+    ref = json.loads(ref_path.read_text())
+    mean = lambda xs: sum(xs) / len(xs)
+    tol_c = max(GATE_MIN_TOLERANCE, max(ref["correct"]) - min(ref["correct"]))
+    tol_f = max(GATE_MIN_TOLERANCE, max(ref["flagged"]) - min(ref["flagged"]))
+    d_c, d_f = mean(summ["correct"]) - mean(ref["correct"]), mean(summ["flagged"]) - mean(ref["flagged"])
+    fail = d_c < -tol_c or d_f > tol_f
+    regressed = sorted(t for t, f in ref["ticket_correct_frac"].items() if f - summ["ticket_correct_frac"][t] >= 0.5)
+    (ROOT / "data" / f"regression_{variant}.json").write_text(json.dumps(summ, indent=2))
+    print(f"variant={variant}  mean correct {mean(summ['correct']):.2f} (baseline {mean(ref['correct']):.2f}, "
+          f"{d_c:+.2f}, tolerance {tol_c:.2f})  mean flagged {mean(summ['flagged']):.2f} "
+          f"(baseline {mean(ref['flagged']):.2f}, {d_f:+.2f}, tolerance {tol_f:.2f})")
+    print("tickets that regressed (correct in >=half more baseline repeats):", regressed or "none")
+    print("GATE", "FAIL" if fail else "PASS")
+    sys.exit(1 if fail else 0)
 
 
 def agreement():
@@ -161,4 +224,4 @@ def report():
 
 
 if __name__ == "__main__":
-    {"run": run, "score": score, "autoscore": autoscore, "keyscore": keyscore, "agreement": agreement, "recheck": recheck, "report": report}[sys.argv[1] if len(sys.argv) > 1 else "report"]()
+    {"run": run, "score": score, "autoscore": autoscore, "keyscore": keyscore, "gate": gate, "agreement": agreement, "recheck": recheck, "report": report}[sys.argv[1] if len(sys.argv) > 1 else "report"]()

@@ -36,7 +36,7 @@ Limits:
 
 ## Triage agent (synthetic)
 
-`POST /tickets/{id}/triage` runs a support-escalation agent over synthetic tickets and logs (`data/tickets`, `data/logs`; 4 tickets so far). Steps: classify, retrieve doc, grep logs (the model picks the regex), diagnose with cited log lines, draft reply. Nothing is ever sent: every run stores `approval=pending_approval` until `POST /runs/{id}/approve` or `/reject`. Emails/IPs are redacted before model calls; `TRIAGE_KILL_SWITCH` disables the agent. This is a personal project, not a production deployment.
+`POST /tickets/{id}/triage` runs a support-escalation agent over synthetic tickets and logs (`data/tickets`, `data/logs`; 20 tickets). Steps: classify, retrieve doc, grep logs (the model picks the regex), diagnose with cited log lines, draft reply. Nothing is ever sent: every run stores `approval=pending_approval` until `POST /runs/{id}/approve` or `/reject`. Emails/IPs are redacted before model calls; `TRIAGE_KILL_SWITCH` disables the agent. This is a personal project, not a production deployment.
 
 ## Fault injection (20 tickets x 6 conditions = 120 runs)
 
@@ -60,3 +60,20 @@ Findings:
 - The groundedness judge is noisy: on the same stored runs `truncate_reply` flagged 4/4, 2/4, then 3/4 across judge rolls (4-ticket run). T-001 baseline is a repeatable judge false positive.
 
 Scoring validity: keyword scoring agrees with my hand scores on 14/24 rows exactly and 18/24 on correct-vs-not (n=24, first 4 tickets). An LLM scorer was tried first and agreed on only 11/24 exactly and 17/24 on correct-vs-not, so it is not used for results. Known disagreements: reply truncation is invisible to keyword scoring, and cause-from-docs-with-unverified-evidence is scored incorrect where I hand-scored partial. Hand scores for tickets 5-20 were lost to a file-overwrite bug (fixed), so those rows are keyword-scored only. Keyword lists were written by me before seeing the 16 new tickets' results, but the 4 original keyword lists were written after seeing their runs. Single run per cell, no repeats, no confidence intervals. Data: `data/triage_eval.json`, earlier 4-ticket snapshot in `data/triage_eval_before.json`.
+
+## Regression gate
+
+`scripts/eval_triage.py gate baseline` records the reference (3 repeats of all 20 tickets). `gate <variant>` reruns with a diagnosis-prompt variant (`TRIAGE_PROMPT_VARIANT`, defined in `app/pipeline/triage.py`) and exits 1 if mean correct drops, or mean flagged rises, by more than the baseline's own run-to-run spread (never less than 0.10).
+
+| Variant | mean correct | mean flagged | verdict |
+|---|---|---|---|
+| baseline (reference) | 0.75 | 0.15 | n/a |
+| `no_grounding` (original prompt) | 0.77 | 0.08 | pass |
+| `concise` ("under 15 words") | 0.60 | 0.15 | pass, borderline |
+| `paraphrase` (rewrite evidence) | 0.00 | 1.00 | **fail** |
+
+- A first single-pass gate failed the unchanged baseline prompt (14/20 vs 17/20 earlier). Same-prompt single runs scored 13 to 18 of 20, so one run cannot gate a change. The reference now uses 3 repeats and its observed spread (0.20 here) as the tolerance.
+- It only catches large regressions: a drop under about 4 tickets of 20 on average passes. `concise` scored 12/20 on all three repeats (same three tickets each time) and passed only because of that tolerance. That looks like a real effect, possibly the keyword scorer penalising shorter cause text.
+- `no_grounding` did not regress: the original fabrication needed an empty log search, which the current agent rarely produces on clean runs.
+- The recorded baseline file was written by two overlapping gate processes, so the reference spread comes from the later run (0.75, 0.85, 0.65), not the run whose log was read. Re-record it if you need a clean reference.
+- 3 repeats, 20 tickets, one model. A smoke-test gate, not a statistical guarantee.

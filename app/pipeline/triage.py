@@ -1,5 +1,6 @@
 import datetime
 import json
+import os
 import pathlib
 import re
 
@@ -15,6 +16,16 @@ from app.tracing.tracer import tracer
 
 DATA = pathlib.Path(__file__).resolve().parents[2] / "data"
 DEFAULT_PATTERN = "ERROR|WARN|FATAL"
+
+# Diagnosis-prompt variants for the regression gate (scripts/eval_triage.py gate). Pick with TRIAGE_PROMPT_VARIANT.
+_GROUNDED = ("Evidence must be copied verbatim from the log lines above. If there are no log lines, "
+             "return {\"candidates\": []}; never invent evidence.")
+PROMPT_VARIANTS = {
+    "baseline": _GROUNDED,
+    "concise": _GROUNDED + " Keep each cause under 15 words.",  # should not regress
+    "no_grounding": "Use only the logs and doc.",               # the original prompt, before the fix
+    "paraphrase": "Summarise the evidence in your own words; do not copy log lines exactly.",
+}
 
 
 def _json(prompt: str, fallback):
@@ -67,9 +78,8 @@ def propose_diagnosis(symptom: str, doc: str, lines: list[str]) -> dict:
     with tracer.start_as_current_span("propose_diagnosis") as span:
         fallback = {"candidates": [{"cause": re.sub(r"^\S+ ", "", l), "evidence": [l]} for l in lines if " ERROR " in l][:2]}
         out = _json(f"Ticket: {symptom}\nDoc: {doc}\nLog lines:\n" + "\n".join(lines) +
-                    "\nGive JSON {\"candidates\": [{\"cause\": ..., \"evidence\": [exact log lines]}]}. "
-                    "Evidence must be copied verbatim from the log lines above. If there are no log lines, "
-                    "return {\"candidates\": []}; never invent evidence.", fallback)
+                    "\nGive JSON {\"candidates\": [{\"cause\": ..., \"evidence\": [log lines]}]}. "
+                    + PROMPT_VARIANTS[os.environ.get("TRIAGE_PROMPT_VARIANT", "baseline")], fallback)
         if fault() == "fabricate_evidence":
             for c in out.get("candidates", []):
                 c["evidence"] = ["2023-10-23T08:15:00Z ERROR upstream dependency returned 500"]
