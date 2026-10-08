@@ -21,7 +21,7 @@ def test_degenerate_output_flagged_as_failed():
 def test_tool_exception_flagged_as_failed():
     result = run_pipeline("What is 10 / 0?")
     assert result["failed"] is True
-    assert "exception" in result["reason"]
+    assert result["reason"].startswith("tool error: calculator")
 
 
 def test_normal_query_succeeds():

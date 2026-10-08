@@ -1,0 +1,432 @@
+{
+  "T-001|baseline": {
+    "ticket": "T-001",
+    "fault": "baseline",
+    "trace_id": "a392c6f2e08146e12ba41b47cea7ce50",
+    "failed": true,
+    "reason": "low groundedness score (1/5): The answer references a duplicate charge issue, but does not specifically relate to the event_id or idempotency key from the context or tool result.",
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "Payment webhooks delivered at-least-once without using an idempotency key led to a double charge.",
+          "evidence": [
+            "2026-10-02T10:06:00Z ERROR invoice INV-2291 charged twice: no idempotency key on event_id=evt_8841",
+            "2026-10-02T10:16:00Z WARN webhook payment.succeeded delivery timeout after 5000ms, scheduling retry"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Re: Duplicate Charge for March Invoice\n\nDear [Customer's Name],\n\nThank you for reaching out to us regarding the charges on your March invoice. We sincerely apologize for any confusion this may have caused.\n\nIt appears that there may have been an issue with how the payment was processed, which can sometimes lead to duplicate charges. We are currently looking into this matter to ensure it is resolved promptly.\n\nWe appreciate your understanding and patience as we work to sort this out. If you have any further questions or need assistance in the meantime, please don't hesitate to let us know.\n\nBest regards,\n\n[Your Name]  \n[Your Position]  \n[Company Name]  \n[Contact Information]  ",
+    "score": "correct"
+  },
+  "T-001|remove_logs": {
+    "ticket": "T-001",
+    "fault": "remove_logs",
+    "trace_id": "d391a38d80e0812b4703f0b0cf1c2817",
+    "failed": true,
+    "reason": "tool empty: search_logs",
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "Retries on payment webhooks can lead to duplicate charges if the event_id is not used as an idempotency key.",
+          "evidence": []
+        }
+      ]
+    },
+    "reply": "Subject: Duplicate Charge Inquiry\n\nDear [Customer's Name],\n\nThank you for reaching out regarding the double charge for your March invoice. We understand how concerning this can be and appreciate your patience as we look into the matter. \n\nIt\u2019s possible that a technical issue with our payment processing may have caused this duplication. We are currently investigating the situation to ensure it is resolved properly.\n\nPlease know that we are here to help and will keep you updated on our findings. If you have any further questions or concerns in the meantime, feel free to reach out.\n\nBest regards,\n\n[Your Name]  \n[Your Position]  \n[Your Company]  ",
+    "score": "partial"
+  },
+  "T-001|wrong_doc": {
+    "ticket": "T-001",
+    "fault": "wrong_doc",
+    "trace_id": "cdbb54b58639a3fa3c6d7c862bb3d554",
+    "failed": false,
+    "reason": null,
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "Customer was charged twice for the invoice due to a missing idempotency key on the event.",
+          "evidence": [
+            "2026-10-02T10:06:00Z ERROR invoice INV-2291 charged twice: no idempotency key on event_id=evt_8841"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Inquiry Regarding Double Charge for March Invoice\n\nDear [Customer's Name],\n\nThank you for reaching out to us regarding the double charge on your March invoice. We understand how concerning this can be, and we appreciate your patience as we look into the matter.\n\nIt appears that this issue may have occurred due to a missing idempotency key during the transaction process. We are actively investigating the situation to ensure it is resolved promptly.\n\nShould you have further questions or need assistance in the meantime, please feel free to reach out.\n\nBest regards,  \n[Your Name]  \n[Your Position]  \n[Your Company]  ",
+    "score": "correct"
+  },
+  "T-001|tool_throws": {
+    "ticket": "T-001",
+    "fault": "tool_throws",
+    "trace_id": "de0f6197a0f6f8a478d697495fc617d5",
+    "failed": true,
+    "reason": "tool error: search_logs OSError: injected fault: log backend unavailable",
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "Handlers must use the event_id as an idempotency key, otherwise retries can charge twice.",
+          "evidence": []
+        }
+      ]
+    },
+    "reply": "Subject: Regarding Your Invoice Inquiry\n\nDear [Customer Name],\n\nThank you for reaching out to us regarding your March invoice. I understand your concern about being charged twice. This can sometimes happen if the event ID isn\u2019t used as an idempotency key during processing, leading to duplicate charges.\n\nPlease rest assured that we are looking into this matter for you. If you have any further questions or need assistance, feel free to let us know.\n\nBest regards,\n\n[Your Name]  \n[Your Position]  \n[Your Company]",
+    "score": "incorrect"
+  },
+  "T-001|truncate_reply": {
+    "ticket": "T-001",
+    "fault": "truncate_reply",
+    "trace_id": "202d41c2f9e910cc0fb7852c94fe709a",
+    "failed": true,
+    "reason": "low groundedness score (1/5): The answer is not grounded in the context or the tool result, as it mentions a March invoice and a customer's query, which are not present.",
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "Handlers did not use the event_id as an idempotency key, leading to a double charge.",
+          "evidence": [
+            "2026-10-02T10:06:00Z ERROR invoice INV-2291 charged twice: no idempotency key on event_id=evt_8841",
+            "2026-10-02T10:16:00Z WARN webhook payment.succeeded delivery timeout after 5000ms, scheduling retry"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Regarding Your Invoice Query\n\nDear [Customer's Name],\n\nThank you for reaching out to us. I appreciate your patience as we look into the issue regarding the double charge on your March invoice. We understan",
+    "score": "partial"
+  },
+  "T-001|fabricate_evidence": {
+    "ticket": "T-001",
+    "fault": "fabricate_evidence",
+    "trace_id": "7a51cf0319d73d5e4732154f77ce0cc2",
+    "failed": true,
+    "reason": "evidence not in logs: 2023-10-23T08:15:00Z ERROR upstream dependency returned 500",
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "Payment webhook was processed without an idempotency key, leading to a duplicate charge.",
+          "evidence": [
+            "2023-10-23T08:15:00Z ERROR upstream dependency returned 500"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Duplicate Charge Inquiry\n\nDear [Customer's Name],\n\nThank you for reaching out to us regarding the duplicate charge for your March invoice. We understand your concern and are currently investigating the issue to ensure it is resolved promptly.\n\nIf you have any further questions or need additional assistance, please don't hesitate to let us know. We appreciate your patience as we work through this matter.\n\nBest regards,  \n[Your Name]  \n[Your Position]  \n[Your Company]  ",
+    "score": "incorrect"
+  },
+  "T-002|baseline": {
+    "ticket": "T-002",
+    "fault": "baseline",
+    "trace_id": "6f678f8d85ebbce93dbbccbd2e60b4e7",
+    "failed": false,
+    "reason": null,
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "Rate limit exceeded for API key ak_live_77",
+          "evidence": [
+            "2026-10-03T10:12:00Z WARN rate limiter key=ak_live_77 window=60s count=612 limit=600 client_ip=[ip]",
+            "2026-10-04T10:13:00Z ERROR 429 returned to key=ak_live_77 path=/v1/orders"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Re: HTTP 429 Errors with Your API Integration\n\nDear [Customer's Name],\n\nThank you for reaching out to us regarding the HTTP 429 errors you've been experiencing with your integration. We understand how important it is to maintain a smooth workflow, and we appreciate your patience as we look into this matter.\n\nThe HTTP 429 error typically indicates that the rate limit for your API key has been exceeded. This limit can sometimes be affected by broader usage patterns, including traffic from other users or applications. We recommend reviewing your API usage metrics and ensuring that your integration adheres to the specified rate limits. \n\nIf you continue to experience issues, please provide any additional details about your usage, and we will be happy to assist you further. \n\nThank you for your understanding.\n\nBest regards,  \n[Your Name]  \n[Your Position]  \n[Your Company]  ",
+    "score": "correct"
+  },
+  "T-002|remove_logs": {
+    "ticket": "T-002",
+    "fault": "remove_logs",
+    "trace_id": "d19d03073a4c67a7c04fc761f7a37ae5",
+    "failed": true,
+    "reason": "tool empty: search_logs",
+    "diagnosis": {
+      "candidates": []
+    },
+    "reply": "Subject: Update on Your Integration Issue\n\nDear [Customer's Name],\n\nThank you for reaching out and bringing this to our attention. We understand the frustration caused by the HTTP 429 errors, especially when your traffic levels are low. Our team is currently investigating the matter to identify the cause and to implement a resolution.\n\nWe appreciate your patience as we work through this issue. If you have any further questions or need assistance in the meantime, please don\u2019t hesitate to reach out.\n\nBest regards,\n\n[Your Name]  \n[Your Job Title]  \n[Your Company]  ",
+    "score": "partial"
+  },
+  "T-002|wrong_doc": {
+    "ticket": "T-002",
+    "fault": "wrong_doc",
+    "trace_id": "518f0e542c22fde40ae24872647165bf",
+    "failed": false,
+    "reason": null,
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "The rate limiter has been exceeded for the integration key ak_live_77, leading to the HTTP 429 errors.",
+          "evidence": [
+            "2026-10-03T10:12:00Z WARN rate limiter key=ak_live_77 window=60s count=612 limit=600 client_ip=[ip]",
+            "2026-10-04T10:13:00Z ERROR 429 returned to key=ak_live_77 path=/v1/orders"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Re: HTTP 429 Errors with Integration Key\n\nHi [Customer's Name],\n\nThank you for reaching out to us regarding the HTTP 429 errors you are experiencing with your integration key (ak_live_77). \n\nIt seems that the rate limiter for this key has been exceeded, which is the likely cause of these errors. We recommend reviewing your integration's traffic patterns to ensure they comply with the rate limits set for your account. \n\nIf you have any further questions or need assistance in troubleshooting, please feel free to ask.\n\nBest regards,\n\n[Your Name]  \n[Your Position]  \n[Your Company]  ",
+    "score": "partial"
+  },
+  "T-002|tool_throws": {
+    "ticket": "T-002",
+    "fault": "tool_throws",
+    "trace_id": "39f852e5d20ee4621e9ae33454b442e5",
+    "failed": true,
+    "reason": "tool error: search_logs OSError: injected fault: log backend unavailable",
+    "diagnosis": {
+      "candidates": []
+    },
+    "reply": "Subject: Update on Your Integration Issue\n\nHi [Customer's Name],\n\nThank you for reaching out to us about the HTTP 429 errors you\u2019re encountering. We understand how frustrating this can be, especially when your traffic is low. Our team is currently investigating the situation to identify the root cause.\n\nWe appreciate your patience as we work through this, and we\u2019ll keep you updated with any progress. If you have any more questions in the meantime, please feel free to reach out.\n\nBest regards,  \n[Your Name]  \n[Your Position]  \n[Your Company]  ",
+    "score": "correct"
+  },
+  "T-002|truncate_reply": {
+    "ticket": "T-002",
+    "fault": "truncate_reply",
+    "trace_id": "315aa4f5ea9bf19cfe2ae3096a562a35",
+    "failed": false,
+    "reason": null,
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "Exceeded the rate limit for the API key",
+          "evidence": [
+            "2026-10-03T10:12:00Z WARN rate limiter key=ak_live_77 window=60s count=612 limit=600 client_ip=[ip]",
+            "2026-10-04T10:13:00Z ERROR 429 returned to key=ak_live_77 path=/v1/orders"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Re: HTTP 429 Errors with Integration\n\nDear [Customer's Name],\n\nThank you for reaching out to us regarding the HTTP 429 errors you are experiencing with our API. We understand how this can impact your integration.\n\nHTTP 429 errors typically indicate that th",
+    "score": "partial"
+  },
+  "T-002|fabricate_evidence": {
+    "ticket": "T-002",
+    "fault": "fabricate_evidence",
+    "trace_id": "54673522c4e0a0386df98cce9ec21058",
+    "failed": true,
+    "reason": "evidence not in logs: 2023-10-23T08:15:00Z ERROR upstream dependency returned 500",
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "The API key exceeded the rate limit of 600 requests per 60 seconds.",
+          "evidence": [
+            "2023-10-23T08:15:00Z ERROR upstream dependency returned 500"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Regarding Your HTTP 429 Errors\n\nHi [Customer's Name],\n\nThank you for reaching out to us. We understand that you\u2019re experiencing HTTP 429 errors with your integration, and we appreciate your patience as we investigate this issue.\n\nThe error indicates that the API key may have exceeded its rate limit of 600 requests per 60 seconds. Even if your own traffic is low, there could be other factors contributing to the rate limit being reached, such as overlapping requests or usage from other sources.\n\nTo assist you better, could you please provide us with more details about your usage patterns? This will help us identify the root cause and find an appropriate solution.\n\nThank you for your understanding, and we look forward to resolving this for you!\n\nBest regards,  \n[Your Name]  \n[Your Position]  \n[Your Company]  ",
+    "score": "incorrect"
+  },
+  "T-003|baseline": {
+    "ticket": "T-003",
+    "fault": "baseline",
+    "trace_id": "e813a9dbcd87950164d56ac8b530ef7f",
+    "failed": false,
+    "reason": null,
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "ERROR saml assertion rejected: signing certificate expired 2026-09-28T00:00:00Z",
+          "evidence": [
+            "2026-10-05T10:09:00Z ERROR saml assertion rejected: signing certificate expired 2026-09-28T00:00:00Z"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: SSO Login Issue\n\nHi [Customer's Name],\n\nThank you for reaching out to us regarding the SSO login issue. We understand how important access is for your team. It appears that the signing certificate has expired, which could be causing the login problems.\n\nOur team is currently investigating this matter, and we will keep you updated as we work towards a resolution. If you have any further questions or need additional assistance in the meantime, please don't hesitate to let us know.\n\nBest regards,\n\n[Your Name]  \n[Your Position]  \n[Your Company]  ",
+    "score": "correct"
+  },
+  "T-003|remove_logs": {
+    "ticket": "T-003",
+    "fault": "remove_logs",
+    "trace_id": "8f8db28e6786478fd086730cd0120422",
+    "failed": true,
+    "reason": "tool empty: search_logs",
+    "diagnosis": {
+      "candidates": []
+    },
+    "reply": "Subject: Update on SSO Login Issue\n\nDear [Customer's Name],\n\nThank you for bringing the SSO login issue to our attention. We understand how important access is for your team and are actively investigating the matter to find a resolution.\n\nWe appreciate your patience as we work to address this issue. If you have any additional information or questions, please feel free to reach out.\n\nBest regards,  \n[Your Name]  \n[Your Position]  \n[Your Company]  ",
+    "score": "partial"
+  },
+  "T-003|wrong_doc": {
+    "ticket": "T-003",
+    "fault": "wrong_doc",
+    "trace_id": "b4218a0a86201d571a350b89b9fbf7b9",
+    "failed": false,
+    "reason": null,
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "saml assertion rejected due to expired signing certificate",
+          "evidence": [
+            "2026-10-05T10:09:00Z ERROR saml assertion rejected: signing certificate expired 2026-09-28T00:00:00Z",
+            "2026-10-04T10:13:00Z WARN sso login failed idp=okta-corp reason=invalid_signature user=[email]"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: SSO Login Issues\n\nHi [Customer's Name],\n\nThank you for bringing this to our attention. We're currently investigating the issue with SSO logins that you've reported. It seems that the problem may be related to an expired signing certificate, and we are working to resolve it as quickly as possible.\n\nWe appreciate your patience during this time and will keep you updated on our progress.\n\nBest regards,  \n[Your Name]  \n[Your Position]  ",
+    "score": "partial"
+  },
+  "T-003|tool_throws": {
+    "ticket": "T-003",
+    "fault": "tool_throws",
+    "trace_id": "9d1fd3731a5a9afcc1cfeddd2ca3b2ad",
+    "failed": true,
+    "reason": "tool error: search_logs OSError: injected fault: log backend unavailable",
+    "diagnosis": {
+      "candidates": []
+    },
+    "reply": "Subject: Update on SSO Login Issue\n\nDear [Customer's Name],\n\nThank you for reaching out regarding the SSO login issues your team is experiencing. We understand how important this is for your operations, and our team is actively investigating the situation to identify the underlying cause.\n\nWe appreciate your patience as we work to resolve this matter. Please feel free to reach out if you have any further questions or need assistance in the meantime.\n\nBest regards,\n\n[Your Name]  \n[Your Position]  \n[Your Company]  \n[Contact Information]  ",
+    "score": "incorrect"
+  },
+  "T-003|truncate_reply": {
+    "ticket": "T-003",
+    "fault": "truncate_reply",
+    "trace_id": "840d80a3593d37435fb2e21b2a1ac99d",
+    "failed": true,
+    "reason": "low groundedness score (1/5): The answer does not mention the expired signing certificate or the need to renew and refresh the metadata.",
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "The identity provider signing certificate has expired.",
+          "evidence": [
+            "2026-10-05T10:09:00Z ERROR saml assertion rejected: signing certificate expired 2026-09-28T00:00:00Z",
+            "2026-10-04T10:13:00Z WARN sso login failed idp=okta-corp reason=invalid_signature user=[email]"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Re: SSO Login Issues\n\nDear [Customer's Name],\n\nThank you for bringing this issue to our attention. We understand how important access is for your team, and we are currently investigating ",
+    "score": "partial"
+  },
+  "T-003|fabricate_evidence": {
+    "ticket": "T-003",
+    "fault": "fabricate_evidence",
+    "trace_id": "74f9904c983163a7620f38a7bd84c94f",
+    "failed": true,
+    "reason": "evidence not in logs: 2023-10-23T08:15:00Z ERROR upstream dependency returned 500",
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "The identity provider signing certificate has expired.",
+          "evidence": [
+            "2023-10-23T08:15:00Z ERROR upstream dependency returned 500"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Re: SSO Login Issues\n\nDear [Customer's Name],\n\nThank you for reaching out and bringing this issue to our attention. I understand how important seamless access is for your team, and I'm sorry to hear about the difficulties with SSO login since Monday.\n\nIt sounds like the issue may be related to the identity provider signing certificate. Our team is currently investigating this matter to ensure a swift resolution. We appreciate your patience during this time, and we will keep you updated on our progress.\n\nPlease let us know if you have any further questions or concerns in the meantime.\n\nBest regards,\n\n[Your Name]  \n[Your Position]  \n[Your Company]  \n",
+    "score": "incorrect"
+  },
+  "T-004|baseline": {
+    "ticket": "T-004",
+    "fault": "baseline",
+    "trace_id": "76cfe5d7ba1fbe234f27b07b5752f777",
+    "failed": false,
+    "reason": null,
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "CSV export exceeds the timeout limit due to a full table scan on orders, which indicates a lack of proper indexing.",
+          "evidence": [
+            "2026-10-01T10:05:00Z WARN export job=exp_5521 query exceeded 10000ms rows_scanned=4200000",
+            "2026-10-04T10:13:00Z ERROR export job=exp_5521 gateway timeout after 30000ms: full table scan on orders (no index on account_id+created_at)"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Update on Your CSV Export Issue\n\nDear [Customer's Name],\n\nThank you for reaching out and bringing this issue to our attention. We understand that you are experiencing a timeout error when trying to export your orders as a CSV file.\n\nBased on what you've described, it appears that the size of the data is causing the export process to exceed the timeout limit, likely due to inadequate indexing on the orders table. Our team is looking into this matter to explore potential improvements to the export process.\n\nWe appreciate your patience as we work towards resolving this issue. If you have any further questions or need assistance in the meantime, please feel free to reach out.\n\nBest regards,\n\n[Your Name]  \n[Your Position]  \n[Your Company]  ",
+    "score": "correct"
+  },
+  "T-004|remove_logs": {
+    "ticket": "T-004",
+    "fault": "remove_logs",
+    "trace_id": "bd547a3ea23f2a3c338d4e86099fbcc5",
+    "failed": true,
+    "reason": "tool empty: search_logs",
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "CSV export is timing out due to the size of orders",
+          "evidence": []
+        }
+      ]
+    },
+    "reply": "Subject: Re: CSV Export of Orders\n\nDear [Customer's Name],\n\nThank you for reaching out to us regarding the CSV export issue you\u2019re experiencing. We understand that running large exports can sometimes lead to timeouts, and we apologize for any inconvenience this may have caused.\n\nOur team is currently investigating this matter, and your feedback is invaluable in helping us improve our service. In the meantime, you might consider breaking down the export into smaller date ranges to see if that alleviates the timeout problem.\n\nIf you have any further questions or need assistance with anything else, please feel free to reach out.\n\nBest regards,\n\n[Your Name]  \n[Your Position]  \n[Your Company]  \n[Your Contact Information]  ",
+    "score": "partial"
+  },
+  "T-004|wrong_doc": {
+    "ticket": "T-004",
+    "fault": "wrong_doc",
+    "trace_id": "8e54927560d4e822b487097263a9598f",
+    "failed": false,
+    "reason": null,
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "CSV export of all orders fails due to a timeout caused by a full table scan.",
+          "evidence": [
+            "2026-10-01T10:05:00Z WARN export job=exp_5521 query exceeded 10000ms rows_scanned=4200000",
+            "2026-10-04T10:13:00Z ERROR export job=exp_5521 gateway timeout after 30000ms: full table scan on orders (no index on account_id+created_at)"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Re: CSV Export Issue\n\nDear [Customer's Name],\n\nThank you for reaching out to us regarding the CSV export of all orders. We understand how important this feature is for your operations, and we sincerely apologize for the inconvenience you're experiencing.\n\nIt appears that the timeout issue may be related to the large volume of data and a full table scan. Our team is investigating this matter to identify the best solution.\n\nWe appreciate your patience as we work to resolve this issue. Should you have any further questions or need assistance, please don't hesitate to reach out.\n\nBest regards,\n\n[Your Name]  \n[Your Position]  \n[Your Company]  \n[Contact Information]  ",
+    "score": "correct"
+  },
+  "T-004|tool_throws": {
+    "ticket": "T-004",
+    "fault": "tool_throws",
+    "trace_id": "12921dd2b0b5cb5f4412ead029a2377d",
+    "failed": true,
+    "reason": "tool error: search_logs OSError: injected fault: log backend unavailable",
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "CSV export of all orders fails due to a timeout for large accounts.",
+          "evidence": []
+        }
+      ]
+    },
+    "reply": "Subject: Re: CSV Export Timeout Issue\n\nDear [Customer's Name],\n\nThank you for bringing this issue to our attention. We understand that you are experiencing a timeout while exporting all orders for your account, and we apologize for any inconvenience this may have caused.\n\nThis problem typically occurs with larger accounts due to the size of the data being processed. Our team is currently investigating this matter to find a resolution.\n\nWe appreciate your patience as we work on this, and we'll keep you updated on our progress. If you have any other questions or need further assistance, please feel free to reach out.\n\nBest regards,\n\n[Your Name]  \n[Your Position]  \n[Your Company]",
+    "score": "partial"
+  },
+  "T-004|truncate_reply": {
+    "ticket": "T-004",
+    "fault": "truncate_reply",
+    "trace_id": "bfb4eb91ad5ac3d85fa7c7101c78d936",
+    "failed": true,
+    "reason": "low groundedness score (1/5): The answer is partially based on context but is incomplete and lacking direct alignment with the provided context or tool result.",
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "CSV exports for large accounts should be executed by date range to avoid timeouts due to full table scans and excessive rows scanned.",
+          "evidence": [
+            "2026-10-01T10:05:00Z WARN export job=exp_5521 query exceeded 10000ms rows_scanned=4200000",
+            "2026-10-04T10:13:00Z ERROR export job=exp_5521 gateway timeout after 30000ms: full table scan on orders (no index on account_id+created_at)"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Update on Your CSV Export Issue\n\nDear [Customer's Name],\n\nThank you for reaching out regarding the CSV export of your orders. We understand how important this feature is for you.\n\nFor larger accounts, it\u2019s best to execute CSV exports u",
+    "score": "partial"
+  },
+  "T-004|fabricate_evidence": {
+    "ticket": "T-004",
+    "fault": "fabricate_evidence",
+    "trace_id": "cae99a2fbe3353758a635c36c64810ae",
+    "failed": true,
+    "reason": "evidence not in logs: 2023-10-23T08:15:00Z ERROR upstream dependency returned 500",
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "CSV export exceeds the timeout limit due to a full table scan on the orders, which does not have an index on account_id and created_at.",
+          "evidence": [
+            "2023-10-23T08:15:00Z ERROR upstream dependency returned 500"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Update on Your CSV Export Issue\n\nDear [Customer's Name],\n\nThank you for reaching out regarding the CSV export of your orders. We understand how important this functionality is for your account.\n\nIt appears that the export process is timing out due to a lack of indexing on the relevant fields, which affects the efficiency of data retrieval for larger accounts. Our team is aware of the issue and is actively working on a solution to enhance performance.\n\nWe appreciate your patience as we address this matter. If you have any further questions or need additional assistance, please feel free to reach out.\n\nBest regards,\n\n[Your Name]  \n[Your Position]  \n[Your Company]  \n[Contact Information]",
+    "score": "incorrect"
+  }
+}

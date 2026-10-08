@@ -1,0 +1,17 @@
+2026-10-01T10:00:00Z DEBUG cache hit key=session:146 ttl=217s
+2026-10-02T10:01:00Z INFO request id=66 completed in 31ms status=200 from 10.0.127.195
+2026-10-03T10:02:00Z DEBUG gc pause 121ms heap=167MB
+2026-10-04T10:03:00Z DEBUG cache hit key=session:25 ttl=125s
+2026-10-05T10:04:00Z DEBUG gc pause 111ms heap=156MB
+2026-10-01T10:05:00Z INFO webhook payment.succeeded retry attempt=2 event_id=evt_8841
+2026-10-02T10:06:00Z ERROR invoice INV-2291 charged twice: no idempotency key on event_id=evt_8841
+2026-10-03T10:07:00Z INFO request id=179 completed in 115ms status=200 from 10.0.69.185
+2026-10-04T10:08:00Z DEBUG cache hit key=session:152 ttl=242s
+2026-10-05T10:09:00Z INFO health check ok node=8 latency=6ms
+2026-10-01T10:10:00Z INFO request id=241 completed in 226ms status=200 from 10.0.98.176
+2026-10-02T10:11:00Z DEBUG cache hit key=session:249 ttl=109s
+2026-10-03T10:12:00Z DEBUG cache hit key=session:196 ttl=113s
+2026-10-04T10:13:00Z DEBUG cache hit key=session:89 ttl=60s
+2026-10-05T10:14:00Z DEBUG gc pause 244ms heap=75MB
+2026-10-01T10:15:00Z DEBUG gc pause 215ms heap=235MB
+2026-10-02T10:16:00Z WARN webhook payment.succeeded delivery timeout after 5000ms, scheduling retry

@@ -1,0 +1,17 @@
+2026-10-01T10:00:00Z INFO health check ok node=166 latency=183ms
+2026-10-02T10:01:00Z INFO health check ok node=128 latency=122ms
+2026-10-03T10:02:00Z INFO health check ok node=99 latency=88ms
+2026-10-04T10:03:00Z DEBUG cache hit key=session:67 ttl=28s
+2026-10-05T10:04:00Z INFO export job=exp_5521 status=failed
+2026-10-01T10:05:00Z WARN export job=exp_5521 query exceeded 10000ms rows_scanned=4200000
+2026-10-02T10:06:00Z DEBUG cache hit key=session:248 ttl=156s
+2026-10-03T10:07:00Z INFO request id=58 completed in 5ms status=200 from 10.0.102.38
+2026-10-04T10:08:00Z INFO request id=185 completed in 246ms status=200 from 10.0.42.115
+2026-10-05T10:09:00Z DEBUG gc pause 140ms heap=214MB
+2026-10-01T10:10:00Z DEBUG gc pause 58ms heap=135MB
+2026-10-02T10:11:00Z DEBUG gc pause 173ms heap=148MB
+2026-10-03T10:12:00Z DEBUG gc pause 16ms heap=189MB
+2026-10-04T10:13:00Z ERROR export job=exp_5521 gateway timeout after 30000ms: full table scan on orders (no index on account_id+created_at)
+2026-10-05T10:14:00Z DEBUG cache hit key=session:225 ttl=13s
+2026-10-01T10:15:00Z INFO request id=80 completed in 235ms status=200 from 10.0.241.77
+2026-10-02T10:16:00Z DEBUG cache hit key=session:107 ttl=145s

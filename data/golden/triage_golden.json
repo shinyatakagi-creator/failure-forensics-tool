@@ -1,0 +1,14 @@
+{
+  "T-001": {
+    "root_cause": "Webhook retry after a delivery timeout re-processed payment.succeeded without an idempotency key, charging the invoice twice."
+  },
+  "T-002": {
+    "root_cause": "The API key is shared with a nightly batch sync job, which uses up the per-minute rate limit."
+  },
+  "T-003": {
+    "root_cause": "The identity provider's SAML signing certificate expired on 2026-09-28 and metadata was never refreshed."
+  },
+  "T-004": {
+    "root_cause": "The export query does a full table scan on orders for large accounts and exceeds the 30s gateway timeout."
+  }
+}

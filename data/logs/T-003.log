@@ -1,0 +1,17 @@
+2026-10-01T10:00:00Z INFO request id=99 completed in 201ms status=200 from 10.0.220.211
+2026-10-02T10:01:00Z DEBUG cache hit key=session:133 ttl=200s
+2026-10-03T10:02:00Z DEBUG gc pause 244ms heap=15MB
+2026-10-04T10:03:00Z INFO health check ok node=146 latency=142ms
+2026-10-05T10:04:00Z DEBUG gc pause 125ms heap=209MB
+2026-10-01T10:05:00Z INFO health check ok node=1 latency=138ms
+2026-10-02T10:06:00Z INFO sso metadata last refreshed 2025-09-28
+2026-10-03T10:07:00Z INFO health check ok node=118 latency=154ms
+2026-10-04T10:08:00Z DEBUG cache hit key=session:163 ttl=46s
+2026-10-05T10:09:00Z ERROR saml assertion rejected: signing certificate expired 2026-09-28T00:00:00Z
+2026-10-01T10:10:00Z DEBUG cache hit key=session:221 ttl=24s
+2026-10-02T10:11:00Z INFO health check ok node=9 latency=216ms
+2026-10-03T10:12:00Z INFO request id=22 completed in 223ms status=200 from 10.0.5.116
+2026-10-04T10:13:00Z WARN sso login failed idp=okta-corp reason=invalid_signature user=j.kim@corp-example.com
+2026-10-05T10:14:00Z INFO request id=194 completed in 194ms status=200 from 10.0.72.64
+2026-10-01T10:15:00Z INFO health check ok node=29 latency=205ms
+2026-10-02T10:16:00Z INFO health check ok node=75 latency=18ms

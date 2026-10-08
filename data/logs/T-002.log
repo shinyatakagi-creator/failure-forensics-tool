@@ -1,0 +1,17 @@
+2026-10-01T10:00:00Z INFO health check ok node=31 latency=191ms
+2026-10-02T10:01:00Z DEBUG gc pause 130ms heap=213MB
+2026-10-03T10:02:00Z DEBUG cache hit key=session:78 ttl=73s
+2026-10-04T10:03:00Z DEBUG gc pause 217ms heap=241MB
+2026-10-05T10:04:00Z INFO request id=123 completed in 63ms status=200 from 10.0.191.205
+2026-10-01T10:05:00Z DEBUG gc pause 107ms heap=171MB
+2026-10-02T10:06:00Z INFO health check ok node=23 latency=113ms
+2026-10-03T10:07:00Z INFO request id=200 completed in 42ms status=200 from 10.0.134.216
+2026-10-04T10:08:00Z DEBUG gc pause 95ms heap=126MB
+2026-10-05T10:09:00Z DEBUG gc pause 12ms heap=79MB
+2026-10-01T10:10:00Z DEBUG gc pause 166ms heap=44MB
+2026-10-02T10:11:00Z DEBUG cache hit key=session:4 ttl=198s
+2026-10-03T10:12:00Z WARN rate limiter key=ak_live_77 window=60s count=612 limit=600 client_ip=203.0.113.45
+2026-10-04T10:13:00Z ERROR 429 returned to key=ak_live_77 path=/v1/orders
+2026-10-05T10:14:00Z DEBUG cache hit key=session:104 ttl=132s
+2026-10-01T10:15:00Z INFO key=ak_live_77 also used by job=nightly-batch-sync (shared key)
+2026-10-02T10:16:00Z INFO health check ok node=118 latency=233ms
