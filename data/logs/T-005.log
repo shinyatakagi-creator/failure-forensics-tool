@@ -1,0 +1,20 @@
+2026-10-06T10:00:00Z INFO health check ok node=243 latency=39ms
+2026-10-06T10:02:00Z INFO request id=19 completed in 211ms status=200 from 10.0.138.25
+2026-10-06T10:04:00Z INFO health check ok node=150 latency=15ms
+2026-10-06T10:06:00Z DEBUG cache hit key=session:10 ttl=23s
+2026-10-06T10:08:00Z ERROR pdf renderer font cache miss, regenerated
+2026-10-06T10:10:00Z INFO request id=62 completed in 24ms status=200 from 10.0.142.109
+2026-10-06T10:12:00Z INFO request id=212 completed in 145ms status=200 from 10.0.32.243
+2026-10-06T10:14:00Z DEBUG cache hit key=session:162 ttl=161s
+2026-10-06T10:16:00Z INFO tax lookup region=DE vat_id=DE999999999 validation=pending
+2026-10-06T10:18:00Z INFO request id=148 completed in 150ms status=200 from 10.0.102.13
+2026-10-06T10:20:00Z DEBUG cache hit key=session:12 ttl=143s
+2026-10-06T10:22:00Z INFO health check ok node=108 latency=37ms
+2026-10-06T10:24:00Z INFO job heartbeat worker=79 queue=144
+2026-10-06T10:26:00Z DEBUG cache hit key=session:27 ttl=149s
+2026-10-06T10:28:00Z WARN vies validation timeout after 8000ms, vat_id treated as unverified
+2026-10-06T10:30:00Z INFO tax rate applied=0.00 reason=fallback_unverified_vat
+2026-10-06T10:32:00Z DEBUG cache hit key=session:96 ttl=25s
+2026-10-06T10:34:00Z INFO request id=145 completed in 16ms status=200 from 10.0.159.53
+2026-10-06T10:36:00Z DEBUG gc pause 175ms heap=137MB
+2026-10-06T10:38:00Z INFO health check ok node=120 latency=150ms

@@ -1,0 +1,5 @@
+{
+  "id": "T-007",
+  "area": "auth",
+  "symptom": "Password reset emails never arrive for several of our users."
+}

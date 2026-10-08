@@ -28,9 +28,16 @@ def call_tool(query: str, context: str) -> dict | None:
         if not match:
             span.set_attribute("output_preview", "no tool needed")
             return None
+        span.set_attribute("tool.name", "calculator")
         a, op, b = match.groups()
         a, b = float(a), float(b)
-        result = {"+": a + b, "-": a - b, "*": a * b, "/": a / b}[op]
+        try:
+            result = {"+": a + b, "-": a - b, "*": a * b, "/": a / b}[op]
+        except Exception as e:
+            span.set_attribute("tool.status", "error")
+            span.set_attribute("tool.error", f"{type(e).__name__}: {e}")
+            raise
+        span.set_attribute("tool.status", "empty" if result is None else "ok")
         span.set_attribute("output_preview", str(result))
         return {"tool": "calculator", "result": result}
 

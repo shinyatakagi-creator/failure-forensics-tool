@@ -1,0 +1,20 @@
+2026-10-06T10:00:00Z INFO request id=148 completed in 77ms status=200 from 10.0.135.127
+2026-10-06T10:02:00Z INFO health check ok node=187 latency=115ms
+2026-10-06T10:04:00Z INFO request id=31 completed in 132ms status=200 from 10.0.108.43
+2026-10-06T10:06:00Z INFO health check ok node=39 latency=239ms
+2026-10-06T10:08:00Z INFO request id=247 completed in 172ms status=200 from 10.0.20.196
+2026-10-06T10:10:00Z INFO job heartbeat worker=147 queue=203
+2026-10-06T10:12:00Z ERROR metrics exporter connection reset, retrying
+2026-10-06T10:14:00Z INFO health check ok node=88 latency=178ms
+2026-10-06T10:16:00Z DEBUG gc pause 149ms heap=205MB
+2026-10-06T10:18:00Z WARN webhook delivery endpoint=https://hooks.example-customer.test/in status=410 attempt=1
+2026-10-06T10:20:00Z INFO request id=242 completed in 70ms status=200 from 10.0.122.179
+2026-10-06T10:22:00Z WARN webhook delivery endpoint=https://hooks.example-customer.test/in status=410 consecutive_failures=50
+2026-10-06T10:24:00Z INFO request id=16 completed in 188ms status=200 from 10.0.180.80
+2026-10-06T10:26:00Z INFO job heartbeat worker=175 queue=211
+2026-10-06T10:28:00Z INFO webhook subscription sub_204 auto-disabled after 50 consecutive failures
+2026-10-06T10:30:00Z DEBUG gc pause 228ms heap=172MB
+2026-10-06T10:32:00Z DEBUG gc pause 91ms heap=44MB
+2026-10-06T10:34:00Z DEBUG gc pause 16ms heap=56MB
+2026-10-06T10:36:00Z DEBUG cache hit key=session:190 ttl=64s
+2026-10-06T10:38:00Z DEBUG gc pause 21ms heap=43MB

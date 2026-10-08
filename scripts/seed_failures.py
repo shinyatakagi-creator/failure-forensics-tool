@@ -27,7 +27,8 @@ FAULT_QUERIES = [
 
 def main():
     random.seed(0)
-    for q in QUERIES:
+    n = int(sys.argv[1]) if len(sys.argv) > 1 else len(QUERIES)  # e.g. 40 to get 30+ runs to label
+    for q in (QUERIES * (n // len(QUERIES) + 1))[:n]:
         if random.random() < 0.2:
             q = random.choice(FAULT_QUERIES)
         result = run_pipeline(q)

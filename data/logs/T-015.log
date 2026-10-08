@@ -1,0 +1,20 @@
+2026-10-06T10:00:00Z INFO request id=124 completed in 16ms status=200 from 10.0.125.69
+2026-10-06T10:02:00Z INFO request id=178 completed in 56ms status=200 from 10.0.173.126
+2026-10-06T10:04:00Z INFO health check ok node=182 latency=133ms
+2026-10-06T10:06:00Z INFO report rpt_31 started filter=segment:seg_88
+2026-10-06T10:08:00Z DEBUG gc pause 120ms heap=197MB
+2026-10-06T10:10:00Z INFO job heartbeat worker=52 queue=80
+2026-10-06T10:12:00Z ERROR s3 put retried once
+2026-10-06T10:14:00Z DEBUG gc pause 5ms heap=75MB
+2026-10-06T10:16:00Z INFO job heartbeat worker=248 queue=116
+2026-10-06T10:18:00Z DEBUG cache hit key=session:235 ttl=243s
+2026-10-06T10:20:00Z INFO request id=149 completed in 24ms status=200 from 10.0.37.192
+2026-10-06T10:22:00Z INFO job heartbeat worker=68 queue=244
+2026-10-06T10:24:00Z INFO job heartbeat worker=210 queue=162
+2026-10-06T10:26:00Z INFO request id=181 completed in 94ms status=200 from 10.0.60.128
+2026-10-06T10:28:00Z WARN segment seg_88 not found (deleted 2026-09-30)
+2026-10-06T10:30:00Z DEBUG gc pause 101ms heap=7MB
+2026-10-06T10:32:00Z DEBUG gc pause 175ms heap=116MB
+2026-10-06T10:34:00Z INFO report rpt_31 finished rows=0
+2026-10-06T10:36:00Z DEBUG cache hit key=session:107 ttl=89s
+2026-10-06T10:38:00Z INFO request id=216 completed in 85ms status=200 from 10.0.1.84

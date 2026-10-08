@@ -1,0 +1,20 @@
+2026-10-06T10:00:00Z DEBUG gc pause 50ms heap=83MB
+2026-10-06T10:02:00Z DEBUG gc pause 8ms heap=162MB
+2026-10-06T10:04:00Z WARN thumbnail backfill paused
+2026-10-06T10:06:00Z DEBUG gc pause 11ms heap=97MB
+2026-10-06T10:08:00Z INFO request id=206 completed in 236ms status=200 from 10.0.16.66
+2026-10-06T10:10:00Z DEBUG cache hit key=session:192 ttl=17s
+2026-10-06T10:12:00Z INFO quota acct_41 used=49.6GB limit=50GB
+2026-10-06T10:14:00Z INFO health check ok node=93 latency=70ms
+2026-10-06T10:16:00Z INFO quota breakdown live=2.1GB trash=47.5GB
+2026-10-06T10:18:00Z INFO trash retention=30d purge_scheduled=2026-10-30
+2026-10-06T10:20:00Z INFO job heartbeat worker=12 queue=68
+2026-10-06T10:22:00Z INFO health check ok node=237 latency=71ms
+2026-10-06T10:24:00Z INFO job heartbeat worker=235 queue=207
+2026-10-06T10:26:00Z INFO request id=7 completed in 212ms status=200 from 10.0.60.28
+2026-10-06T10:28:00Z DEBUG gc pause 184ms heap=245MB
+2026-10-06T10:30:00Z DEBUG gc pause 203ms heap=65MB
+2026-10-06T10:32:00Z DEBUG gc pause 34ms heap=238MB
+2026-10-06T10:34:00Z INFO request id=206 completed in 239ms status=200 from 10.0.190.78
+2026-10-06T10:36:00Z DEBUG cache hit key=session:156 ttl=61s
+2026-10-06T10:38:00Z INFO health check ok node=118 latency=93ms

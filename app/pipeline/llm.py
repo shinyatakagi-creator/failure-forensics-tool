@@ -7,6 +7,9 @@ from dotenv import load_dotenv
 load_dotenv()
 
 HAS_API_KEY = bool(os.environ.get("OPENAI_API_KEY"))
+GEN_MODEL = os.environ.get("GEN_MODEL", "gpt-4o-mini")
+# Judge must differ from the generator so it doesn't share its blind spots.
+JUDGE_MODEL = os.environ.get("JUDGE_MODEL", "gpt-4o")
 
 _STOPWORDS = {
     "the", "a", "an", "to", "of", "in", "on", "is", "are", "for", "and",
@@ -45,10 +48,10 @@ def cosine(a: np.ndarray, b: np.ndarray) -> float:
     return float(np.dot(a, b) / denom) if denom else 0.0
 
 
-def complete(prompt: str, system: str = "") -> str:
+def complete(prompt: str, system: str = "", model: str | None = None) -> str:
     if HAS_API_KEY:
         resp = _get_client().chat.completions.create(
-            model="gpt-4o-mini",
+            model=model or GEN_MODEL,
             messages=[{"role": "system", "content": system}, {"role": "user", "content": prompt}],
         )
         return resp.choices[0].message.content or ""

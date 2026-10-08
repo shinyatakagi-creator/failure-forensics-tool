@@ -1,0 +1,5 @@
+{
+  "id": "T-002",
+  "area": "api",
+  "symptom": "Our integration gets HTTP 429 errors even though our own traffic is low."
+}

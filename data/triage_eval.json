@@ -1,0 +1,2352 @@
+{
+  "T-001|baseline": {
+    "ticket": "T-001",
+    "fault": "baseline",
+    "trace_id": "a392c6f2e08146e12ba41b47cea7ce50",
+    "failed": true,
+    "reason": "low groundedness score (1/5): The answer references a duplicate charge issue, but does not specifically relate to the event_id or idempotency key from the context or tool result.",
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "Payment webhooks delivered at-least-once without using an idempotency key led to a double charge.",
+          "evidence": [
+            "2026-10-02T10:06:00Z ERROR invoice INV-2291 charged twice: no idempotency key on event_id=evt_8841",
+            "2026-10-02T10:16:00Z WARN webhook payment.succeeded delivery timeout after 5000ms, scheduling retry"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Re: Duplicate Charge for March Invoice\n\nDear [Customer's Name],\n\nThank you for reaching out to us regarding the charges on your March invoice. We sincerely apologize for any confusion this may have caused.\n\nIt appears that there may have been an issue with how the payment was processed, which can sometimes lead to duplicate charges. We are currently looking into this matter to ensure it is resolved promptly.\n\nWe appreciate your understanding and patience as we work to sort this out. If you have any further questions or need assistance in the meantime, please don't hesitate to let us know.\n\nBest regards,\n\n[Your Name]  \n[Your Position]  \n[Company Name]  \n[Contact Information]  ",
+    "score": "correct",
+    "auto_score": "partial",
+    "key_score": "correct"
+  },
+  "T-001|remove_logs": {
+    "ticket": "T-001",
+    "fault": "remove_logs",
+    "trace_id": "d391a38d80e0812b4703f0b0cf1c2817",
+    "failed": true,
+    "reason": "tool empty: search_logs",
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "Retries on payment webhooks can lead to duplicate charges if the event_id is not used as an idempotency key.",
+          "evidence": []
+        }
+      ]
+    },
+    "reply": "Subject: Duplicate Charge Inquiry\n\nDear [Customer's Name],\n\nThank you for reaching out regarding the double charge for your March invoice. We understand how concerning this can be and appreciate your patience as we look into the matter. \n\nIt\u2019s possible that a technical issue with our payment processing may have caused this duplication. We are currently investigating the situation to ensure it is resolved properly.\n\nPlease know that we are here to help and will keep you updated on our findings. If you have any further questions or concerns in the meantime, feel free to reach out.\n\nBest regards,\n\n[Your Name]  \n[Your Position]  \n[Your Company]  ",
+    "score": "partial",
+    "auto_score": "partial",
+    "key_score": "partial"
+  },
+  "T-001|wrong_doc": {
+    "ticket": "T-001",
+    "fault": "wrong_doc",
+    "trace_id": "cdbb54b58639a3fa3c6d7c862bb3d554",
+    "failed": false,
+    "reason": null,
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "Customer was charged twice for the invoice due to a missing idempotency key on the event.",
+          "evidence": [
+            "2026-10-02T10:06:00Z ERROR invoice INV-2291 charged twice: no idempotency key on event_id=evt_8841"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Inquiry Regarding Double Charge for March Invoice\n\nDear [Customer's Name],\n\nThank you for reaching out to us regarding the double charge on your March invoice. We understand how concerning this can be, and we appreciate your patience as we look into the matter.\n\nIt appears that this issue may have occurred due to a missing idempotency key during the transaction process. We are actively investigating the situation to ensure it is resolved promptly.\n\nShould you have further questions or need assistance in the meantime, please feel free to reach out.\n\nBest regards,  \n[Your Name]  \n[Your Position]  \n[Your Company]  ",
+    "score": "correct",
+    "auto_score": "partial",
+    "key_score": "partial"
+  },
+  "T-001|tool_throws": {
+    "ticket": "T-001",
+    "fault": "tool_throws",
+    "trace_id": "de0f6197a0f6f8a478d697495fc617d5",
+    "failed": true,
+    "reason": "tool error: search_logs OSError: injected fault: log backend unavailable",
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "Handlers must use the event_id as an idempotency key, otherwise retries can charge twice.",
+          "evidence": []
+        }
+      ]
+    },
+    "reply": "Subject: Regarding Your Invoice Inquiry\n\nDear [Customer Name],\n\nThank you for reaching out to us regarding your March invoice. I understand your concern about being charged twice. This can sometimes happen if the event ID isn\u2019t used as an idempotency key during processing, leading to duplicate charges.\n\nPlease rest assured that we are looking into this matter for you. If you have any further questions or need assistance, feel free to let us know.\n\nBest regards,\n\n[Your Name]  \n[Your Position]  \n[Your Company]",
+    "score": "incorrect",
+    "auto_score": "partial",
+    "key_score": "partial"
+  },
+  "T-001|truncate_reply": {
+    "ticket": "T-001",
+    "fault": "truncate_reply",
+    "trace_id": "202d41c2f9e910cc0fb7852c94fe709a",
+    "failed": true,
+    "reason": "low groundedness score (1/5): The answer is not grounded in the context or the tool result, as it mentions a March invoice and a customer's query, which are not present.",
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "Handlers did not use the event_id as an idempotency key, leading to a double charge.",
+          "evidence": [
+            "2026-10-02T10:06:00Z ERROR invoice INV-2291 charged twice: no idempotency key on event_id=evt_8841",
+            "2026-10-02T10:16:00Z WARN webhook payment.succeeded delivery timeout after 5000ms, scheduling retry"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Regarding Your Invoice Query\n\nDear [Customer's Name],\n\nThank you for reaching out to us. I appreciate your patience as we look into the issue regarding the double charge on your March invoice. We understan",
+    "score": "partial",
+    "auto_score": "partial",
+    "key_score": "partial"
+  },
+  "T-001|fabricate_evidence": {
+    "ticket": "T-001",
+    "fault": "fabricate_evidence",
+    "trace_id": "7a51cf0319d73d5e4732154f77ce0cc2",
+    "failed": true,
+    "reason": "evidence not in logs: 2023-10-23T08:15:00Z ERROR upstream dependency returned 500",
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "Payment webhook was processed without an idempotency key, leading to a duplicate charge.",
+          "evidence": [
+            "2023-10-23T08:15:00Z ERROR upstream dependency returned 500"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Duplicate Charge Inquiry\n\nDear [Customer's Name],\n\nThank you for reaching out to us regarding the duplicate charge for your March invoice. We understand your concern and are currently investigating the issue to ensure it is resolved promptly.\n\nIf you have any further questions or need additional assistance, please don't hesitate to let us know. We appreciate your patience as we work through this matter.\n\nBest regards,  \n[Your Name]  \n[Your Position]  \n[Your Company]  ",
+    "score": "incorrect",
+    "auto_score": "partial",
+    "key_score": "incorrect"
+  },
+  "T-002|baseline": {
+    "ticket": "T-002",
+    "fault": "baseline",
+    "trace_id": "6f678f8d85ebbce93dbbccbd2e60b4e7",
+    "failed": false,
+    "reason": null,
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "Rate limit exceeded for API key ak_live_77",
+          "evidence": [
+            "2026-10-03T10:12:00Z WARN rate limiter key=ak_live_77 window=60s count=612 limit=600 client_ip=[ip]",
+            "2026-10-04T10:13:00Z ERROR 429 returned to key=ak_live_77 path=/v1/orders"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Re: HTTP 429 Errors with Your API Integration\n\nDear [Customer's Name],\n\nThank you for reaching out to us regarding the HTTP 429 errors you've been experiencing with your integration. We understand how important it is to maintain a smooth workflow, and we appreciate your patience as we look into this matter.\n\nThe HTTP 429 error typically indicates that the rate limit for your API key has been exceeded. This limit can sometimes be affected by broader usage patterns, including traffic from other users or applications. We recommend reviewing your API usage metrics and ensuring that your integration adheres to the specified rate limits. \n\nIf you continue to experience issues, please provide any additional details about your usage, and we will be happy to assist you further. \n\nThank you for your understanding.\n\nBest regards,  \n[Your Name]  \n[Your Position]  \n[Your Company]  ",
+    "score": "correct",
+    "auto_score": "partial",
+    "key_score": "partial"
+  },
+  "T-002|remove_logs": {
+    "ticket": "T-002",
+    "fault": "remove_logs",
+    "trace_id": "d19d03073a4c67a7c04fc761f7a37ae5",
+    "failed": true,
+    "reason": "tool empty: search_logs",
+    "diagnosis": {
+      "candidates": []
+    },
+    "reply": "Subject: Update on Your Integration Issue\n\nDear [Customer's Name],\n\nThank you for reaching out and bringing this to our attention. We understand the frustration caused by the HTTP 429 errors, especially when your traffic levels are low. Our team is currently investigating the matter to identify the cause and to implement a resolution.\n\nWe appreciate your patience as we work through this issue. If you have any further questions or need assistance in the meantime, please don\u2019t hesitate to reach out.\n\nBest regards,\n\n[Your Name]  \n[Your Job Title]  \n[Your Company]  ",
+    "score": "partial",
+    "auto_score": "incorrect",
+    "key_score": "incorrect"
+  },
+  "T-002|wrong_doc": {
+    "ticket": "T-002",
+    "fault": "wrong_doc",
+    "trace_id": "518f0e542c22fde40ae24872647165bf",
+    "failed": false,
+    "reason": null,
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "The rate limiter has been exceeded for the integration key ak_live_77, leading to the HTTP 429 errors.",
+          "evidence": [
+            "2026-10-03T10:12:00Z WARN rate limiter key=ak_live_77 window=60s count=612 limit=600 client_ip=[ip]",
+            "2026-10-04T10:13:00Z ERROR 429 returned to key=ak_live_77 path=/v1/orders"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Re: HTTP 429 Errors with Integration Key\n\nHi [Customer's Name],\n\nThank you for reaching out to us regarding the HTTP 429 errors you are experiencing with your integration key (ak_live_77). \n\nIt seems that the rate limiter for this key has been exceeded, which is the likely cause of these errors. We recommend reviewing your integration's traffic patterns to ensure they comply with the rate limits set for your account. \n\nIf you have any further questions or need assistance in troubleshooting, please feel free to ask.\n\nBest regards,\n\n[Your Name]  \n[Your Position]  \n[Your Company]  ",
+    "score": "partial",
+    "auto_score": "partial",
+    "key_score": "partial"
+  },
+  "T-002|tool_throws": {
+    "ticket": "T-002",
+    "fault": "tool_throws",
+    "trace_id": "39f852e5d20ee4621e9ae33454b442e5",
+    "failed": true,
+    "reason": "tool error: search_logs OSError: injected fault: log backend unavailable",
+    "diagnosis": {
+      "candidates": []
+    },
+    "reply": "Subject: Update on Your Integration Issue\n\nHi [Customer's Name],\n\nThank you for reaching out to us about the HTTP 429 errors you\u2019re encountering. We understand how frustrating this can be, especially when your traffic is low. Our team is currently investigating the situation to identify the root cause.\n\nWe appreciate your patience as we work through this, and we\u2019ll keep you updated with any progress. If you have any more questions in the meantime, please feel free to reach out.\n\nBest regards,  \n[Your Name]  \n[Your Position]  \n[Your Company]  ",
+    "score": "correct",
+    "auto_score": "incorrect",
+    "key_score": "incorrect"
+  },
+  "T-002|truncate_reply": {
+    "ticket": "T-002",
+    "fault": "truncate_reply",
+    "trace_id": "315aa4f5ea9bf19cfe2ae3096a562a35",
+    "failed": false,
+    "reason": null,
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "Exceeded the rate limit for the API key",
+          "evidence": [
+            "2026-10-03T10:12:00Z WARN rate limiter key=ak_live_77 window=60s count=612 limit=600 client_ip=[ip]",
+            "2026-10-04T10:13:00Z ERROR 429 returned to key=ak_live_77 path=/v1/orders"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Re: HTTP 429 Errors with Integration\n\nDear [Customer's Name],\n\nThank you for reaching out to us regarding the HTTP 429 errors you are experiencing with our API. We understand how this can impact your integration.\n\nHTTP 429 errors typically indicate that th",
+    "score": "partial",
+    "auto_score": "partial",
+    "key_score": "partial"
+  },
+  "T-002|fabricate_evidence": {
+    "ticket": "T-002",
+    "fault": "fabricate_evidence",
+    "trace_id": "54673522c4e0a0386df98cce9ec21058",
+    "failed": true,
+    "reason": "evidence not in logs: 2023-10-23T08:15:00Z ERROR upstream dependency returned 500",
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "The API key exceeded the rate limit of 600 requests per 60 seconds.",
+          "evidence": [
+            "2023-10-23T08:15:00Z ERROR upstream dependency returned 500"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Regarding Your HTTP 429 Errors\n\nHi [Customer's Name],\n\nThank you for reaching out to us. We understand that you\u2019re experiencing HTTP 429 errors with your integration, and we appreciate your patience as we investigate this issue.\n\nThe error indicates that the API key may have exceeded its rate limit of 600 requests per 60 seconds. Even if your own traffic is low, there could be other factors contributing to the rate limit being reached, such as overlapping requests or usage from other sources.\n\nTo assist you better, could you please provide us with more details about your usage patterns? This will help us identify the root cause and find an appropriate solution.\n\nThank you for your understanding, and we look forward to resolving this for you!\n\nBest regards,  \n[Your Name]  \n[Your Position]  \n[Your Company]  ",
+    "score": "incorrect",
+    "auto_score": "partial",
+    "key_score": "incorrect"
+  },
+  "T-003|baseline": {
+    "ticket": "T-003",
+    "fault": "baseline",
+    "trace_id": "e813a9dbcd87950164d56ac8b530ef7f",
+    "failed": false,
+    "reason": null,
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "ERROR saml assertion rejected: signing certificate expired 2026-09-28T00:00:00Z",
+          "evidence": [
+            "2026-10-05T10:09:00Z ERROR saml assertion rejected: signing certificate expired 2026-09-28T00:00:00Z"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: SSO Login Issue\n\nHi [Customer's Name],\n\nThank you for reaching out to us regarding the SSO login issue. We understand how important access is for your team. It appears that the signing certificate has expired, which could be causing the login problems.\n\nOur team is currently investigating this matter, and we will keep you updated as we work towards a resolution. If you have any further questions or need additional assistance in the meantime, please don't hesitate to let us know.\n\nBest regards,\n\n[Your Name]  \n[Your Position]  \n[Your Company]  ",
+    "score": "correct",
+    "auto_score": "partial",
+    "key_score": "correct"
+  },
+  "T-003|remove_logs": {
+    "ticket": "T-003",
+    "fault": "remove_logs",
+    "trace_id": "8f8db28e6786478fd086730cd0120422",
+    "failed": true,
+    "reason": "tool empty: search_logs",
+    "diagnosis": {
+      "candidates": []
+    },
+    "reply": "Subject: Update on SSO Login Issue\n\nDear [Customer's Name],\n\nThank you for bringing the SSO login issue to our attention. We understand how important access is for your team and are actively investigating the matter to find a resolution.\n\nWe appreciate your patience as we work to address this issue. If you have any additional information or questions, please feel free to reach out.\n\nBest regards,  \n[Your Name]  \n[Your Position]  \n[Your Company]  ",
+    "score": "partial",
+    "auto_score": "incorrect",
+    "key_score": "incorrect"
+  },
+  "T-003|wrong_doc": {
+    "ticket": "T-003",
+    "fault": "wrong_doc",
+    "trace_id": "b4218a0a86201d571a350b89b9fbf7b9",
+    "failed": false,
+    "reason": null,
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "saml assertion rejected due to expired signing certificate",
+          "evidence": [
+            "2026-10-05T10:09:00Z ERROR saml assertion rejected: signing certificate expired 2026-09-28T00:00:00Z",
+            "2026-10-04T10:13:00Z WARN sso login failed idp=okta-corp reason=invalid_signature user=[email]"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: SSO Login Issues\n\nHi [Customer's Name],\n\nThank you for bringing this to our attention. We're currently investigating the issue with SSO logins that you've reported. It seems that the problem may be related to an expired signing certificate, and we are working to resolve it as quickly as possible.\n\nWe appreciate your patience during this time and will keep you updated on our progress.\n\nBest regards,  \n[Your Name]  \n[Your Position]  ",
+    "score": "partial",
+    "auto_score": "correct",
+    "key_score": "correct"
+  },
+  "T-003|tool_throws": {
+    "ticket": "T-003",
+    "fault": "tool_throws",
+    "trace_id": "9d1fd3731a5a9afcc1cfeddd2ca3b2ad",
+    "failed": true,
+    "reason": "tool error: search_logs OSError: injected fault: log backend unavailable",
+    "diagnosis": {
+      "candidates": []
+    },
+    "reply": "Subject: Update on SSO Login Issue\n\nDear [Customer's Name],\n\nThank you for reaching out regarding the SSO login issues your team is experiencing. We understand how important this is for your operations, and our team is actively investigating the situation to identify the underlying cause.\n\nWe appreciate your patience as we work to resolve this matter. Please feel free to reach out if you have any further questions or need assistance in the meantime.\n\nBest regards,\n\n[Your Name]  \n[Your Position]  \n[Your Company]  \n[Contact Information]  ",
+    "score": "incorrect",
+    "auto_score": "incorrect",
+    "key_score": "incorrect"
+  },
+  "T-003|truncate_reply": {
+    "ticket": "T-003",
+    "fault": "truncate_reply",
+    "trace_id": "840d80a3593d37435fb2e21b2a1ac99d",
+    "failed": true,
+    "reason": "low groundedness score (1/5): The answer does not mention the expired signing certificate or the need to renew and refresh the metadata.",
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "The identity provider signing certificate has expired.",
+          "evidence": [
+            "2026-10-05T10:09:00Z ERROR saml assertion rejected: signing certificate expired 2026-09-28T00:00:00Z",
+            "2026-10-04T10:13:00Z WARN sso login failed idp=okta-corp reason=invalid_signature user=[email]"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Re: SSO Login Issues\n\nDear [Customer's Name],\n\nThank you for bringing this issue to our attention. We understand how important access is for your team, and we are currently investigating ",
+    "score": "partial",
+    "auto_score": "partial",
+    "key_score": "correct"
+  },
+  "T-003|fabricate_evidence": {
+    "ticket": "T-003",
+    "fault": "fabricate_evidence",
+    "trace_id": "74f9904c983163a7620f38a7bd84c94f",
+    "failed": true,
+    "reason": "evidence not in logs: 2023-10-23T08:15:00Z ERROR upstream dependency returned 500",
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "The identity provider signing certificate has expired.",
+          "evidence": [
+            "2023-10-23T08:15:00Z ERROR upstream dependency returned 500"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Re: SSO Login Issues\n\nDear [Customer's Name],\n\nThank you for reaching out and bringing this issue to our attention. I understand how important seamless access is for your team, and I'm sorry to hear about the difficulties with SSO login since Monday.\n\nIt sounds like the issue may be related to the identity provider signing certificate. Our team is currently investigating this matter to ensure a swift resolution. We appreciate your patience during this time, and we will keep you updated on our progress.\n\nPlease let us know if you have any further questions or concerns in the meantime.\n\nBest regards,\n\n[Your Name]  \n[Your Position]  \n[Your Company]  \n",
+    "score": "incorrect",
+    "auto_score": "partial",
+    "key_score": "incorrect"
+  },
+  "T-004|baseline": {
+    "ticket": "T-004",
+    "fault": "baseline",
+    "trace_id": "76cfe5d7ba1fbe234f27b07b5752f777",
+    "failed": false,
+    "reason": null,
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "CSV export exceeds the timeout limit due to a full table scan on orders, which indicates a lack of proper indexing.",
+          "evidence": [
+            "2026-10-01T10:05:00Z WARN export job=exp_5521 query exceeded 10000ms rows_scanned=4200000",
+            "2026-10-04T10:13:00Z ERROR export job=exp_5521 gateway timeout after 30000ms: full table scan on orders (no index on account_id+created_at)"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Update on Your CSV Export Issue\n\nDear [Customer's Name],\n\nThank you for reaching out and bringing this issue to our attention. We understand that you are experiencing a timeout error when trying to export your orders as a CSV file.\n\nBased on what you've described, it appears that the size of the data is causing the export process to exceed the timeout limit, likely due to inadequate indexing on the orders table. Our team is looking into this matter to explore potential improvements to the export process.\n\nWe appreciate your patience as we work towards resolving this issue. If you have any further questions or need assistance in the meantime, please feel free to reach out.\n\nBest regards,\n\n[Your Name]  \n[Your Position]  \n[Your Company]  ",
+    "score": "correct",
+    "auto_score": "correct",
+    "key_score": "correct"
+  },
+  "T-004|remove_logs": {
+    "ticket": "T-004",
+    "fault": "remove_logs",
+    "trace_id": "bd547a3ea23f2a3c338d4e86099fbcc5",
+    "failed": true,
+    "reason": "tool empty: search_logs",
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "CSV export is timing out due to the size of orders",
+          "evidence": []
+        }
+      ]
+    },
+    "reply": "Subject: Re: CSV Export of Orders\n\nDear [Customer's Name],\n\nThank you for reaching out to us regarding the CSV export issue you\u2019re experiencing. We understand that running large exports can sometimes lead to timeouts, and we apologize for any inconvenience this may have caused.\n\nOur team is currently investigating this matter, and your feedback is invaluable in helping us improve our service. In the meantime, you might consider breaking down the export into smaller date ranges to see if that alleviates the timeout problem.\n\nIf you have any further questions or need assistance with anything else, please feel free to reach out.\n\nBest regards,\n\n[Your Name]  \n[Your Position]  \n[Your Company]  \n[Your Contact Information]  ",
+    "score": "partial",
+    "auto_score": "partial",
+    "key_score": "incorrect"
+  },
+  "T-004|wrong_doc": {
+    "ticket": "T-004",
+    "fault": "wrong_doc",
+    "trace_id": "8e54927560d4e822b487097263a9598f",
+    "failed": false,
+    "reason": null,
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "CSV export of all orders fails due to a timeout caused by a full table scan.",
+          "evidence": [
+            "2026-10-01T10:05:00Z WARN export job=exp_5521 query exceeded 10000ms rows_scanned=4200000",
+            "2026-10-04T10:13:00Z ERROR export job=exp_5521 gateway timeout after 30000ms: full table scan on orders (no index on account_id+created_at)"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Re: CSV Export Issue\n\nDear [Customer's Name],\n\nThank you for reaching out to us regarding the CSV export of all orders. We understand how important this feature is for your operations, and we sincerely apologize for the inconvenience you're experiencing.\n\nIt appears that the timeout issue may be related to the large volume of data and a full table scan. Our team is investigating this matter to identify the best solution.\n\nWe appreciate your patience as we work to resolve this issue. Should you have any further questions or need assistance, please don't hesitate to reach out.\n\nBest regards,\n\n[Your Name]  \n[Your Position]  \n[Your Company]  \n[Contact Information]  ",
+    "score": "correct",
+    "auto_score": "correct",
+    "key_score": "correct"
+  },
+  "T-004|tool_throws": {
+    "ticket": "T-004",
+    "fault": "tool_throws",
+    "trace_id": "12921dd2b0b5cb5f4412ead029a2377d",
+    "failed": true,
+    "reason": "tool error: search_logs OSError: injected fault: log backend unavailable",
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "CSV export of all orders fails due to a timeout for large accounts.",
+          "evidence": []
+        }
+      ]
+    },
+    "reply": "Subject: Re: CSV Export Timeout Issue\n\nDear [Customer's Name],\n\nThank you for bringing this issue to our attention. We understand that you are experiencing a timeout while exporting all orders for your account, and we apologize for any inconvenience this may have caused.\n\nThis problem typically occurs with larger accounts due to the size of the data being processed. Our team is currently investigating this matter to find a resolution.\n\nWe appreciate your patience as we work on this, and we'll keep you updated on our progress. If you have any other questions or need further assistance, please feel free to reach out.\n\nBest regards,\n\n[Your Name]  \n[Your Position]  \n[Your Company]",
+    "score": "partial",
+    "auto_score": "partial",
+    "key_score": "partial"
+  },
+  "T-004|truncate_reply": {
+    "ticket": "T-004",
+    "fault": "truncate_reply",
+    "trace_id": "bfb4eb91ad5ac3d85fa7c7101c78d936",
+    "failed": true,
+    "reason": "low groundedness score (1/5): The answer is partially based on context but is incomplete and lacking direct alignment with the provided context or tool result.",
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "CSV exports for large accounts should be executed by date range to avoid timeouts due to full table scans and excessive rows scanned.",
+          "evidence": [
+            "2026-10-01T10:05:00Z WARN export job=exp_5521 query exceeded 10000ms rows_scanned=4200000",
+            "2026-10-04T10:13:00Z ERROR export job=exp_5521 gateway timeout after 30000ms: full table scan on orders (no index on account_id+created_at)"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Update on Your CSV Export Issue\n\nDear [Customer's Name],\n\nThank you for reaching out regarding the CSV export of your orders. We understand how important this feature is for you.\n\nFor larger accounts, it\u2019s best to execute CSV exports u",
+    "score": "partial",
+    "auto_score": "partial",
+    "key_score": "correct"
+  },
+  "T-004|fabricate_evidence": {
+    "ticket": "T-004",
+    "fault": "fabricate_evidence",
+    "trace_id": "cae99a2fbe3353758a635c36c64810ae",
+    "failed": true,
+    "reason": "evidence not in logs: 2023-10-23T08:15:00Z ERROR upstream dependency returned 500",
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "CSV export exceeds the timeout limit due to a full table scan on the orders, which does not have an index on account_id and created_at.",
+          "evidence": [
+            "2023-10-23T08:15:00Z ERROR upstream dependency returned 500"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Update on Your CSV Export Issue\n\nDear [Customer's Name],\n\nThank you for reaching out regarding the CSV export of your orders. We understand how important this functionality is for your account.\n\nIt appears that the export process is timing out due to a lack of indexing on the relevant fields, which affects the efficiency of data retrieval for larger accounts. Our team is aware of the issue and is actively working on a solution to enhance performance.\n\nWe appreciate your patience as we address this matter. If you have any further questions or need additional assistance, please feel free to reach out.\n\nBest regards,\n\n[Your Name]  \n[Your Position]  \n[Your Company]  \n[Contact Information]",
+    "score": "incorrect",
+    "auto_score": "correct",
+    "key_score": "incorrect"
+  },
+  "T-005|baseline": {
+    "ticket": "T-005",
+    "fault": "baseline",
+    "trace_id": "2a99ae00d0dddeb4aaf321e695afec8b",
+    "failed": false,
+    "reason": null,
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "The VAT ID validation timed out, leading to the application of a fallback rate of 0% VAT.",
+          "evidence": [
+            "2026-10-06T10:16:00Z INFO tax lookup region=DE vat_id=DE999999999 validation=pending",
+            "2026-10-06T10:28:00Z WARN vies validation timeout after 8000ms, vat_id treated as unverified",
+            "2026-10-06T10:30:00Z INFO tax rate applied=0.00 reason=fallback_unverified_vat"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Clarification on Your Invoice\n\nDear [Customer's Name],\n\nThank you for reaching out regarding the VAT charge on your invoice. \n\nIt appears that the VAT ID validation may have timed out, which can sometimes result in a fallback rate of 0% VAT being applied. We understand that this can be confusing, and we are here to assist you with any further questions or concerns.\n\nIf you need additional information or help with this matter, please feel free to let us know.\n\nBest regards,  \n[Your Name]  \n[Your Position]  \n[Your Company]  ",
+    "auto_score": "correct",
+    "key_score": "correct"
+  },
+  "T-005|remove_logs": {
+    "ticket": "T-005",
+    "fault": "remove_logs",
+    "trace_id": "a6d69015c9f960e8c13e942c9a66746f",
+    "failed": false,
+    "reason": null,
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "The invoice charges 0% VAT because the VAT ID validation is pending and was treated as unverified, leading to a fallback rate being applied.",
+          "evidence": [
+            "2026-10-06T10:16:00Z INFO tax lookup region=DE vat_id=DE999999999 validation=pending",
+            "2026-10-06T10:30:00Z INFO tax rate applied=0.00 reason=fallback_unverified_vat"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Clarification on VAT Charge on Invoice\n\nDear [Customer's Name],\n\nThank you for reaching out to us regarding your invoice for the German entity. \n\nThe reason you are seeing a 0% VAT charge is that the VAT ID validation is currently pending, which causes it to be treated as unverified. Consequently, a fallback rate has been applied.\n\nIf you need further assistance or have any more questions, please let us know.\n\nBest regards,  \n[Your Name]  \n[Your Company]  ",
+    "auto_score": "correct",
+    "key_score": "correct"
+  },
+  "T-005|wrong_doc": {
+    "ticket": "T-005",
+    "fault": "wrong_doc",
+    "trace_id": "36e07af219ea8c42adc2b778ba832ef5",
+    "failed": false,
+    "reason": null,
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "The invoice charges 0% VAT because the VAT ID was treated as unverified due to a validation timeout during the lookup process.",
+          "evidence": [
+            "2026-10-06T10:28:00Z WARN vies validation timeout after 8000ms, vat_id treated as unverified",
+            "2026-10-06T10:30:00Z INFO tax rate applied=0.00 reason=fallback_unverified_vat"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Clarification on Your Invoice VAT Charges\n\nDear [Customer's Name],\n\nThank you for reaching out to us regarding your invoice for the German entity. \n\nThe 0% VAT charge on your invoice is due to the VAT ID being treated as unverified. This occurred because of a validation timeout during the lookup process. We understand this may raise questions, and we appreciate your understanding as we work to clarify this matter.\n\nIf you have any further questions or need additional assistance, please don't hesitate to let us know.\n\nBest regards,\n\n[Your Name]  \n[Your Position]  \n[Your Company]  \n",
+    "auto_score": "correct",
+    "key_score": "correct"
+  },
+  "T-005|tool_throws": {
+    "ticket": "T-005",
+    "fault": "tool_throws",
+    "trace_id": "9bd5907646e1545582a41900505a36a3",
+    "failed": true,
+    "reason": "tool error: search_logs OSError: injected fault: log backend unavailable",
+    "diagnosis": {
+      "candidates": []
+    },
+    "reply": "Subject: Invoice Inquiry\n\nDear [Customer's Name],\n\nThank you for reaching out regarding the VAT charge on your invoice for the German entity. We understand the importance of this matter and are currently investigating the specifics.\n\nWe appreciate your patience as we work to provide clarity. Please feel free to reach out if you have any further questions in the meantime.\n\nBest regards,\n\n[Your Name]  \n[Your Position]  \n[Your Company]  \n[Contact Information]  ",
+    "auto_score": "incorrect",
+    "key_score": "incorrect"
+  },
+  "T-005|truncate_reply": {
+    "ticket": "T-005",
+    "fault": "truncate_reply",
+    "trace_id": "db0f368aed5874baee50147183a8fbe6",
+    "failed": false,
+    "reason": null,
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "The VAT ID for the German entity was treated as unverified due to a timeout in validation, leading to a fallback tax rate of 0%.",
+          "evidence": [
+            "2026-10-06T10:16:00Z INFO tax lookup region=DE vat_id=DE999999999 validation=pending",
+            "2026-10-06T10:28:00Z WARN vies validation timeout after 8000ms, vat_id treated as unverified",
+            "2026-10-06T10:30:00Z INFO tax rate applied=0.00 reason=fallback_unverified_vat"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Clarification on VAT Charges for Your Invoice\n\nDear [Customer's Name],\n\nThank you for reaching out regarding the VAT charge on your invoice for the German entity. \n\nThe 0% VAT rate applied may be due to the VAT ID for your German entity being treated as ",
+    "auto_score": "partial",
+    "key_score": "correct"
+  },
+  "T-005|fabricate_evidence": {
+    "ticket": "T-005",
+    "fault": "fabricate_evidence",
+    "trace_id": "bcda62a28f71d8c2f01abca33143d9ee",
+    "failed": true,
+    "reason": "evidence not in logs: 2023-10-23T08:15:00Z ERROR upstream dependency returned 500",
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "The VAT ID for the German entity was not successfully validated, leading to a fallback rate of 0% VAT being applied.",
+          "evidence": [
+            "2023-10-23T08:15:00Z ERROR upstream dependency returned 500"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Inquiry Regarding 0% VAT Charge\n\nDear [Customer's Name],\n\nThank you for reaching out regarding your invoice for the German entity. The 0% VAT charge is likely due to the VAT ID for the German entity not being successfully validated, which prompts the system to apply a fallback rate.\n\nIf you have further questions or need assistance with the VAT ID validation, please let us know, and we\u2019ll be happy to help.\n\nBest regards,  \n[Your Name]  \n[Your Position]  \n[Your Company]",
+    "auto_score": "partial",
+    "key_score": "incorrect"
+  },
+  "T-006|baseline": {
+    "ticket": "T-006",
+    "fault": "baseline",
+    "trace_id": "a7ffe9bd573134a01d10c5a8adf3332f",
+    "failed": false,
+    "reason": null,
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "Webhook subscription is disabled due to 50 consecutive failed deliveries.",
+          "evidence": [
+            "2026-10-06T10:18:00Z WARN webhook delivery endpoint=https://hooks.example-customer.test/in status=410 attempt=1",
+            "2026-10-06T10:22:00Z WARN webhook delivery endpoint=https://hooks.example-customer.test/in status=410 consecutive_failures=50"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Update on Your Webhook Deliveries\n\nDear [Customer's Name],\n\nThank you for reaching out regarding the issue with your webhook deliveries. It appears that the subscription may have been disabled due to 50 consecutive failed delivery attempts.\n\nTo resolve this, please ensure that your endpoint is active and able to process incoming requests. Once we confirm that your endpoint is functioning correctly, we can assist you in re-enabling the webhook subscription.\n\nIf you have any further questions or need assistance, please don't hesitate to ask.\n\nBest regards,  \n[Your Name]  \n[Your Position]  \n[Your Company]  ",
+    "auto_score": "correct",
+    "key_score": "partial"
+  },
+  "T-006|remove_logs": {
+    "ticket": "T-006",
+    "fault": "remove_logs",
+    "trace_id": "d55dda57fe36347151ddf17c9a0ee606",
+    "failed": true,
+    "reason": "tool empty: search_logs",
+    "diagnosis": {
+      "candidates": []
+    },
+    "reply": "Subject: Update on Your Webhook Delivery Issue\n\nDear [Customer's Name],\n\nThank you for reaching out regarding the webhook deliveries to your endpoint. We understand how important this is for your operations, and we're currently investigating the cause of the disruption.\n\nWe appreciate your patience as we work to resolve this issue. If you have any further questions or need assistance, please don't hesitate to reach out.\n\nBest regards,  \n[Your Name]  \n[Your Company] Support Team",
+    "auto_score": "incorrect",
+    "key_score": "incorrect"
+  },
+  "T-006|wrong_doc": {
+    "ticket": "T-006",
+    "fault": "wrong_doc",
+    "trace_id": "f1e02192cb0591b9991eed7db3e818cb",
+    "failed": false,
+    "reason": null,
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "The webhook delivery endpoint has been permanently removed or does not exist anymore (status 410).",
+          "evidence": [
+            "2026-10-06T10:18:00Z WARN webhook delivery endpoint=https://hooks.example-customer.test/in status=410 attempt=1",
+            "2026-10-06T10:22:00Z WARN webhook delivery endpoint=https://hooks.example-customer.test/in status=410 consecutive_failures=50"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Update on Your Webhook Delivery Issue\n\nDear [Customer's Name],\n\nThank you for reaching out to us regarding the webhook deliveries to your endpoint. We\u2019re sorry to hear that you\u2019ve encountered this issue.\n\nThe status code 410 indicates that the delivery endpoint may have been removed or is no longer available. If you'd like, we can assist you in checking the configuration of your endpoint to ensure everything is set up correctly.\n\nPlease let us know how you would like to proceed, and we\u2019ll be happy to help!\n\nBest regards,  \n[Your Name]  \n[Your Company] Support Team",
+    "auto_score": "correct",
+    "key_score": "partial"
+  },
+  "T-006|tool_throws": {
+    "ticket": "T-006",
+    "fault": "tool_throws",
+    "trace_id": "3ce0b78a3b913490223f5569b809505f",
+    "failed": true,
+    "reason": "tool error: search_logs OSError: injected fault: log backend unavailable",
+    "diagnosis": {
+      "candidates": []
+    },
+    "reply": "Subject: Update on Webhook Deliveries\n\nDear [Customer's Name],\n\nThank you for reaching out to us regarding the issues with your webhook deliveries. We understand the importance of this service and are currently investigating the cause of the interruption. \n\nWe appreciate your patience as we work to resolve this matter. If you have any further questions or concerns in the meantime, please feel free to reach out.\n\nBest regards,  \n[Your Name]  \n[Your Company\u2019s Name]  \n[Your Contact Information]  ",
+    "auto_score": "incorrect",
+    "key_score": "incorrect"
+  },
+  "T-006|truncate_reply": {
+    "ticket": "T-006",
+    "fault": "truncate_reply",
+    "trace_id": "07937688df7741e67cd7231b50cee308",
+    "failed": false,
+    "reason": null,
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "Webhook subscription has been disabled due to 50 consecutive failed deliveries.",
+          "evidence": [
+            "2026-10-06T10:18:00Z WARN webhook delivery endpoint=https://hooks.example-customer.test/in status=410 attempt=1",
+            "2026-10-06T10:22:00Z WARN webhook delivery endpoint=https://hooks.example-customer.test/in status=410 consecutive_failures=50"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Update on Your Webhook Deliveries\n\nDear [Customer's Name],\n\nThank you for reaching out regarding the webhook deliveries to your endpoint. It appears that the webhook subscription may have been disabled due to 50 consecutive failed delivery atte",
+    "auto_score": "partial",
+    "key_score": "partial"
+  },
+  "T-006|fabricate_evidence": {
+    "ticket": "T-006",
+    "fault": "fabricate_evidence",
+    "trace_id": "813c4017614a51bdcd7fcbff10c9cc2d",
+    "failed": true,
+    "reason": "evidence not in logs: 2023-10-23T08:15:00Z ERROR upstream dependency returned 500",
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "The webhook delivery endpoint has been disabled due to 50 consecutive failed deliveries.",
+          "evidence": [
+            "2023-10-23T08:15:00Z ERROR upstream dependency returned 500"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Update on Your Webhook Deliveries\n\nDear [Customer's Name],\n\nThank you for reaching out to us regarding the issue with your webhook deliveries. We understand how important this is for your operations.\n\nIt appears that the webhook delivery endpoint has been disabled due to a series of consecutive failed deliveries. To resolve this, please check the endpoint for any potential issues, and once it is ready, we can assist you in re-enabling it.\n\nIf you need further assistance or have any questions, please don\u2019t hesitate to reach out.\n\nBest regards,\n\n[Your Name]  \n[Your Position]  \n[Your Company]  \n[Your Contact Information]  ",
+    "auto_score": "incorrect",
+    "key_score": "incorrect"
+  },
+  "T-007|baseline": {
+    "ticket": "T-007",
+    "fault": "baseline",
+    "trace_id": "7def0ff2ac5768ec9f6333b8eb00a769",
+    "failed": false,
+    "reason": null,
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "The user's email address is on a suppression list due to a hard bounce.",
+          "evidence": [
+            "2026-10-06T10:34:00Z WARN email send suppressed recipient=[email] reason=suppression_list"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Password Reset Email Issue\n\nDear [Customer's Name],\n\nThank you for reaching out to us regarding the password reset emails. It appears that some of your users may not be receiving these emails because their email addresses are on a suppression list due to a prior hard bounce.\n\nTo resolve this issue, we recommend checking the affected email addresses and ensuring they are valid. If you would like us to assist further in reviewing the suppression status, please provide the affected email addresses, and we will look into it for you.\n\nWe appreciate your understanding and are here to help!\n\nBest regards,  \n[Your Name]  \n[Your Position]  \n[Your Company]  ",
+    "auto_score": "correct",
+    "key_score": "correct"
+  },
+  "T-007|remove_logs": {
+    "ticket": "T-007",
+    "fault": "remove_logs",
+    "trace_id": "e53cc4ef5819acb17ff5bba8af494489",
+    "failed": false,
+    "reason": null,
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "User's email address is on the suppression list due to a hard bounce.",
+          "evidence": [
+            "2026-10-06T10:36:00Z INFO suppression entry created 2026-09-12 reason=hard_bounce"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Assistance with Password Reset Email Issues\n\nDear [Customer's Name],\n\nThank you for reaching out regarding the password reset emails for some of your users. It appears that the email addresses in question may be on the suppression list due to previous hard bounces.\n\nTo resolve this, we recommend that the affected users check their email settings and ensure that their email addresses are accurate. If needed, we can assist you further in reviewing the specific accounts and taking appropriate steps to remove them from the suppression list.\n\nPlease let us know how you would like to proceed or if you have any other questions.\n\nBest regards,\n\n[Your Name]  \n[Your Position]  \n[Your Company]  \n[Your Contact Information]  ",
+    "auto_score": "correct",
+    "key_score": "correct"
+  },
+  "T-007|wrong_doc": {
+    "ticket": "T-007",
+    "fault": "wrong_doc",
+    "trace_id": "ca909d867ac501a119412259420d8e0b",
+    "failed": false,
+    "reason": null,
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "The password reset emails are not being delivered to some users due to them being on a suppression list.",
+          "evidence": [
+            "2026-10-06T10:34:00Z WARN email send suppressed recipient=[email] reason=suppression_list",
+            "2026-10-06T10:36:00Z INFO suppression entry created 2026-09-12 reason=hard_bounce"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Re: Password Reset Emails\n\nHi [Customer's Name],\n\nThank you for reaching out to us. I understand that several of your users are not receiving password reset emails. This issue may be related to the users being on a suppression list, which prevents those emails from being delivered.\n\nTo assist you further, I recommend checking if those affected users have previously unsubscribed from our emails or if there's a specific email address issue. If needed, please provide me with the affected email addresses, and I can help investigate further.\n\nThank you for your patience, and I appreciate your understanding as we work to resolve this issue.\n\nBest regards,  \n[Your Name]  \n[Your Position]  \n[Your Company]  ",
+    "auto_score": "partial",
+    "key_score": "correct"
+  },
+  "T-007|tool_throws": {
+    "ticket": "T-007",
+    "fault": "tool_throws",
+    "trace_id": "33564d0f76d05011fa9058d12a815aca",
+    "failed": true,
+    "reason": "tool error: search_logs OSError: injected fault: log backend unavailable",
+    "diagnosis": {
+      "candidates": []
+    },
+    "reply": "Subject: Re: Password Reset Emails\n\nDear [Customer's Name],\n\nThank you for reaching out to us regarding the issue with password reset emails. We understand how important this is for your users, and we're currently investigating the root cause of the problem.\n\nWe appreciate your patience as we work to resolve this matter. If you have any further questions or need assistance, please feel free to reach out.\n\nBest regards,  \n[Your Name]  \n[Your Position]  \n[Your Company]",
+    "auto_score": "incorrect",
+    "key_score": "incorrect"
+  },
+  "T-007|truncate_reply": {
+    "ticket": "T-007",
+    "fault": "truncate_reply",
+    "trace_id": "bd2edc4d7cc7155bb883e0f8f1bc3735",
+    "failed": false,
+    "reason": null,
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "Email delivery is suppressed due to the recipient being on a suppression list.",
+          "evidence": [
+            "2026-10-06T10:34:00Z WARN email send suppressed recipient=[email] reason=suppression_list"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Re: Password Reset Email Issue\n\nDear [Customer's Name],\n\nThank you for reaching out regarding the password reset emails. It appears that the delivery may be affected if the recipient email addresses are on our suppression list.\n\nTo res",
+    "auto_score": "partial",
+    "key_score": "correct"
+  },
+  "T-007|fabricate_evidence": {
+    "ticket": "T-007",
+    "fault": "fabricate_evidence",
+    "trace_id": "b26b1d5391ce4f04300be3e43062d9e2",
+    "failed": true,
+    "reason": "evidence not in logs: 2023-10-23T08:15:00Z ERROR upstream dependency returned 500",
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "The email delivery issue is due to addresses being on a suppression list.",
+          "evidence": [
+            "2023-10-23T08:15:00Z ERROR upstream dependency returned 500"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Re: Password Reset Email Issue\n\nDear [Customer's Name],\n\nThank you for reaching out regarding the password reset emails. It appears that the issue may be related to the email addresses being on a suppression list, which can prevent delivery.\n\nTo help resolve this matter, please verify that the email addresses in question are correct and check if they might have previously opted out of receiving emails. If you continue to have issues, please provide us with the affected email addresses, and we will investigate further.\n\nWe appreciate your understanding and are here to assist you.\n\nBest regards,  \n[Your Name]  \n[Your Position]  \n[Your Company]",
+    "auto_score": "partial",
+    "key_score": "incorrect"
+  },
+  "T-008|baseline": {
+    "ticket": "T-008",
+    "fault": "baseline",
+    "trace_id": "5ea218e686c16ee6540a5d482532f69f",
+    "failed": false,
+    "reason": null,
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "Uploading a 300MB video fails because it exceeds the upload limit of 250MB.",
+          "evidence": [
+            "2026-10-06T10:20:00Z WARN proxy rejected request path=/upload/complete status=413 limit=262144000",
+            "2026-10-06T10:26:00Z ERROR upload up_771 finalize failed: entity too large"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Re: Issue with Video Upload\n\nDear [Customer's Name],\n\nThank you for reaching out to us regarding the issue you experienced while uploading your video. \n\nIt appears that the upload may be failing because the video file exceeds our maximum upload limit of 250MB. We recommend trying to trim the video or compress it to fit within this limit. \n\nIf you have any further questions or need assistance, please don't hesitate to ask.\n\nBest regards,  \n[Your Name]  \n[Your Position]  \n[Your Company]  ",
+    "auto_score": "correct",
+    "key_score": "correct"
+  },
+  "T-008|remove_logs": {
+    "ticket": "T-008",
+    "fault": "remove_logs",
+    "trace_id": "7233fb8ced4821fe5955d71a828353a8",
+    "failed": true,
+    "reason": "tool empty: search_logs",
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "Uploading a video larger than allowed limit of 250MB at the proxy.",
+          "evidence": [
+            "Uploading a 300MB video fails when the progress bar reaches 100%."
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Update on Your Video Upload Issue\n\nDear [Customer's Name],\n\nThank you for reaching out regarding your video upload. It seems that the issue you're experiencing may be due to the file size exceeding the allowed limit of 250MB at our proxy. \n\nTo resolve this, you might consider compressing the video to reduce its size before attempting to upload again. If you have any questions or need assistance with this process, please don't hesitate to let us know.\n\nWe appreciate your understanding and are here to help.\n\nBest regards,  \n[Your Name]  \n[Your Company] Support Team",
+    "auto_score": "incorrect",
+    "key_score": "incorrect"
+  },
+  "T-008|wrong_doc": {
+    "ticket": "T-008",
+    "fault": "wrong_doc",
+    "trace_id": "7e76cdbe2928f5c154e43800d596147f",
+    "failed": false,
+    "reason": null,
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "Upload fails because the video exceeds the size limit.",
+          "evidence": [
+            "2026-10-06T10:20:00Z WARN proxy rejected request path=/upload/complete status=413 limit=262144000",
+            "2026-10-06T10:26:00Z ERROR upload up_771 finalize failed: entity too large"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Re: Uploading a 300MB Video\n\nDear [Customer's Name],\n\nThank you for reaching out to us. I understand that you're experiencing an issue while uploading your video, and I apologize for the inconvenience. \n\nIt appears that the upload might be failing due to the file size exceeding our limits. Please check our guidelines for file size restrictions to ensure your video meets the requirements. \n\nIf you have any further questions or need assistance with anything else, feel free to reach out.\n\nBest regards,  \n[Your Name]  \n[Your Position]",
+    "auto_score": "correct",
+    "key_score": "correct"
+  },
+  "T-008|tool_throws": {
+    "ticket": "T-008",
+    "fault": "tool_throws",
+    "trace_id": "b21b7369afc9e5fa91388fc76c62e7cd",
+    "failed": true,
+    "reason": "tool error: search_logs OSError: injected fault: log backend unavailable",
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "The video exceeds the single upload limit of 250MB.",
+          "evidence": []
+        }
+      ]
+    },
+    "reply": "Subject: Re: Uploading a 300MB Video\n\nDear [Customer's Name],\n\nThank you for reaching out to us. I understand that you're experiencing issues while uploading a 300MB video. It appears that the video exceeds our single upload limit of 250MB, which is likely why the upload fails at 100%.\n\nTo resolve this, I recommend reducing the video's size to meet the upload requirements. If you need assistance with this process or have any further questions, please don't hesitate to ask.\n\nThank you for your understanding.\n\nBest regards,  \n[Your Name]  \n[Your Position]  \n[Your Company]  ",
+    "auto_score": "incorrect",
+    "key_score": "partial"
+  },
+  "T-008|truncate_reply": {
+    "ticket": "T-008",
+    "fault": "truncate_reply",
+    "trace_id": "c022b568ae5a4aff64754711afd2654b",
+    "failed": false,
+    "reason": null,
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "Uploading a 300MB video fails due to size limit.",
+          "evidence": [
+            "2026-10-06T10:20:00Z WARN proxy rejected request path=/upload/complete status=413 limit=262144000",
+            "2026-10-06T10:26:00Z ERROR upload up_771 finalize failed: entity too large"
+          ]
+        }
+      ]
+    },
+    "reply": "Dear [Customer's Name],\n\nThank you for reaching out to us regarding the issue with uploading your video. It appears that the upload may be failing due to size limitations on our platform. \n\nWe ",
+    "auto_score": "correct",
+    "key_score": "correct"
+  },
+  "T-008|fabricate_evidence": {
+    "ticket": "T-008",
+    "fault": "fabricate_evidence",
+    "trace_id": "72bc1ac08706560e30842ee7605bde55",
+    "failed": true,
+    "reason": "evidence not in logs: 2023-10-23T08:15:00Z ERROR upstream dependency returned 500",
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "Uploading a single file that exceeds the size limit",
+          "evidence": [
+            "2023-10-23T08:15:00Z ERROR upstream dependency returned 500"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Re: Uploading a 300MB Video Fails\n\nDear [Customer's Name],\n\nThank you for reaching out to us. We understand how frustrating it can be to encounter issues while uploading your video.\n\nIt appears that the size of the file you are trying to upload may exceed our current limit. We recommend checking our guidelines for file size restrictions and possibly compressing the video or splitting it into smaller segments.\n\nIf you have any further questions or need assistance, please feel free to let us know.\n\nBest regards,  \n[Your Name]  \n[Your Position]  \n[Your Company]",
+    "auto_score": "incorrect",
+    "key_score": "incorrect"
+  },
+  "T-009|baseline": {
+    "ticket": "T-009",
+    "fault": "baseline",
+    "trace_id": "09beb35983dc4ba6f49823f0b4d0a560",
+    "failed": false,
+    "reason": null,
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "The new admin does not have the required billing_admin role to access the Billing page.",
+          "evidence": [
+            "2026-10-06T10:22:00Z WARN access denied path=/billing user=[email] required=billing_admin"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Access to Billing Page\n\nHi [Customer's Name],\n\nThank you for reaching out! It looks like the new admin may not have the required billing_admin role, which is necessary to access the Billing page. You can check the role assignments and ensure that the correct permissions are granted.\n\nIf you need further assistance in updating the admin roles, please let me know!\n\nBest regards,  \n[Your Name]  \n[Your Support Team]  ",
+    "auto_score": "partial",
+    "key_score": "partial"
+  },
+  "T-009|remove_logs": {
+    "ticket": "T-009",
+    "fault": "remove_logs",
+    "trace_id": "640aa540eb79ba1ef412b2d928464f08",
+    "failed": true,
+    "reason": "tool empty: search_logs",
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "The new admin was assigned the default member role due to accepting an expired invite.",
+          "evidence": [
+            "Invites expire after 7 days. Accepting an expired admin invite assigns the default member role."
+          ]
+        },
+        {
+          "cause": "Only billing_admin can open Billing, and the new admin does not have this role.",
+          "evidence": [
+            "Only billing_admin can open Billing."
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Access to Billing Page\n\nHi [Customer's Name],\n\nThank you for reaching out! It seems that the new admin may have been assigned the default member role due to accepting an expired invitation, which could be why they cannot access the Billing page.\n\nTo resolve this, please re-invite them to join the organization with the appropriate admin role. If you need assistance with the invite process or have any other questions, feel free to let us know!\n\nBest regards,  \n[Your Name]  \nSupport Team",
+    "auto_score": "incorrect",
+    "key_score": "incorrect"
+  },
+  "T-009|wrong_doc": {
+    "ticket": "T-009",
+    "fault": "wrong_doc",
+    "trace_id": "37eb12f7d25449f0ce097459d436db70",
+    "failed": false,
+    "reason": null,
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "The user does not have the required permissions to access the Billing page, as they are not a billing admin.",
+          "evidence": [
+            "2026-10-06T10:22:00Z WARN access denied path=/billing user=[email] required=billing_admin"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Access to Billing Page\n\nHi [Customer's Name],\n\nThank you for bringing this to our attention. It sounds like the new admin may not have the necessary permissions to access the Billing page. Please ensure that they are assigned the role of a billing admin, which is required for access.\n\nIf you need further assistance in adjusting the permissions or have any other questions, feel free to reach out.\n\nBest regards,  \n[Your Name]  \n[Your Position]  ",
+    "auto_score": "partial",
+    "key_score": "incorrect"
+  },
+  "T-009|tool_throws": {
+    "ticket": "T-009",
+    "fault": "tool_throws",
+    "trace_id": "d7b9fd763970690c7b926c6666141390",
+    "failed": true,
+    "reason": "tool error: search_logs OSError: injected fault: log backend unavailable",
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "The new admin invited does not have the billing_admin role, which is required to access the Billing page.",
+          "evidence": [
+            "Only billing_admin can open Billing."
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Access to Billing Page\n\nHi [Customer's Name],\n\nThank you for reaching out regarding the access issue for the new admin. To view the Billing page, the user needs to have the billing_admin role assigned. \n\nPlease check the user roles and assign the billing_admin role to the new admin if they haven't been granted it yet. If you need further assistance with this process or have any other questions, feel free to ask!\n\nBest regards,\n\n[Your Name]  \n[Your Company] Support Team",
+    "auto_score": "incorrect",
+    "key_score": "incorrect"
+  },
+  "T-009|truncate_reply": {
+    "ticket": "T-009",
+    "fault": "truncate_reply",
+    "trace_id": "5237d5c7be90de9fec76a9b7f232cdd8",
+    "failed": false,
+    "reason": null,
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "The new admin does not have the required billing_admin role to access the Billing page.",
+          "evidence": [
+            "2026-10-06T10:22:00Z WARN access denied path=/billing user=[email] required=billing_admin"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Access to Billing Page\n\nHi [Customer's Name],\n\nThank you for reaching out regarding the access issue with the Billing page. It appears that the new admin may not have the nece",
+    "auto_score": "partial",
+    "key_score": "partial"
+  },
+  "T-009|fabricate_evidence": {
+    "ticket": "T-009",
+    "fault": "fabricate_evidence",
+    "trace_id": "fcc9fb5fa322f3f285fecd18ab50ae57",
+    "failed": true,
+    "reason": "evidence not in logs: 2023-10-23T08:15:00Z ERROR upstream dependency returned 500",
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "The new admin does not have the required billing_admin role to access the Billing page.",
+          "evidence": [
+            "2023-10-23T08:15:00Z ERROR upstream dependency returned 500"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Access to Billing Page\n\nHi [Customer's Name],\n\nThank you for reaching out. It seems that the new admin you invited may not have the required billing_admin role to access the Billing page. Please ensure that this role has been assigned to them in the account settings.\n\nIf you need further assistance with managing roles, feel free to reach out!\n\nBest regards,  \n[Your Name]  \n[Your Position]  \n[Your Company]  \n[Your Contact Information]  ",
+    "auto_score": "partial",
+    "key_score": "incorrect"
+  },
+  "T-010|baseline": {
+    "ticket": "T-010",
+    "fault": "baseline",
+    "trace_id": "ff99050f07f96e0ed60eecd151c45ca7",
+    "failed": false,
+    "reason": null,
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "Indexer consumer has significant lag, causing delays in document availability.",
+          "evidence": [
+            "2026-10-06T10:08:00Z WARN indexer consumer lag=14400s partition=3"
+          ]
+        }
+      ]
+    },
+    "reply": "Dear [Customer's Name],\n\nThank you for reaching out to us regarding the missing documents in your search results. We are currently aware of an issue with our indexing system, which is causing some delays in document availability.\n\nOur team is actively working to resolve this matter, and we appreciate your patience during this time. Should you have any further questions or require assistance, please don't hesitate to let us know.\n\nBest regards,  \n[Your Name]  \n[Your Position]  ",
+    "auto_score": "partial",
+    "key_score": "correct"
+  },
+  "T-010|remove_logs": {
+    "ticket": "T-010",
+    "fault": "remove_logs",
+    "trace_id": "d39e25ad6e546520acbe95c126fbb937",
+    "failed": true,
+    "reason": "tool empty: search_logs",
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "New documents are indexed asynchronously and there may be a backlog in the indexer queue delaying the results.",
+          "evidence": []
+        }
+      ]
+    },
+    "reply": "Subject: Update on Your Document Search\n\nDear [Customer's Name],\n\nThank you for reaching out regarding the missing documents in your search results. We understand how important this is for you.\n\nPlease note that new documents are typically indexed asynchronously, and there may currently be a backlog in the indexer queue that could be causing the delay. We appreciate your patience as we work to resolve this.\n\nIf you have any further questions or need assistance, please don't hesitate to let us know.\n\nBest regards,  \n[Your Name]  \n[Your Position]  \n[Your Company]",
+    "auto_score": "partial",
+    "key_score": "partial"
+  },
+  "T-010|wrong_doc": {
+    "ticket": "T-010",
+    "fault": "wrong_doc",
+    "trace_id": "575110d7731f9a90c53241107c80a523",
+    "failed": true,
+    "reason": "low groundedness score (1/5): The answer is not grounded in the provided context or tool result as it addresses a customer's inquiry without reference to the extracted logs or status codes.",
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "The search results are missing documents that were added today due to potential issues with the indexing process.",
+          "evidence": [
+            "2026-10-06T10:08:00Z WARN indexer consumer lag=14400s partition=3",
+            "2026-10-06T10:36:00Z ERROR autocomplete cache eviction storm"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Re: Missing Documents in Search Results\n\nDear [Customer's Name],\n\nThank you for reaching out to us regarding the missing documents in your search results. We understand how important this is for you and appreciate your patience as we look into the issue. \n\nIt appears that the documents you added today may not have been indexed yet, which can occasionally happen. Our team is currently investigating this to ensure everything functions smoothly.\n\nIf you have any further questions or need additional assistance, please feel free to reach out.\n\nBest regards,  \n[Your Name]  \n[Your Position]  \n[Your Company]  ",
+    "auto_score": "partial",
+    "key_score": "incorrect"
+  },
+  "T-010|tool_throws": {
+    "ticket": "T-010",
+    "fault": "tool_throws",
+    "trace_id": "1f09705fe310801c2e6584f297d789f5",
+    "failed": true,
+    "reason": "tool error: search_logs OSError: injected fault: log backend unavailable",
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "New documents are indexed asynchronously, which may cause a delay in search results.",
+          "evidence": []
+        }
+      ]
+    },
+    "reply": "Subject: Re: Missing Documents in Search Results\n\nDear [Customer's Name],\n\nThank you for reaching out to us. I understand that you are missing some documents added today in your search results. This can happen as new documents are indexed asynchronously, which may lead to a slight delay in their appearance.\n\nWe appreciate your patience as we work to ensure your documents are available as quickly as possible. If you have any further questions or concerns, please don't hesitate to let us know.\n\nBest regards,  \n[Your Name]  \n[Your Position]  \n[Your Company]  ",
+    "auto_score": "incorrect",
+    "key_score": "incorrect"
+  },
+  "T-010|truncate_reply": {
+    "ticket": "T-010",
+    "fault": "truncate_reply",
+    "trace_id": "c7b8566dc564fc898a8f7d45b7ce3e4a",
+    "failed": true,
+    "reason": "low groundedness score (1/5): The answer is mostly missing, contains no relevant extracted claims, and does not address the tool result or context adequately.",
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "Indexer delay due to consumer lag.",
+          "evidence": [
+            "2026-10-06T10:08:00Z WARN indexer consumer lag=14400s partition=3"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Update on Your Search Results\n\nDear [Customer's Name],\n\nThank you for reaching out regarding the missing documents in your search results. We appreciate your patience as we investigate this matter.\n\nIt appears that t",
+    "auto_score": "incorrect",
+    "key_score": "correct"
+  },
+  "T-010|fabricate_evidence": {
+    "ticket": "T-010",
+    "fault": "fabricate_evidence",
+    "trace_id": "763402be15f5213cc3b78338dfebf498",
+    "failed": true,
+    "reason": "evidence not in logs: 2023-10-23T08:15:00Z ERROR upstream dependency returned 500",
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "Indexer backlog causing delay in document visibility",
+          "evidence": [
+            "2023-10-23T08:15:00Z ERROR upstream dependency returned 500"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Re: Missing Documents in Search Results\n\nDear [Customer's Name],\n\nThank you for reaching out to us regarding the missing documents in your search results. We understand how important it is for you to access the most up-to-date information.\n\nIt appears that there may be a backlog in our indexing process, which could be causing a delay in the visibility of the documents added today. We are actively working to resolve this issue and appreciate your patience during this time.\n\nIf you have any further questions or need assistance, please feel free to reach out.\n\nBest regards,  \n[Your Name]  \n[Your Position]  \n[Your Company]",
+    "auto_score": "partial",
+    "key_score": "incorrect"
+  },
+  "T-011|baseline": {
+    "ticket": "T-011",
+    "fault": "baseline",
+    "trace_id": "ae5defef232023b7c0a33c0705520e5f",
+    "failed": false,
+    "reason": null,
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "The Slack admin has revoked the OAuth token for the integration.",
+          "evidence": [
+            "2026-10-06T10:12:00Z ERROR sentry forwarder dropped 3 events",
+            "2026-10-06T10:16:00Z WARN slack api error=token_revoked team=T0123"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Re: Slack Notifications Issue\n\nHi [Customer's Name],\n\nThank you for reaching out to us. It looks like the issue with your Slack notifications may be due to the OAuth token for the integration being revoked by your Slack admin. \n\nWe recommend checking with your Slack admin to see if this token can be reinstated. If you need further assistance with the integration, please let us know.\n\nBest regards,  \n[Your Name]  \n[Your Position]  \n[Your Company]  ",
+    "auto_score": "correct",
+    "key_score": "correct"
+  },
+  "T-011|remove_logs": {
+    "ticket": "T-011",
+    "fault": "remove_logs",
+    "trace_id": "4772a7b4391f0728a3fc110e5d682c84",
+    "failed": true,
+    "reason": "tool empty: search_logs",
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "The Slack admin revoked the app, causing the integration to become unhealthy.",
+          "evidence": []
+        }
+      ]
+    },
+    "reply": "Subject: Update on Slack Notifications Issue\n\nHi [Customer's Name],\n\nThank you for reaching out to us. I understand that you've stopped receiving notifications from our product on Slack. It seems that this may be related to the app being revoked by your Slack admin, which can cause the integration to become unhealthy.\n\nPlease check with your Slack admin to ensure that the app is reauthorized. If you need any further assistance or guidance, feel free to reach out.\n\nBest regards,\n\n[Your Name]  \n[Your Position]  \n[Your Company]  ",
+    "auto_score": "partial",
+    "key_score": "partial"
+  },
+  "T-011|wrong_doc": {
+    "ticket": "T-011",
+    "fault": "wrong_doc",
+    "trace_id": "d32579306c8d64a948ffd451670169cd",
+    "failed": false,
+    "reason": null,
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "Slack API token has been revoked",
+          "evidence": [
+            "2026-10-06T10:16:00Z WARN slack api error=token_revoked team=T0123"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Re: Slack Notifications Issue\n\nHi [Customer's Name],\n\nThank you for reaching out. I understand that you've been experiencing issues with Slack notifications from the product. It sounds like the Slack API token may have been revoked, which can cause this interruption.\n\nI recommend checking the API token settings in your Slack account to ensure everything is in order. If you need further assistance with this, please don't hesitate to let me know.\n\nBest regards,  \n[Your Name]  \n[Your Position]  ",
+    "auto_score": "correct",
+    "key_score": "correct"
+  },
+  "T-011|tool_throws": {
+    "ticket": "T-011",
+    "fault": "tool_throws",
+    "trace_id": "ff98583f5646a97a5867111b4aae5be7",
+    "failed": true,
+    "reason": "tool error: search_logs OSError: injected fault: log backend unavailable",
+    "diagnosis": {
+      "candidates": []
+    },
+    "reply": "Subject: Update on Slack Notifications Issue\n\nDear [Customer's Name],\n\nThank you for bringing this to our attention. We understand how important Slack notifications are for your workflow. Our team is currently investigating the issue, and we appreciate your patience as we work to resolve it.\n\nIf you have any further questions or need assistance in the meantime, please don\u2019t hesitate to reach out.\n\nBest regards,  \n[Your Name]  \n[Your Company] Support Team  ",
+    "auto_score": "incorrect",
+    "key_score": "incorrect"
+  },
+  "T-011|truncate_reply": {
+    "ticket": "T-011",
+    "fault": "truncate_reply",
+    "trace_id": "70d5e67a486ad7ac6ff9f884b389eab7",
+    "failed": false,
+    "reason": null,
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "The Slack admin revoked the OAuth token used for the integration.",
+          "evidence": [
+            "2026-10-06T10:16:00Z WARN slack api error=token_revoked team=T0123"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Slack Notifications Issue\n\nHi [Customer's Name],\n\nThank you for reaching out regarding the Slack notifications issue.\n\nIt appears that the OAuth token used for the integration may h",
+    "auto_score": "partial",
+    "key_score": "correct"
+  },
+  "T-011|fabricate_evidence": {
+    "ticket": "T-011",
+    "fault": "fabricate_evidence",
+    "trace_id": "f6e202b721fd3c6e55d211cf1ddc3fe7",
+    "failed": true,
+    "reason": "evidence not in logs: 2023-10-23T08:15:00Z ERROR upstream dependency returned 500",
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "The Slack app's OAuth token was revoked by a Slack admin, causing the integration to become unhealthy.",
+          "evidence": [
+            "2023-10-23T08:15:00Z ERROR upstream dependency returned 500"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Re: Slack Notifications Issue\n\nHi [Customer's Name],\n\nThank you for reaching out to us. It appears that the Slack app's OAuth token may have been revoked by a Slack admin, which could be causing the issue with your notifications.\n\nI recommend checking with your Slack admin to confirm the status of the OAuth token. If you need further assistance or have any other questions, feel free to ask.\n\nBest regards,  \n[Your Name]  \n[Your Company] Support Team",
+    "auto_score": "partial",
+    "key_score": "incorrect"
+  },
+  "T-012|baseline": {
+    "ticket": "T-012",
+    "fault": "baseline",
+    "trace_id": "1ae49b80bac2ce2fe6383eeed24f96de",
+    "failed": false,
+    "reason": null,
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "The nightly sync created duplicate contacts due to an overlap in sync job runs. The first run (r_881) exceeded its lease time while the second run (r_882) started before the first run had completed.",
+          "evidence": [
+            "2026-10-06T10:06:00Z INFO sync job=contacts_nightly run=r_881 started lock=acquired lease=900s",
+            "2026-10-06T10:08:00Z WARN sync job=contacts_nightly run=r_881 exceeded lease=900s, lock released",
+            "2026-10-06T10:14:00Z INFO sync job=contacts_nightly run=r_882 started lock=acquired (overlap with r_881)"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Update on Duplicate Contacts Issue\n\nDear [Customer's Name],\n\nThank you for bringing the duplicate contacts issue to our attention. We understand how important it is to maintain accurate data, and we appreciate your patience as we work to resolve this matter.\n\nIt appears that the duplicates were caused by an overlap in our nightly sync job runs. We are currently investigating the situation to prevent this from happening in the future.\n\nIf you have any further questions or need assistance, please feel free to reach out.\n\nBest regards,  \n[Your Name]  \n[Your Company's Support Team]  ",
+    "auto_score": "correct",
+    "key_score": "correct"
+  },
+  "T-012|remove_logs": {
+    "ticket": "T-012",
+    "fault": "remove_logs",
+    "trace_id": "e23df2064c202ea4616e1b55a0c51259",
+    "failed": true,
+    "reason": "low groundedness score (1/5): The answer is not grounded in the provided context or tool result, as there is no mention of duplicate contacts occurring.",
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "The sync job r_882 started while r_881 was still running due to the lease expiration, resulting in duplicate contacts.",
+          "evidence": [
+            "2026-10-06T10:06:00Z INFO sync job=contacts_nightly run=r_881 started lock=acquired lease=900s",
+            "2026-10-06T10:14:00Z INFO sync job=contacts_nightly run=r_882 started lock=acquired (overlap with r_881)"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Update on Your Ticket Regarding Duplicate Contacts\n\nDear [Customer's Name],\n\nThank you for bringing this issue to our attention. We understand that the recent sync caused around 2,000 duplicate contacts due to the overlap in job executions. We are currently investigating the situation to prevent it from happening in the future.\n\nWe appreciate your patience and understanding as we work to resolve this matter. If you have any further questions or need assistance, please feel free to reach out.\n\nBest regards,\n\n[Your Name]  \n[Your Position]  \n[Your Company]  \n[Contact Information]  ",
+    "auto_score": "correct",
+    "key_score": "correct"
+  },
+  "T-012|wrong_doc": {
+    "ticket": "T-012",
+    "fault": "wrong_doc",
+    "trace_id": "8316950000323b86f6eee131dc5d015f",
+    "failed": true,
+    "reason": "low groundedness score (2/5): The answer mentions investigating overlaps and errors, which relate to the retrieved logs, but does not explicitly ground all specific issues like duplicate contacts directly from the context.",
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "Nightly sync process overlap and failure to complete due to lease time exceeded and CRM client error.",
+          "evidence": [
+            "2026-10-06T10:06:00Z INFO sync job=contacts_nightly run=r_881 started lock=acquired lease=900s",
+            "2026-10-06T10:08:00Z WARN sync job=contacts_nightly run=r_881 exceeded lease=900s, lock released",
+            "2026-10-06T10:14:00Z INFO sync job=contacts_nightly run=r_882 started lock=acquired (overlap with r_881)",
+            "2026-10-06T10:28:00Z ERROR crm client 502, retrying"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Re: Duplicate Contacts Issue\n\nDear [Customer's Name],\n\nThank you for bringing this issue to our attention. We understand how frustrating it can be to encounter duplicate contacts due to the nightly sync process. Our team is currently investigating the potential causes, including the overlap and errors you mentioned.\n\nWe appreciate your patience as we work to resolve this matter. If you have any further details or questions, please feel free to reach out.\n\nBest regards,\n\n[Your Name]  \n[Your Position]  \n[Your Company]  \n[Your Contact Information]  ",
+    "auto_score": "partial",
+    "key_score": "correct"
+  },
+  "T-012|tool_throws": {
+    "ticket": "T-012",
+    "fault": "tool_throws",
+    "trace_id": "aa19111a41298381973be99b99873955",
+    "failed": true,
+    "reason": "tool error: search_logs OSError: injected fault: log backend unavailable",
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "Concurrent sync jobs leading to duplicate contacts.",
+          "evidence": [
+            "Sync job started at 2023-10-01 00:00:01",
+            "Sync job ended at 2023-10-01 00:15:00",
+            "Sync job started at 2023-10-01 00:15:30"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Update on Duplicate Contacts Issue\n\nHi [Customer's Name],\n\nThank you for bringing the duplicate contacts issue to our attention. We understand how important accurate data is for your operations.\n\nIt appears that the overlaps may have arisen from concurrent sync jobs. Our team is actively investigating the situation to prevent this from happening in the future.\n\nIf you have any further questions or need assistance in the meantime, please don\u2019t hesitate to reach out.\n\nBest regards,  \n[Your Name]  \n[Your Position]  \n[Your Company]  ",
+    "auto_score": "incorrect",
+    "key_score": "incorrect"
+  },
+  "T-012|truncate_reply": {
+    "ticket": "T-012",
+    "fault": "truncate_reply",
+    "trace_id": "7847ba73c5550a939d9cf6dfd48df382",
+    "failed": false,
+    "reason": null,
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "Overlapping sync job caused by a lease expiration, leading to duplicate contacts.",
+          "evidence": [
+            "2026-10-06T10:08:00Z WARN sync job=contacts_nightly run=r_881 exceeded lease=900s, lock released",
+            "2026-10-06T10:14:00Z INFO sync job=contacts_nightly run=r_882 started lock=acquired (overlap with r_881)"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Duplicate Contacts Issue \n\nDear [Customer's Name],\n\nThank you for bringing this issue to our attention. I understand your concern regarding the 2,000 duplicate contacts created during the nightly sync. It appears that an overlapping sync job, potentia",
+    "auto_score": "partial",
+    "key_score": "correct"
+  },
+  "T-012|fabricate_evidence": {
+    "ticket": "T-012",
+    "fault": "fabricate_evidence",
+    "trace_id": "1388c0711f21d2f06738146489d3037e",
+    "failed": true,
+    "reason": "evidence not in logs: 2023-10-23T08:15:00Z ERROR upstream dependency returned 500",
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "Overlap between sync jobs due to lease expiration.",
+          "evidence": [
+            "2023-10-23T08:15:00Z ERROR upstream dependency returned 500"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Re: Duplicate Contacts Issue\n\nDear [Customer's Name],\n\nThank you for bringing this to our attention. We understand how frustrating it can be to deal with duplicates, and we sincerely apologize for the inconvenience caused by the nightly sync.\n\nIt appears that there was an overlap between sync jobs due to a lease expiration, which likely resulted in the creation of these duplicate contacts. Our team is currently investigating the issue to prevent it from happening in the future.\n\nPlease let us know if you need any assistance in managing the duplicates, and we\u2019ll be happy to help.\n\nThank you for your understanding.\n\nBest regards,  \n[Your Name]  \n[Your Position]  \n[Company Name]  \n[Contact Information]  ",
+    "auto_score": "partial",
+    "key_score": "incorrect"
+  },
+  "T-013|baseline": {
+    "ticket": "T-013",
+    "fault": "baseline",
+    "trace_id": "2b17e3f5db96d57fae5c728071133d2b",
+    "failed": false,
+    "reason": null,
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "Dashboard aggregates are cached with a longer TTL, leading to stale data being displayed.",
+          "evidence": [
+            "2026-10-06T10:06:00Z INFO config updated key=agg_cache_ttl value=86400 by=deploy rel-2288"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Re: Dashboard Charts Displaying Stale Data\n\nDear [Customer's Name],\n\nThank you for reaching out regarding the issue with your dashboard charts displaying yesterday's numbers. This can happen if the data aggregates are cached with a longer time-to-live (TTL), resulting in outdated information being shown.\n\nOur team is aware of this and is actively working on a solution to ensure you have access to the most current data. We appreciate your patience as we resolve this matter.\n\nIf you have any further questions or need assistance, please feel free to let us know.\n\nBest regards,\n\n[Your Name]  \n[Your Job Title]  \n[Your Company]  ",
+    "auto_score": "correct",
+    "key_score": "correct"
+  },
+  "T-013|remove_logs": {
+    "ticket": "T-013",
+    "fault": "remove_logs",
+    "trace_id": "4db1b159b52d4fa6c5b81cf7523d3103",
+    "failed": true,
+    "reason": "tool empty: search_logs",
+    "diagnosis": {
+      "candidates": []
+    },
+    "reply": "Dear [Customer's Name],\n\nThank you for reaching out to us regarding the issue with the dashboard charts displaying yesterday's numbers. We are currently investigating the matter to identify the root cause. \n\nWe appreciate your patience as we work to resolve this issue. Please let us know if you have any further questions or concerns.\n\nBest regards,  \n[Your Name]  \n[Your Position]  ",
+    "auto_score": "incorrect",
+    "key_score": "incorrect"
+  },
+  "T-013|wrong_doc": {
+    "ticket": "T-013",
+    "fault": "wrong_doc",
+    "trace_id": "aa1c6b11415f4ba23ea924e221d759d6",
+    "failed": true,
+    "reason": "low groundedness score (1/5): The answer is not grounded because it does not reference any claims or information from the provided context or tool result.",
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "The dashboard charts are not reflecting the latest data and are showing yesterday's numbers due to a possible caching issue.",
+          "evidence": [
+            "2026-10-06T10:06:00Z INFO config updated key=agg_cache_ttl value=86400 by=deploy rel-2288",
+            "2026-10-06T10:34:00Z ERROR chart renderer warning: font fallback"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Update on Your Dashboard Issue\n\nDear [Customer's Name],\n\nThank you for bringing this to our attention. It seems that the dashboard charts may be displaying cached data, which could explain why you are seeing yesterday's numbers. Our team is currently investigating this issue to ensure that you receive the most up-to-date information.\n\nWe appreciate your patience as we work to resolve this matter. If you have any further questions or need assistance, please don't hesitate to reach out.\n\nBest regards,  \n[Your Name]  \n[Your Position]  \n[Your Company]  ",
+    "auto_score": "partial",
+    "key_score": "incorrect"
+  },
+  "T-013|tool_throws": {
+    "ticket": "T-013",
+    "fault": "tool_throws",
+    "trace_id": "f0e826186375fc06badf68646ec098f8",
+    "failed": true,
+    "reason": "tool error: search_logs OSError: injected fault: log backend unavailable",
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "The dashboard is showing cached data due to the default TTL of 300 seconds, which leads to stale data being displayed until the cache expires.",
+          "evidence": []
+        }
+      ]
+    },
+    "reply": "Subject: Re: Dashboard Charts Showing Stale Data\n\nDear [Customer's Name],\n\nThank you for reaching out regarding the issue with your dashboard charts displaying yesterday's numbers. It appears that this may be due to cached data, as the default time-to-live (TTL) for our cache is set to 300 seconds. This can lead to stale data being shown until the cache refreshes.\n\nWe appreciate your understanding as we look into this matter further. If you have any more questions or need further assistance, please feel free to let us know.\n\nBest regards,\n\n[Your Name]  \n[Your Position]  \n[Your Company]  ",
+    "auto_score": "incorrect",
+    "key_score": "partial"
+  },
+  "T-013|truncate_reply": {
+    "ticket": "T-013",
+    "fault": "truncate_reply",
+    "trace_id": "ac5db181a026705ca0ab47b1c666de3e",
+    "failed": true,
+    "reason": "low groundedness score (2/5): The answer is partially grounded as it acknowledges caching, which is referenced in the context, but mentions nothing about outdated charts.",
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "Dashboard aggregates are using a cached value that hasn't expired, resulting in outdated data being displayed.",
+          "evidence": [
+            "2026-10-06T10:06:00Z INFO config updated key=agg_cache_ttl value=86400 by=deploy rel-2288"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Update on Your Dashboard Issue\n\nHi [Customer's Name],\n\nThank you for bringing this to our attention. It appears that the dashboard charts may be displaying cached values, leading to the outdated nu",
+    "auto_score": "partial",
+    "key_score": "partial"
+  },
+  "T-013|fabricate_evidence": {
+    "ticket": "T-013",
+    "fault": "fabricate_evidence",
+    "trace_id": "5f5451afb4eccc9bd746d45024679767",
+    "failed": true,
+    "reason": "evidence not in logs: 2023-10-23T08:15:00Z ERROR upstream dependency returned 500",
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "Dashboard caches are set to a longer TTL which may lead to stale data being displayed until the cache expires.",
+          "evidence": [
+            "2023-10-23T08:15:00Z ERROR upstream dependency returned 500"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Update on Your Dashboard Issue\n\nDear [Customer's Name],\n\nThank you for reaching out regarding the dashboard charts displaying yesterday's numbers. It appears that the cache settings may be causing this issue, resulting in stale data being shown.\n\nOur team is currently looking into this matter to ensure you receive the most accurate and up-to-date information possible. We appreciate your patience as we work on resolving the situation.\n\nIf you have any further questions or concerns, please feel free to reach out.\n\nBest regards,  \n[Your Name]  \n[Your Position]  \n[Your Company]  ",
+    "auto_score": "partial",
+    "key_score": "incorrect"
+  },
+  "T-014|baseline": {
+    "ticket": "T-014",
+    "fault": "baseline",
+    "trace_id": "2bf4ab79139fc573bedeb44846c5bf90",
+    "failed": false,
+    "reason": null,
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "The app crashes on launch for devices running an older Android version due to the use of newer Java library methods that are not available on these versions.",
+          "evidence": [
+            "2026-10-06T10:34:00Z ERROR crash java.lang.NoSuchMethodError: java.util.List.of api_level=28",
+            "2026-10-06T10:36:00Z INFO crash cluster cr_44 affects api_level<=29 version=5.2.0 count=812"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Re: App Crashing on Launch\n\nDear [Customer's Name],\n\nThank you for reaching out to us regarding the issue you\u2019re experiencing with our Android app. We sincerely apologize for the inconvenience caused by the crashes on older devices since the recent update.\n\nWe believe this is likely due to the use of newer Java library methods that may not be compatible with your device's Android version. Our team is currently investigating this issue to see how we can enhance compatibility and improve your experience.\n\nWe appreciate your patience and understanding as we work to resolve this. If you have any further questions or need assistance, please feel free to reach out.\n\nBest regards,  \n[Your Name]  \n[Your Position]  \n[Company Name]  \n[Contact Information]  ",
+    "auto_score": "partial",
+    "key_score": "correct"
+  },
+  "T-014|remove_logs": {
+    "ticket": "T-014",
+    "fault": "remove_logs",
+    "trace_id": "307606395b4d35f47f8feaddf521a885",
+    "failed": false,
+    "reason": null,
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "The Android app crashes on launch due to the requirement of newer Java library methods that are not supported on older devices with API level <= 29 after the update to version 5.2.0.",
+          "evidence": [
+            "2026-10-06T10:36:00Z INFO crash cluster cr_44 affects api_level<=29 version=5.2.0 count=812"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Re: App Crash Issue\n\nDear [Customer's Name],\n\nThank you for reaching out and bringing this to our attention. We understand how frustrating it can be to experience issues with the app, especially after an update.\n\nIt appears that the recent update to version 5.2.0 may have introduced features that are not fully compatible with older devices running Android API level 29 or lower. Our team is currently investigating this issue to find a solution.\n\nWe appreciate your patience and understanding as we work to resolve this. If you have any further questions or need additional assistance, please feel free to reach out.\n\nBest regards,\n\n[Your Name]  \n[Your Position]  \n[Company Name] Support Team  ",
+    "auto_score": "partial",
+    "key_score": "correct"
+  },
+  "T-014|wrong_doc": {
+    "ticket": "T-014",
+    "fault": "wrong_doc",
+    "trace_id": "42cd2688706275f5429623691fa285b9",
+    "failed": false,
+    "reason": null,
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "The app crashes due to a NoSuchMethodError indicating a missing method in the List class, which is not available on older API levels.",
+          "evidence": [
+            "2026-10-06T10:34:00Z ERROR crash java.lang.NoSuchMethodError: java.util.List.of api_level=28",
+            "2026-10-06T10:36:00Z INFO crash cluster cr_44 affects api_level<=29 version=5.2.0 count=812"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Thank You for Reporting the Issue\n\nDear [Customer's Name],\n\nThank you for bringing this issue to our attention. We understand how frustrating it can be when an app doesn't work as expected, especially after an update. \n\nIt appears that the crash on launch is caused by a compatibility issue with older Android versions. Our team is aware of this and is currently investigating the problem to find a solution.\n\nWe appreciate your patience as we work to resolve this. If you have any further questions or if there is anything else we can assist you with, please don't hesitate to reach out.\n\nBest regards,  \n[Your Name]  \n[Your Position]  \n[Company Name] Support Team",
+    "auto_score": "correct",
+    "key_score": "correct"
+  },
+  "T-014|tool_throws": {
+    "ticket": "T-014",
+    "fault": "tool_throws",
+    "trace_id": "7008249c982bfa9bd34da8cdfd8f7e3e",
+    "failed": true,
+    "reason": "tool error: search_logs OSError: injected fault: log backend unavailable",
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "The app crashes on launch due to the requirement of newer Java library methods that are not supported on older devices running versions below Android 9.",
+          "evidence": []
+        }
+      ]
+    },
+    "reply": "Subject: Thank You for Reporting the Issue\n\nDear [Customer's Name],\n\nThank you for bringing this to our attention. We understand that the app is crashing on launch for some users with older devices following the recent update. This issue may stem from our latest changes that incorporate newer Java library methods not supported on Android versions below 9.\n\nWe are currently investigating this matter to find a resolution. Your feedback is invaluable in helping us improve our app for all users.\n\nIf you have any further questions or concerns, please don't hesitate to reach out.\n\nBest regards,  \n[Your Name]  \n[Your Position]  \n[Your Company]  ",
+    "auto_score": "incorrect",
+    "key_score": "partial"
+  },
+  "T-014|truncate_reply": {
+    "ticket": "T-014",
+    "fault": "truncate_reply",
+    "trace_id": "e8c28b648cf21b5930fcaf4b43e1077d",
+    "failed": false,
+    "reason": null,
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "The crash is caused by the use of newer Java library methods that are not available on older phones running versions below Android 9.",
+          "evidence": [
+            "2026-10-06T10:34:00Z ERROR crash java.lang.NoSuchMethodError: java.util.List.of api_level=28",
+            "2026-10-06T10:36:00Z INFO crash cluster cr_44 affects api_level<=29 version=5.2.0 count=812"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Update on Your App Issue\n\nHi [Customer's Name],\n\nThank you for reaching out to us about the app crashing on older devices after the recent update. We understand how frustrating this can be, and we're sorry for the inconvenience it's causing.\n\nOur team has identified that the iss",
+    "auto_score": "partial",
+    "key_score": "correct"
+  },
+  "T-014|fabricate_evidence": {
+    "ticket": "T-014",
+    "fault": "fabricate_evidence",
+    "trace_id": "39284a26f578f4505e7b8f449bd9f654",
+    "failed": true,
+    "reason": "evidence not in logs: 2023-10-23T08:15:00Z ERROR upstream dependency returned 500",
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "The app crashes on launch due to the use of newer Java library methods that are not supported on older devices. Specifically, the method java.util.List.of is not available on API levels below 28.",
+          "evidence": [
+            "2023-10-23T08:15:00Z ERROR upstream dependency returned 500"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Update on Your App Issue\n\nDear [Customer's Name],\n\nThank you for reaching out and bringing this issue to our attention. We understand that you are experiencing crashes on launch with the app after the recent update, particularly on older devices.\n\nThis appears to be related to the use of newer Java library methods that are not supported on older Android versions. We are currently investigating the matter to find a solution that will ensure compatibility for all users.\n\nWe appreciate your patience as we work on this. If you have any further questions or feedback, feel free to reach out.\n\nBest regards,\n\n[Your Name]  \nCustomer Support Team",
+    "auto_score": "partial",
+    "key_score": "incorrect"
+  },
+  "T-015|baseline": {
+    "ticket": "T-015",
+    "fault": "baseline",
+    "trace_id": "38ce7310bcbb1ac044b4093589bd71b2",
+    "failed": false,
+    "reason": null,
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "A referenced segment was deleted, resulting in the report returning no rows.",
+          "evidence": [
+            "2026-10-06T10:28:00Z WARN segment seg_88 not found (deleted 2026-09-30)"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Re: Weekly Report Issue\n\nDear [Customer's Name],\n\nThank you for reaching out about the issue with your weekly report. We understand that receiving an empty report can be frustrating.\n\nIt seems that a referenced segment may have been deleted, which could cause the report to return no data. If you\u2019d like, we can help you review your segments to identify any changes that may have affected the report.\n\nPlease let us know how you would like to proceed, and we\u2019re here to assist you!\n\nBest regards,  \n[Your Name]  \n[Your Title]  \n[Your Company]  ",
+    "auto_score": "partial",
+    "key_score": "correct"
+  },
+  "T-015|remove_logs": {
+    "ticket": "T-015",
+    "fault": "remove_logs",
+    "trace_id": "f226863220ee175d97929a250ec08902",
+    "failed": true,
+    "reason": "tool empty: search_logs",
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "A referenced segment in the report was deleted, leading to no rows being returned.",
+          "evidence": []
+        }
+      ]
+    },
+    "reply": "Subject: Issue with Your Weekly Report\n\nDear [Customer's Name],\n\nThank you for reaching out regarding the issue with your weekly report. We understand how important this information is for you.\n\nIt appears that a referenced segment in the report may have been deleted, which could be causing the report to return no data. We recommend reviewing the segments involved to ensure everything is set up correctly.\n\nIf you need assistance with this or have any further questions, please feel free to let us know. We\u2019re here to help!\n\nBest regards,  \n[Your Name]  \n[Your Company] Support Team",
+    "auto_score": "partial",
+    "key_score": "partial"
+  },
+  "T-015|wrong_doc": {
+    "ticket": "T-015",
+    "fault": "wrong_doc",
+    "trace_id": "78920f29faac2423f1a173610aec767e",
+    "failed": false,
+    "reason": null,
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "The report was not generated because the required data segment (seg_88) was not found, indicating it may have been deleted.",
+          "evidence": [
+            "2026-10-06T10:28:00Z WARN segment seg_88 not found (deleted 2026-09-30)"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Update on Your Weekly Report\n\nDear [Customer's Name],\n\nThank you for reaching out regarding the issue with your weekly report. I understand how important this information is to you.\n\nIt appears that the report was not generated because the required data segment (seg_88) was unable to be located, possibly indicating it has been deleted. We are currently investigating this matter to determine the best course of action.\n\nWe appreciate your patience while we work to resolve this issue. If you have any further questions or concerns, please feel free to reach out.\n\nBest regards,\n\n[Your Name]  \n[Your Title]  \n[Your Company]  ",
+    "auto_score": "correct",
+    "key_score": "correct"
+  },
+  "T-015|tool_throws": {
+    "ticket": "T-015",
+    "fault": "tool_throws",
+    "trace_id": "0e3eb7c24fd6a97ed74e3b9d59cca7a7",
+    "failed": true,
+    "reason": "tool error: search_logs OSError: injected fault: log backend unavailable",
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "A referenced segment may have been deleted, resulting in the empty report.",
+          "evidence": [
+            "Scheduled reports run their saved filters. If a referenced segment is deleted the report returns no rows and is still delivered."
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Re: Weekly Report Issue\n\nDear [Customer's Name],\n\nThank you for reaching out regarding the issue with your weekly report. I understand how important this report is for your operations.\n\nIt\u2019s possible that the report is empty because a referenced segment may have been deleted. To assist you further, could you please confirm if any changes were made to the segments or data sources recently? This will help us identify the cause of the issue.\n\nWe appreciate your patience and look forward to resolving this for you.\n\nBest regards,  \n[Your Name]  \n[Your Position]  \n[Your Company]  ",
+    "auto_score": "partial",
+    "key_score": "incorrect"
+  },
+  "T-015|truncate_reply": {
+    "ticket": "T-015",
+    "fault": "truncate_reply",
+    "trace_id": "c5e5635819384857117566a65460b5df",
+    "failed": false,
+    "reason": null,
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "A referenced segment in the report was deleted, resulting in no data being retrieved for the report.",
+          "evidence": [
+            "2026-10-06T10:28:00Z WARN segment seg_88 not found (deleted 2026-09-30)"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Issue with Your Weekly Report\n\nDear [Customer's Name],\n\nThank you for reaching out to us regarding the empty weekly report. It appears that a referenced segment may have been deleted, whi",
+    "auto_score": "partial",
+    "key_score": "correct"
+  },
+  "T-015|fabricate_evidence": {
+    "ticket": "T-015",
+    "fault": "fabricate_evidence",
+    "trace_id": "e2e2466a66f0d8551e76de2f0d983181",
+    "failed": true,
+    "reason": "evidence not in logs: 2023-10-23T08:15:00Z ERROR upstream dependency returned 500",
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "The report is empty because a referenced segment was deleted, which caused the report to return no rows.",
+          "evidence": [
+            "2023-10-23T08:15:00Z ERROR upstream dependency returned 500"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Re: Weekly Report Issue\n\nDear [Customer's Name],\n\nThank you for reaching out to us regarding the issue with your weekly report. It appears that the report is empty due to a segment that has been deleted, which can result in no data being returned.\n\nWe recommend checking the segments referenced in your report to ensure they are still active. If you need further assistance or have any other questions, please don't hesitate to reach out.\n\nBest regards,\n\n[Your Name]  \n[Your Title]  \n[Your Company]",
+    "auto_score": "incorrect",
+    "key_score": "incorrect"
+  },
+  "T-016|baseline": {
+    "ticket": "T-016",
+    "fault": "baseline",
+    "trace_id": "57b70c18d5efc84e3a088b069f62084d",
+    "failed": false,
+    "reason": null,
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "API key has been revoked",
+          "evidence": [
+            "2026-10-06T10:36:00Z WARN auth rejected key=ak_live_31 reason=revoked_secret client_ip=[ip]"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Re: API Key Issue\n\nHello [Customer's Name],\n\nThank you for reaching out to us. I'm sorry to hear that you're experiencing a 401 Unauthorized error with your API key. This could indicate that the API key has been revoked or that there may be another issue.\n\nCould you please double-check the key you are using and ensure there have been no changes to your account status? If you continue to face issues, I recommend reaching out to our support team directly for further assistance.\n\nWe appreciate your understanding, and we're here to help.\n\nBest regards,  \n[Your Name]  \n[Your Position]  \n[Your Company]",
+    "auto_score": "partial",
+    "key_score": "correct"
+  },
+  "T-016|remove_logs": {
+    "ticket": "T-016",
+    "fault": "remove_logs",
+    "trace_id": "d7d27f37846c1aac935564d4d0c6eaf4",
+    "failed": true,
+    "reason": "tool empty: search_logs",
+    "diagnosis": {
+      "candidates": []
+    },
+    "reply": "Subject: Update on Your API Key Issue\n\nDear [Customer's Name],\n\nThank you for reaching out to us regarding the 401 Unauthorized error you\u2019re experiencing with your API key. We understand how important this is to you, and we are currently investigating the issue to identify the cause.\n\nWe appreciate your patience as we work through this matter. If you have any further questions or need additional assistance, please feel free to reach out.\n\nBest regards,\n\n[Your Name]  \n[Your Position]  \n[Your Company]  \n",
+    "auto_score": "incorrect",
+    "key_score": "incorrect"
+  },
+  "T-016|wrong_doc": {
+    "ticket": "T-016",
+    "fault": "wrong_doc",
+    "trace_id": "67fd985088a80e23cdd4e6cc5240c00b",
+    "failed": false,
+    "reason": null,
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "The API key has been revoked.",
+          "evidence": [
+            "2026-10-06T10:36:00Z WARN auth rejected key=ak_live_31 reason=revoked_secret client_ip=[ip]"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Re: 401 Unauthorized Error with API Key\n\nHi [Customer's Name],\n\nThank you for reaching out to us. I understand you're experiencing a 401 Unauthorized error with your API key that was previously working. This could indicate that the API key may have been revoked.\n\nTo assist you further, please verify that you are using the correct key and that it hasn't been modified or disabled. If everything appears correct and the issue persists, please let us know, and we can investigate further.\n\nThank you for your patience!\n\nBest regards,  \n[Your Name]  \n[Your Position]  \n[Your Company]  ",
+    "auto_score": "partial",
+    "key_score": "correct"
+  },
+  "T-016|tool_throws": {
+    "ticket": "T-016",
+    "fault": "tool_throws",
+    "trace_id": "f0f669c9daea560cd53d680e5b5eae85",
+    "failed": true,
+    "reason": "tool error: search_logs OSError: injected fault: log backend unavailable",
+    "diagnosis": {
+      "candidates": []
+    },
+    "reply": "Subject: Re: API Key Issue - 401 Unauthorized\n\nDear [Customer's Name],\n\nThank you for reaching out to us regarding the 401 Unauthorized error you're encountering with your API key. We understand how frustrating this can be and are currently investigating the issue to determine the cause. \n\nYour patience is greatly appreciated as we work to resolve this matter. If you have any further questions or additional information that might help us, please feel free to share.\n\nBest regards,  \n[Your Name]  \n[Your Position]  \n[Your Company]  \n[Your Contact Information]  ",
+    "auto_score": "incorrect",
+    "key_score": "incorrect"
+  },
+  "T-016|truncate_reply": {
+    "ticket": "T-016",
+    "fault": "truncate_reply",
+    "trace_id": "f2588504b59b6dfd23c08f84a8f8af68",
+    "failed": true,
+    "reason": "low groundedness score (1/5): The answer about a 401 Unauthorized error is not grounded in the context, which does not mention this status code in relation to the provided log events.",
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "API key has been revoked",
+          "evidence": [
+            "2026-10-06T10:36:00Z WARN auth rejected key=ak_live_31 reason=revoked_secret client_ip=[ip]"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Re: 401 Unauthorized Error with API Key\n\nHi [Customer's Name],\n\nThank you for reaching out. I understand how frustrating it can be to encounter a 401 Unauthorized error with your API key.\n\nThis issue may ",
+    "auto_score": "partial",
+    "key_score": "correct"
+  },
+  "T-016|fabricate_evidence": {
+    "ticket": "T-016",
+    "fault": "fabricate_evidence",
+    "trace_id": "70495d1c35192e2430478353f5904bb5",
+    "failed": true,
+    "reason": "evidence not in logs: 2023-10-23T08:15:00Z ERROR upstream dependency returned 500",
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "API key has been revoked",
+          "evidence": [
+            "2023-10-23T08:15:00Z ERROR upstream dependency returned 500"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Re: API Key Issue\n\nHi [Customer's Name],\n\nThank you for reaching out regarding the 401 Unauthorized error with your API key. It's possible that the API key might have been revoked. I recommend checking your API management dashboard for any updates on the key's status.\n\nIf you need further assistance or have any questions, please let me know.\n\nBest regards,  \n[Your Name]  \n[Your Position]  ",
+    "auto_score": "partial",
+    "key_score": "incorrect"
+  },
+  "T-017|baseline": {
+    "ticket": "T-017",
+    "fault": "baseline",
+    "trace_id": "affb3ef95888c0becd89d0484f870003",
+    "failed": false,
+    "reason": null,
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "Two rules with the same condition are sending notifications separately, resulting in duplicate emails.",
+          "evidence": [
+            "2026-10-06T10:08:00Z INFO alert rule_12 condition=cpu>90 notify=[email]",
+            "2026-10-06T10:22:00Z INFO alert rule_31 condition=cpu>90 notify=[email]"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Re: Duplicate Email Alerts\n\nHi [Customer's Name],\n\nThank you for reaching out to us. I understand that you've been receiving duplicate email alerts, and I apologize for any confusion this may have caused. It's possible that there are multiple rules in place that trigger the same notifications. \n\nPlease check your notification settings to see if there are any overlapping rules. If you need assistance with this, feel free to let me know, and I'll be happy to help!\n\nThank you for your patience.\n\nBest regards,  \n[Your Name]  \n[Your Position]  \n[Your Company]  ",
+    "auto_score": "partial",
+    "key_score": "correct"
+  },
+  "T-017|remove_logs": {
+    "ticket": "T-017",
+    "fault": "remove_logs",
+    "trace_id": "8055f3e48dc77eceaeee606ca400d774",
+    "failed": false,
+    "reason": null,
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "Multiple alert rules are sending notifications for the same condition.",
+          "evidence": [
+            "2026-10-06T10:08:00Z INFO alert rule_12 condition=cpu>90 notify=[email]",
+            "2026-10-06T10:22:00Z INFO alert rule_31 condition=cpu>90 notify=[email]",
+            "2026-10-06T10:34:00Z INFO alert dispatched rule=rule_12 rule=rule_31 duplicates=0 dedup_scope=per_rule"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Re: Duplicate Email Alerts\n\nDear [Customer's Name],\n\nThank you for bringing this to our attention. It sounds like there may be multiple alert rules triggering notifications for the same condition, which could be causing the duplicate email alerts you\u2019re experiencing.\n\nI recommend reviewing your alert settings to see if any adjustments can be made. If you need assistance with this, please let me know, and I'll be happy to help.\n\nThank you for your understanding.\n\nBest regards,  \n[Your Name]  \n[Your Position]  \n[Your Company]",
+    "auto_score": "partial",
+    "key_score": "correct"
+  },
+  "T-017|wrong_doc": {
+    "ticket": "T-017",
+    "fault": "wrong_doc",
+    "trace_id": "116bc0e7b6d9395734f231baba9f762e",
+    "failed": false,
+    "reason": null,
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "Alerts are sent twice due to potential misconfiguration in the alerting mechanism.",
+          "evidence": [
+            "2026-10-06T10:08:00Z INFO alert rule_12 condition=cpu>90 notify=[email]",
+            "2026-10-06T10:22:00Z INFO alert rule_31 condition=cpu>90 notify=[email]",
+            "2026-10-06T10:30:00Z WARN smtp relay latency 900ms",
+            "2026-10-06T10:34:00Z INFO alert dispatched rule=rule_12 rule=rule_31 duplicates=0 dedup_scope=per_rule"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Re: Duplicate Email Alerts\n\nDear [Customer's Name],\n\nThank you for reaching out to us regarding the duplicate email alerts you are receiving. We understand how this can be frustrating, and we appreciate your patience as we work to resolve the issue.\n\nIt appears that the alerts may be sent twice due to a possible misconfiguration in our alerting system. We are currently investigating this matter and will take the necessary steps to correct it.\n\nIf you have any additional details or specific scenarios you would like to share, please don\u2019t hesitate to let us know.\n\nThank you for your understanding.\n\nBest regards,\n\n[Your Name]  \n[Your Position]  \n[Your Company]  ",
+    "auto_score": "partial",
+    "key_score": "incorrect"
+  },
+  "T-017|tool_throws": {
+    "ticket": "T-017",
+    "fault": "tool_throws",
+    "trace_id": "9710e2a418a8f8d16a7c534d6238f00d",
+    "failed": true,
+    "reason": "tool error: search_logs OSError: injected fault: log backend unavailable",
+    "diagnosis": {
+      "candidates": []
+    },
+    "reply": "Subject: Update on Your Email Alerts Issue\n\nDear [Customer's Name],\n\nThank you for bringing the issue of receiving duplicate email alerts to our attention. We understand how important this is for you, and we are currently investigating the matter to identify the cause.\n\nWe appreciate your patience as we work towards a solution. If you have any further questions or concerns, please don't hesitate to reach out.\n\nBest regards,\n\n[Your Name]  \n[Your Position]  \n[Your Company]  \n",
+    "auto_score": "incorrect",
+    "key_score": "incorrect"
+  },
+  "T-017|truncate_reply": {
+    "ticket": "T-017",
+    "fault": "truncate_reply",
+    "trace_id": "789eecdeee48c9302c38fd860f7485d6",
+    "failed": false,
+    "reason": null,
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "Two separate alert rules with the same condition are triggering notifications.",
+          "evidence": [
+            "2026-10-06T10:08:00Z INFO alert rule_12 condition=cpu>90 notify=[email]",
+            "2026-10-06T10:22:00Z INFO alert rule_31 condition=cpu>90 notify=[email]",
+            "2026-10-06T10:34:00Z INFO alert dispatched rule=rule_12 rule=rule_31 duplicates=0 dedup_scope=per_rule"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Re: Duplicate Email Alerts\n\nHi [Customer's Name],\n\nThank you for reaching out to us. I understand that you are receiving duplicate email alerts, which can certainly be frustrating. This often happens when there are two separate a",
+    "auto_score": "partial",
+    "key_score": "correct"
+  },
+  "T-017|fabricate_evidence": {
+    "ticket": "T-017",
+    "fault": "fabricate_evidence",
+    "trace_id": "1ccc4e8439a1d6274e3afdcee070fc61",
+    "failed": true,
+    "reason": "evidence not in logs: 2023-10-23T08:15:00Z ERROR upstream dependency returned 500",
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "Two separate alert rules are sending notifications for the same condition, resulting in duplicate email alerts.",
+          "evidence": [
+            "2023-10-23T08:15:00Z ERROR upstream dependency returned 500"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Duplicate Email Alerts\n\nDear [Customer's Name],\n\nThank you for reaching out to us regarding the duplicate email alerts you are receiving. It appears that there may be two separate alert rules configured to notify you for the same condition, which could be causing this issue.\n\nWe recommend reviewing your alert settings to identify any overlaps. If you need assistance with this or have any further questions, please don\u2019t hesitate to let us know. \n\nWe appreciate your understanding and look forward to helping you resolve this matter.\n\nBest regards,  \n[Your Name]  \n[Your Position]  \n[Your Company]  \n[Contact Information]",
+    "auto_score": "partial",
+    "key_score": "incorrect"
+  },
+  "T-018|baseline": {
+    "ticket": "T-018",
+    "fault": "baseline",
+    "trace_id": "272631b960f0557ece75a96cd4fbe724",
+    "failed": false,
+    "reason": null,
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "Excel does not detect UTF-8 encoding properly without a byte order mark (BOM), which causes garbled characters for names with accents in the export.",
+          "evidence": [
+            "2026-10-06T10:24:00Z INFO export job=exp_6620 format=csv encoding=utf-8 bom=false"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Regarding Your Excel Export Issue\n\nDear [Customer's Name],\n\nThank you for reaching out about the issue with garbled characters in the Excel export. This is likely due to the way Excel handles UTF-8 encoding, particularly when there is no byte order mark (BOM) included.\n\nWe appreciate your understanding as we work to improve this feature. In the meantime, you might try opening the file in a different application that handles UTF-8 better or adjusting the encoding settings in Excel.\n\nPlease let us know if you have any further questions or need assistance.\n\nBest regards,\n\n[Your Name]  \n[Your Position]  \n[Your Company]",
+    "auto_score": "correct",
+    "key_score": "correct"
+  },
+  "T-018|remove_logs": {
+    "ticket": "T-018",
+    "fault": "remove_logs",
+    "trace_id": "932fdecbf8c15c05ae80317bb9ab2281",
+    "failed": false,
+    "reason": null,
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "The absence of a byte order mark (BOM) in the CSV export caused Excel to misinterpret the UTF-8 encoding, leading to garbled characters for names with accents.",
+          "evidence": [
+            "2026-10-06T10:24:00Z INFO export job=exp_6620 format=csv encoding=utf-8 bom=false"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Re: Excel Export Issue\n\nDear [Customer's Name],\n\nThank you for bringing this to our attention. We understand how frustrating it can be to see garbled characters in your Excel exports, especially with names that have accents.\n\nThis issue is likely due to the absence of a byte order mark (BOM) in the CSV file, which can cause Excel to misinterpret the UTF-8 encoding. We appreciate your understanding as we work to improve our export functionality.\n\nIf you have any further questions or need assistance, please feel free to reach out.\n\nBest regards,  \n[Your Name]  \n[Your Position]  \n[Your Company]  ",
+    "auto_score": "correct",
+    "key_score": "correct"
+  },
+  "T-018|wrong_doc": {
+    "ticket": "T-018",
+    "fault": "wrong_doc",
+    "trace_id": "b44ef20875dcef6b6866564b2b91dd09",
+    "failed": true,
+    "reason": "low groundedness score (1/5): The answer is not grounded in the provided context or tool result as it does not mention any issues with character encoding or Excel exports from the context.",
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "The garbled characters for names with accents might be related to the character encoding used during the Excel export.",
+          "evidence": [
+            "2026-10-06T10:24:00Z INFO export job=exp_6620 format=csv encoding=utf-8 bom=false"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Re: Excel Export Issue\n\nDear [Customer's Name],\n\nThank you for reaching out to us regarding the issue with garbled characters in the Excel export for names with accents. We understand how important accurate data representation is.\n\nThis issue is likely related to the character encoding used during the export process. Our team is currently investigating this matter to identify a resolution.\n\nWe appreciate your patience as we work to resolve this. If you have any further questions or need assistance, please don't hesitate to ask.\n\nBest regards,\n\n[Your Name]  \n[Your Position]  \n[Your Company]  ",
+    "auto_score": "partial",
+    "key_score": "incorrect"
+  },
+  "T-018|tool_throws": {
+    "ticket": "T-018",
+    "fault": "tool_throws",
+    "trace_id": "11b050a6a552679e4d7356671b94a7c5",
+    "failed": true,
+    "reason": "tool error: search_logs OSError: injected fault: log backend unavailable",
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "Excel does not reliably detect UTF-8 without a byte order mark.",
+          "evidence": [
+            "# export_encoding",
+            "CSV exports use UTF-8. Excel only detects UTF-8 reliably when a byte order mark is present."
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Re: Excel Export Issue\n\nDear [Customer's Name],\n\nThank you for reaching out regarding the issue with garbled characters in the Excel export. We understand how frustrating this can be, especially with names that contain accents. \n\nThis problem often arises because Excel does not always detect UTF-8 encoding without a byte order mark. We appreciate your patience as we look into this matter further. \n\nIf you have any additional questions or need further assistance, please feel free to let us know.\n\nBest regards,  \n[Your Name]  \n[Your Position]  \n[Your Company]  ",
+    "auto_score": "incorrect",
+    "key_score": "incorrect"
+  },
+  "T-018|truncate_reply": {
+    "ticket": "T-018",
+    "fault": "truncate_reply",
+    "trace_id": "193fc68b58176a44afd53e5aa7faadcb",
+    "failed": false,
+    "reason": null,
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "CSV exports use UTF-8 but do not include a byte order mark (BOM), leading to garbled characters for names with accents in Excel.",
+          "evidence": [
+            "2026-10-06T10:24:00Z INFO export job=exp_6620 format=csv encoding=utf-8 bom=false"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Re: Excel Export Issue\n\nDear [Customer's Name],\n\nThank you for reaching out regarding the issue with garbled characters in the Excel export for names with accents. We understand how important it is for your data to display correctly.\n\nThe problem you're experiencing is likely due to the CSV fil",
+    "auto_score": "partial",
+    "key_score": "correct"
+  },
+  "T-018|fabricate_evidence": {
+    "ticket": "T-018",
+    "fault": "fabricate_evidence",
+    "trace_id": "421113b34e1e4d45452443c1b5ec4fb1",
+    "failed": true,
+    "reason": "evidence not in logs: 2023-10-23T08:15:00Z ERROR upstream dependency returned 500",
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "The absence of a byte order mark (BOM) in the UTF-8 encoded CSV export causes Excel to misinterpret characters with accents, resulting in garbled text.",
+          "evidence": [
+            "2023-10-23T08:15:00Z ERROR upstream dependency returned 500"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Re: Excel Export Issue\n\nDear [Customer's Name],\n\nThank you for bringing this issue to our attention. We understand how frustrating it can be to encounter garbled characters, especially with names that include accents. This often occurs due to the absence of a byte order mark (BOM) in the UTF-8 encoded CSV files, which can lead to misinterpretation by Excel.\n\nWe appreciate your patience as we work to resolve this matter. If you have any further questions or need assistance, please feel free to reach out.\n\nBest regards,\n\n[Your Name]  \n[Your Position]  \n[Your Company]",
+    "auto_score": "partial",
+    "key_score": "incorrect"
+  },
+  "T-019|baseline": {
+    "ticket": "T-019",
+    "fault": "baseline",
+    "trace_id": "157eba67291179e38112e6408557ad2f",
+    "failed": false,
+    "reason": null,
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "Device clock is not synchronized, causing TOTP codes to be rejected.",
+          "evidence": [
+            "2026-10-06T10:16:00Z WARN totp verify failed skew=+94s window=30s"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Re: MFA Code Issues\n\nDear [Customer's Name],\n\nThank you for reaching out regarding the issues your users are experiencing with MFA codes. We understand how important it is for your team to access their accounts smoothly.\n\nIt sounds like the device clocks may not be synchronized, which can lead to TOTP codes being rejected even when entered correctly. We recommend ensuring that all users\u2019 devices have their clocks set to the correct time and that they are set to synchronize automatically.\n\nIf you have any further questions or need additional assistance, please don\u2019t hesitate to ask. We're here to help!\n\nBest regards,  \n[Your Name]  \n[Your Position]  \n[Your Company]  ",
+    "auto_score": "correct",
+    "key_score": "correct"
+  },
+  "T-019|remove_logs": {
+    "ticket": "T-019",
+    "fault": "remove_logs",
+    "trace_id": "f9eb3f26c84d82332be7e2e9ad7ab254",
+    "failed": false,
+    "reason": null,
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "Device clock is misconfigured (skew of -71 seconds) causing TOTP codes to be rejected.",
+          "evidence": [
+            "2026-10-06T10:36:00Z INFO mfa verify user=[email] method=totp skew=-71s window=30s failed"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Re: MFA Code Issue\n\nDear [Customer's Name],\n\nThank you for reaching out regarding the issue with MFA codes. Based on your description, it appears that the device clocks of some users may be misconfigured, which can lead to TOTP codes being rejected. We recommend checking and adjusting the time settings on the affected devices to ensure they are synchronized accurately.\n\nIf you continue to experience issues, please let us know, and we\u2019ll be happy to assist further.\n\nBest regards,\n\n[Your Name]  \n[Your Position]  \n[Your Company]  ",
+    "auto_score": "correct",
+    "key_score": "correct"
+  },
+  "T-019|wrong_doc": {
+    "ticket": "T-019",
+    "fault": "wrong_doc",
+    "trace_id": "575f086a1af2a189e88d2cf5c7231648",
+    "failed": false,
+    "reason": null,
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "Time skew between the user's device and the server.",
+          "evidence": [
+            "2026-10-06T10:16:00Z WARN totp verify failed skew=+94s window=30s"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Re: MFA Code Issues\n\nDear [Customer's Name],\n\nThank you for reaching out to us regarding the MFA code issues experienced by some of your users. We understand how important it is to have seamless access, and we appreciate your patience.\n\nOne common cause for this type of issue is a time skew between the user's device and our server. We recommend that your users ensure their device clock is set to the correct time and is synchronized with an internet time server. This often resolves the problem.\n\nIf the issue persists after making these adjustments, please let us know, and we\u2019ll be happy to assist further.\n\nBest regards,  \n[Your Name]  \n[Your Position]  \n[Your Company]  \n",
+    "auto_score": "correct",
+    "key_score": "correct"
+  },
+  "T-019|tool_throws": {
+    "ticket": "T-019",
+    "fault": "tool_throws",
+    "trace_id": "d1ec5f798a08b61ecc697da99b9df70f",
+    "failed": true,
+    "reason": "tool error: search_logs OSError: injected fault: log backend unavailable",
+    "diagnosis": {
+      "candidates": []
+    },
+    "reply": "Subject: Update on MFA Code Issues\n\nDear [Customer's Name],\n\nThank you for bringing the issue with MFA codes to our attention. We understand the frustration this may cause for your users. Please rest assured that our team is actively investigating the situation to identify the root cause.\n\nWe appreciate your patience as we work to resolve this matter. If you have any further questions or need assistance in the meantime, please feel free to reach out.\n\nBest regards,\n\n[Your Name]  \n[Your Position]  \n[Your Company]  ",
+    "auto_score": "incorrect",
+    "key_score": "incorrect"
+  },
+  "T-019|truncate_reply": {
+    "ticket": "T-019",
+    "fault": "truncate_reply",
+    "trace_id": "c0ca6a067344523b06ede746a392b7d8",
+    "failed": true,
+    "reason": "low groundedness score (1/5): The answer is incomplete and doesn't provide any information from the context or tool result.",
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "Device clock is skewed by more than 30 seconds, causing TOTP codes to be rejected.",
+          "evidence": [
+            "2026-10-06T10:16:00Z WARN totp verify failed skew=+94s window=30s"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Re: MFA Code Issues\n\nDear [Customer's Name],\n\nThank you for reaching out to us regarding the MFA code issues some of your users are experiencing. This problem can often arise if the d",
+    "auto_score": "partial",
+    "key_score": "correct"
+  },
+  "T-019|fabricate_evidence": {
+    "ticket": "T-019",
+    "fault": "fabricate_evidence",
+    "trace_id": "d60450c2a7cf0149f30aba6f13afdd8a",
+    "failed": true,
+    "reason": "evidence not in logs: 2023-10-23T08:15:00Z ERROR upstream dependency returned 500",
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "Device clock is out of sync, causing TOTP codes to be rejected.",
+          "evidence": [
+            "2023-10-23T08:15:00Z ERROR upstream dependency returned 500"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Re: MFA Code Issues\n\nDear [Customer's Name],\n\nThank you for reaching out to us regarding the MFA code issues some of your users are experiencing. It's possible that device clock synchronization might be causing the TOTP codes to be rejected. \n\nWe recommend checking that the clocks on these devices are set to the correct time and are synchronized properly. Adjusting the device\u2019s time settings often resolves this issue.\n\nIf you continue to experience problems, please let us know, and we\u2019ll be happy to assist further.\n\nBest regards,\n\n[Your Name]  \n[Your Position]  \n[Your Company]  ",
+    "auto_score": "incorrect",
+    "key_score": "incorrect"
+  },
+  "T-020|baseline": {
+    "ticket": "T-020",
+    "fault": "baseline",
+    "trace_id": "520867a4451643d938f4e01b42fc2dc9",
+    "failed": false,
+    "reason": null,
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "Deleted files are still in the trash and count toward the storage quota.",
+          "evidence": [
+            "2026-10-06T10:12:00Z INFO quota acct_41 used=49.6GB limit=50GB"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Re: Storage Issue\n\nDear [Customer's Name],\n\nThank you for reaching out to us regarding your storage issue. It appears that the files you've deleted may still be in the trash, which can affect your available storage quota. \n\nTo free up space, we recommend emptying your trash folder. If you need assistance with this process or have any further questions, please don't hesitate to let us know.\n\nBest regards,  \n[Your Name]  \n[Your Position]  \n[Your Company]  ",
+    "auto_score": "partial",
+    "key_score": "correct"
+  },
+  "T-020|remove_logs": {
+    "ticket": "T-020",
+    "fault": "remove_logs",
+    "trace_id": "2d854cdef67414f86689520f7dfdc912",
+    "failed": false,
+    "reason": null,
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "The account has a significant amount of storage used, likely due to files being in the trash.",
+          "evidence": [
+            "2026-10-06T10:12:00Z INFO quota acct_41 used=49.6GB limit=50GB"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Storage Issue Assistance\n\nDear [Customer's Name],\n\nThank you for reaching out to us. I understand that you're seeing a \"storage full\" message despite only having around 2GB of files. This can often occur if files are still present in your trash, as they continue to take up storage space until permanently deleted.\n\nTo resolve this issue, I recommend checking your trash folder and emptying it if you see any items you no longer need. This should help free up space on your account.\n\nIf you have any further questions or need assistance, please don't hesitate to let me know.\n\nBest regards,\n\n[Your Name]  \n[Your Position]  \n[Company Name]  \n[Contact Information]",
+    "key_score": "correct"
+  },
+  "T-020|wrong_doc": {
+    "ticket": "T-020",
+    "fault": "wrong_doc",
+    "trace_id": "b12e0ebc499484ba95591113c06cedf6",
+    "failed": false,
+    "reason": null,
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "Quota limit exceeded",
+          "evidence": [
+            "2026-10-06T10:12:00Z INFO quota acct_41 used=49.6GB limit=50GB"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Re: Storage Issue\n\nDear [Customer's Name],\n\nThank you for reaching out. I understand that your account indicates your storage is full despite having around 2GB of files. This issue may be related to the storage quota limits, which can sometimes include hidden files or backups that aren't immediately visible.\n\nTo help resolve this, I recommend checking for any additional storage use, such as shared files or backups, which could contribute to the overall limit. If you need further assistance with this, please let me know.\n\nThank you for your understanding!\n\nBest regards,  \n[Your Name]  \n[Your Support Team]  ",
+    "key_score": "partial"
+  },
+  "T-020|tool_throws": {
+    "ticket": "T-020",
+    "fault": "tool_throws",
+    "trace_id": "ca4f7318f509378a84fb2f245bf6b088",
+    "failed": true,
+    "reason": "tool error: search_logs OSError: injected fault: log backend unavailable",
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "Deleted files are still in the trash and count toward quota until purged",
+          "evidence": []
+        }
+      ]
+    },
+    "reply": "Subject: Storage Quota Inquiry\n\nDear [Customer's Name],\n\nThank you for reaching out to us. I understand that you're experiencing issues with your storage showing as full despite having only about 2GB of files. \n\nThis situation might be caused by deleted files still residing in your trash, as they continue to count towards your storage quota until they are permanently purged. I recommend checking your trash folder and deleting any unnecessary files to free up space.\n\nIf you have any further questions or need assistance with this process, please feel free to reach out.\n\nBest regards,  \n[Your Name]  \n[Your Position]  \n[Your Company]",
+    "key_score": "partial"
+  },
+  "T-020|truncate_reply": {
+    "ticket": "T-020",
+    "fault": "truncate_reply",
+    "trace_id": "fd017d4a6ebb04e81967e2700d062d24",
+    "failed": true,
+    "reason": "low groundedness score (1/5): The answer is incomplete and does not directly reference the retrieved context or tool result.",
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "Deleted files in the trash are still counting toward the storage quota.",
+          "evidence": [
+            "2026-10-06T10:12:00Z INFO quota acct_41 used=49.6GB limit=50GB"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Regarding Your Storage Issue\n\nDear [Customer's Name],\n\nThank you for reaching out to us regarding your storage concerns. I understand how important it is to have clarity on your storage status.\n\nIt appears that the files you've deleted may still be in th",
+    "key_score": "correct"
+  },
+  "T-020|fabricate_evidence": {
+    "ticket": "T-020",
+    "fault": "fabricate_evidence",
+    "trace_id": "4b14288056bab4989aa16db0b3406f44",
+    "failed": true,
+    "reason": "evidence not in logs: 2023-10-23T08:15:00Z ERROR upstream dependency returned 500",
+    "diagnosis": {
+      "candidates": [
+        {
+          "cause": "The account's storage quota is nearly full due to files in the trash that have not been purged.",
+          "evidence": [
+            "2023-10-23T08:15:00Z ERROR upstream dependency returned 500"
+          ]
+        }
+      ]
+    },
+    "reply": "Subject: Storage Issue Resolution\n\nDear [Customer's Name],\n\nThank you for reaching out regarding your storage concerns. It appears that your account shows it's full, which may be due to files in the trash that have not yet been purged. We recommend checking your trash folder and permanently deleting any unwanted files, as this can help free up space.\n\nIf you need further assistance, feel free to let us know.\n\nBest regards,  \n[Your Name]  \n[Your Position]  \n[Your Company]  \n",
+    "key_score": "incorrect"
+  }
+}

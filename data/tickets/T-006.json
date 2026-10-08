@@ -1,0 +1,5 @@
+{
+  "id": "T-006",
+  "area": "webhooks",
+  "symptom": "Webhook deliveries to our endpoint stopped arriving since Thursday."
+}

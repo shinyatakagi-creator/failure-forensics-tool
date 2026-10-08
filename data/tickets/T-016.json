@@ -1,0 +1,5 @@
+{
+  "id": "T-016",
+  "area": "api",
+  "symptom": "We get 401 Unauthorized with an API key that worked yesterday."
+}

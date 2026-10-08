@@ -1,0 +1,5 @@
+{
+  "id": "T-008",
+  "area": "uploads",
+  "symptom": "Uploading a 300MB video fails when the progress bar reaches 100%."
+}

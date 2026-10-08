@@ -1,0 +1,20 @@
+2026-10-06T10:00:00Z INFO health check ok node=22 latency=37ms
+2026-10-06T10:02:00Z INFO health check ok node=190 latency=68ms
+2026-10-06T10:04:00Z DEBUG cache hit key=session:133 ttl=6s
+2026-10-06T10:06:00Z INFO upload session up_771 size=314572800 chunks=60
+2026-10-06T10:08:00Z INFO job heartbeat worker=93 queue=38
+2026-10-06T10:10:00Z INFO request id=195 completed in 136ms status=200 from 10.0.77.165
+2026-10-06T10:12:00Z INFO request id=179 completed in 217ms status=200 from 10.0.67.133
+2026-10-06T10:14:00Z WARN thumbnail worker slow queue_depth=14
+2026-10-06T10:16:00Z INFO health check ok node=233 latency=43ms
+2026-10-06T10:18:00Z DEBUG cache hit key=session:137 ttl=139s
+2026-10-06T10:20:00Z WARN proxy rejected request path=/upload/complete status=413 limit=262144000
+2026-10-06T10:22:00Z INFO health check ok node=163 latency=58ms
+2026-10-06T10:24:00Z DEBUG cache hit key=session:207 ttl=62s
+2026-10-06T10:26:00Z ERROR upload up_771 finalize failed: entity too large
+2026-10-06T10:28:00Z DEBUG cache hit key=session:52 ttl=133s
+2026-10-06T10:30:00Z INFO request id=8 completed in 203ms status=200 from 10.0.72.121
+2026-10-06T10:32:00Z INFO health check ok node=50 latency=178ms
+2026-10-06T10:34:00Z INFO health check ok node=115 latency=207ms
+2026-10-06T10:36:00Z INFO health check ok node=245 latency=250ms
+2026-10-06T10:38:00Z DEBUG cache hit key=session:27 ttl=59s

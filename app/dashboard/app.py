@@ -4,7 +4,8 @@ from app.storage import db
 
 st.set_page_config(page_title="Failure Forensics", layout="wide")
 
-runs = db.list_runs()
+pipeline = st.sidebar.selectbox("Pipeline", ["all", "demo", "triage"])
+runs = db.list_runs(pipeline=None if pipeline == "all" else pipeline)
 if not runs:
     st.info("No runs yet. Run scripts/seed_failures.py first.")
     st.stop()
@@ -18,7 +19,7 @@ run = db.get_run_with_spans(selected)
 
 st.write(
     f"Status: **{run['status']}**  ·  Reason: {run.get('fail_reason') or '—'}  ·  "
-    f"Flagged: {'yes' if run['flagged'] else 'no'}"
+    f"Flagged: {'yes' if run['flagged'] else 'no'}  ·  Approval: {run.get('approval') or '—'}"
 )
 for span in run["spans"]:
     icon = "⚠️" if span["status"] == "ERROR" else "✅"

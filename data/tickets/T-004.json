@@ -1,0 +1,5 @@
+{
+  "id": "T-004",
+  "area": "export",
+  "symptom": "CSV export of all orders fails with a timeout for our large account."
+}

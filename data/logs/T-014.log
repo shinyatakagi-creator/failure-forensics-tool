@@ -1,0 +1,20 @@
+2026-10-06T10:00:00Z INFO job heartbeat worker=161 queue=110
+2026-10-06T10:02:00Z INFO job heartbeat worker=36 queue=233
+2026-10-06T10:04:00Z INFO job heartbeat worker=146 queue=214
+2026-10-06T10:06:00Z WARN push token refresh failed, retrying
+2026-10-06T10:08:00Z INFO request id=212 completed in 176ms status=200 from 10.0.150.205
+2026-10-06T10:10:00Z DEBUG cache hit key=session:22 ttl=8s
+2026-10-06T10:12:00Z INFO health check ok node=246 latency=27ms
+2026-10-06T10:14:00Z DEBUG gc pause 143ms heap=13MB
+2026-10-06T10:16:00Z INFO job heartbeat worker=175 queue=63
+2026-10-06T10:18:00Z INFO request id=117 completed in 205ms status=200 from 10.0.18.192
+2026-10-06T10:20:00Z INFO job heartbeat worker=230 queue=138
+2026-10-06T10:22:00Z INFO job heartbeat worker=17 queue=191
+2026-10-06T10:24:00Z INFO app_start version=5.2.0 os=android api_level=28
+2026-10-06T10:26:00Z INFO health check ok node=208 latency=20ms
+2026-10-06T10:28:00Z DEBUG cache hit key=session:187 ttl=194s
+2026-10-06T10:30:00Z DEBUG gc pause 127ms heap=217MB
+2026-10-06T10:32:00Z DEBUG gc pause 234ms heap=176MB
+2026-10-06T10:34:00Z ERROR crash java.lang.NoSuchMethodError: java.util.List.of api_level=28
+2026-10-06T10:36:00Z INFO crash cluster cr_44 affects api_level<=29 version=5.2.0 count=812
+2026-10-06T10:38:00Z INFO request id=158 completed in 162ms status=200 from 10.0.165.51

@@ -36,6 +36,11 @@ def get_conn() -> sqlite3.Connection:
     conn = sqlite3.connect(DB_PATH)
     conn.row_factory = sqlite3.Row
     conn.executescript(SCHEMA)
+    for col in ("pipeline TEXT DEFAULT 'demo'", "approval TEXT", "edited_reply TEXT"):
+        try:
+            conn.execute(f"ALTER TABLE runs ADD COLUMN {col}")
+        except sqlite3.OperationalError:
+            pass  # column already exists
     return conn
 
 
@@ -62,25 +67,24 @@ def insert_span(span: dict) -> None:
 
 
 def insert_run(trace_id: str, query: str, answer: str | None, failed: bool,
-                reason: str | None, started_at: str, ended_at: str) -> None:
+                reason: str | None, started_at: str, ended_at: str,
+                pipeline: str = "demo", approval: str | None = None) -> None:
     conn = get_conn()
     conn.execute(
-        "INSERT OR REPLACE INTO runs (trace_id, started_at, ended_at, input, output, status, fail_reason) "
-        "VALUES (?, ?, ?, ?, ?, ?, ?)",
-        (trace_id, started_at, ended_at, query, answer, "failed" if failed else "ok", reason),
+        "INSERT OR REPLACE INTO runs (trace_id, started_at, ended_at, input, output, status, fail_reason, pipeline, approval) "
+        "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+        (trace_id, started_at, ended_at, query, answer, "failed" if failed else "ok", reason, pipeline, approval),
     )
     conn.commit()
     conn.close()
 
 
-def list_runs(status: str | None = None) -> list[dict]:
+def list_runs(status: str | None = None, pipeline: str | None = None) -> list[dict]:
     conn = get_conn()
-    if status:
-        rows = conn.execute(
-            "SELECT * FROM runs WHERE status = ? ORDER BY started_at DESC", (status,)
-        ).fetchall()
-    else:
-        rows = conn.execute("SELECT * FROM runs ORDER BY started_at DESC").fetchall()
+    rows = conn.execute(
+        "SELECT * FROM runs WHERE (? IS NULL OR status = ?) AND (? IS NULL OR pipeline = ?) "
+        "ORDER BY started_at DESC", (status, status, pipeline, pipeline)
+    ).fetchall()
     conn.close()
     return [dict(r) for r in rows]
 
@@ -116,10 +120,31 @@ def set_flagged(trace_id: str, flagged: bool, reason: str | None = None) -> None
 def max_step_latency(trace_id: str) -> float:
     conn = get_conn()
     row = conn.execute(
-        "SELECT MAX(latency_ms) AS m FROM spans WHERE trace_id = ?", (trace_id,)
+        "SELECT MAX(latency_ms) AS m FROM spans WHERE trace_id = ? AND name != 'run'", (trace_id,)
     ).fetchone()
     conn.close()
     return row["m"] or 0.0
+
+
+def set_approval(trace_id: str, approval: str, edited_reply: str | None = None) -> bool:
+    """Only a pending triage run can be approved/rejected. Returns False otherwise."""
+    conn = get_conn()
+    cur = conn.execute(
+        "UPDATE runs SET approval = ?, edited_reply = ? WHERE trace_id = ? AND approval = 'pending_approval'",
+        (approval, edited_reply, trace_id),
+    )
+    conn.commit()
+    conn.close()
+    return cur.rowcount == 1
+
+
+def get_span_attrs(trace_id: str, name: str) -> list[dict]:
+    conn = get_conn()
+    rows = conn.execute(
+        "SELECT attributes FROM spans WHERE trace_id = ? AND name = ? ORDER BY started_at", (trace_id, name)
+    ).fetchall()
+    conn.close()
+    return [json.loads(r["attributes"] or "{}") for r in rows]
 
 
 def export_flagged_jsonl() -> str:

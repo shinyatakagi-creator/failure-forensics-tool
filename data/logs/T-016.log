@@ -1,0 +1,20 @@
+2026-10-06T10:00:00Z INFO health check ok node=96 latency=17ms
+2026-10-06T10:02:00Z INFO job heartbeat worker=20 queue=93
+2026-10-06T10:04:00Z INFO health check ok node=219 latency=13ms
+2026-10-06T10:06:00Z INFO request id=214 completed in 170ms status=200 from 10.0.74.163
+2026-10-06T10:08:00Z DEBUG cache hit key=session:64 ttl=249s
+2026-10-06T10:10:00Z INFO job heartbeat worker=81 queue=49
+2026-10-06T10:12:00Z DEBUG gc pause 227ms heap=8MB
+2026-10-06T10:14:00Z DEBUG gc pause 234ms heap=225MB
+2026-10-06T10:16:00Z INFO audit key=ak_live_31 rotated by=admin@corp-example.test
+2026-10-06T10:18:00Z INFO job heartbeat worker=53 queue=185
+2026-10-06T10:20:00Z DEBUG gc pause 116ms heap=158MB
+2026-10-06T10:22:00Z INFO health check ok node=125 latency=13ms
+2026-10-06T10:24:00Z INFO job heartbeat worker=33 queue=44
+2026-10-06T10:26:00Z INFO health check ok node=73 latency=77ms
+2026-10-06T10:28:00Z ERROR geo lookup service timeout
+2026-10-06T10:30:00Z INFO health check ok node=104 latency=168ms
+2026-10-06T10:32:00Z DEBUG gc pause 143ms heap=172MB
+2026-10-06T10:34:00Z INFO audit key=ak_live_31 old secret revoked
+2026-10-06T10:36:00Z WARN auth rejected key=ak_live_31 reason=revoked_secret client_ip=198.51.100.7
+2026-10-06T10:38:00Z DEBUG cache hit key=session:165 ttl=42s
